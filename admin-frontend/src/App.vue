@@ -1,31 +1,70 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+  <v-app>
+    <div id="header">
+      <v-toolbar app>
+        <div class="logo">
+          <v-img class="lipster" :src="require('./assets/logo-3.png')"/>
+        </div>
+        <v-spacer></v-spacer>
+        <!-- <v-toolbar-items>
+          <v-btn flat to="/Lipsticks">Lipsticks</v-btn>
+          <v-btn flat to="/Trends">Trends</v-btn>
+        </v-toolbar-items>
+        <v-btn flat href="#" target="_blank">
+          <span class="mr-2">Logout</span>
+        </v-btn> -->
+      </v-toolbar>
     </div>
-    <router-view />
-  </div>
+
+    <v-content>
+      <div id="nav">
+        <v-navigation-drawer permanent>
+          <v-list dense class="pt-0">
+            <v-list-tile v-for="item in items" :key="item.title" :to="item.link">
+              <v-list-tile-action>
+                <img v-bind:src="item.image" class="nav-icon">
+              </v-list-tile-action>
+
+              <v-list-tile-content>
+                <v-list-tile-title class="nav-title">{{ item.title }}</v-list-tile-title>
+                
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-navigation-drawer>
+      </div>
+
+      <div id="container">
+        <!-- <Lipsticks/> -->
+        <router-view/>
+      </div>
+    </v-content>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
+<script>
+import HelloWorld from "./components/HelloWorld";
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+export default {
+  name: "App",
+  components: {
+    HelloWorld
+  },
+  data() {
+    return {
+      items: [
+        { title: "Lipstick", image: require('./assets/lipstick.png'), link: '/Lipsticks'},
+        { title: "Trend", image: require('./assets/mirror.png'), link: '/Trends'},
+        { title: "Logout", image: require('./assets/exit.png'), link: '/'}
+      ],
+      right: null
+    };
+  },
+  method: {
+    linkToPage(title){
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+    }
+  }
+};
+</script>
+

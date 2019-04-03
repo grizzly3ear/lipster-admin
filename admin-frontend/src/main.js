@@ -1,7 +1,9 @@
 import Vue from "vue";
+import './plugins/vuetify'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import './style/style.css'
 
 Vue.config.productionTip = false;
 
@@ -14,12 +16,4 @@ new Vue({
 }).$mount("#app");
 
 
-// new Vue({
-//   el:"#test-vue",
-//   data: {
-//     name: "Bo",
-//     job: "student",
-//     age: 21,
-//     status: false
-//   }
-// })
+

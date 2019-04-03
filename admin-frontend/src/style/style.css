@@ -1,0 +1,164 @@
+.v-content {
+  /* background-image: url("../assets/lipster-background.png");
+  background-repeat: repeat; */
+  width: 100%;
+  height: 100%;
+ }
+
+#fleft {
+    float: left;
+  }
+  
+  #fright {
+    float: right;
+  }
+  
+  .body-content {
+    width: 100%;
+  }
+  
+.logo {
+    width: 20%;
+  }
+  
+.v-image__image {
+    margin-top: 5%;
+    width: 60% !important;
+    height: 60% !important;
+}
+  
+#container {
+    /* width: 1500px; */
+    margin-top: 20px;
+    width: 90%;
+    float:right;
+}
+  
+#nav{
+    float: left;
+    width: 10%;
+    height: 100%;
+    margin-top: 10px !important;
+}
+  
+.v-toolbar__content{
+    height: 80px !important;
+}
+
+.theme--light.v-table tbody tr:not(:last-child){
+  height: 80px !important;
+}
+  
+  .nav-icon{
+    height: 36px;
+  }
+  
+  .nav-title{
+    font-size: 18px;
+  }
+  
+  .v-list--dense .v-list__tile:not(.v-list__tile--avatar){
+    height: 80px !important;
+  }
+  
+  #header .theme--light.v-toolbar{
+    background-color: black !important;
+    color: white !important;
+  }
+  
+  .v-btn__content{
+    color: white !important;
+  }
+  
+  #table-list{
+      margin-top: 2px;
+      padding: 5px;
+      font-size: 16px;
+  }
+
+  #table-list td{
+    font-size: 16px;
+  }
+
+  #table-list td.spacial_col{
+    width: 300px;
+  }
+
+  #table-list th{
+    font-size: 16px;
+  }
+
+.v-input__slot{
+    width: 100%;
+    margin-top: 10px;
+}
+
+#operation-icon{
+    width: 60px;
+ 
+   
+}
+
+#search-container{
+    float: left;
+    width: 30%;
+    height: 76px;
+    padding: 5px;
+}
+
+#operation-container{
+    float: right;
+    width: 70%;
+    height: 76px;
+   
+}
+
+.v-toolbar{
+  box-shadow: none;
+}
+
+.v-toolbar__content{
+  /* background-color: white; */
+  color: black;
+}
+
+.v-btn:not(.v-btn--depressed):not(.v-btn--flat){
+  width: 50px;
+
+}
+
+.v-btn v-btn--icon theme--light{
+  width: 60px;
+  height: 60px;
+}
+
+#tool-bar{
+  background-color: transparent;
+}
+
+#tool-container {
+  background-color: white;
+  /* padding-top: 20px; */
+  margin: 100px 5px 0 5px;
+}
+
+.layout row justify-center{
+  width: 55px !important;
+}
+
+.spacer{
+  width: 700px !important;
+}
+
+.v-navigation-drawer > .v-list .v-list__tile--active .v-list__tile__title{
+  color: white;
+}
+
+.v-list__tile--active{
+  color: white;
+  background-color: 	#D42D5E;
+}
+
+.v-list__tile{
+  border-bottom: 1px solid rgba(0,0,0,0.12);
+}
