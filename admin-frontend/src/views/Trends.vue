@@ -2,7 +2,7 @@
   <div>
     <v-toolbar card prominent id="tool-container">
       <div id="search-container">
-        <Search/>
+        <!-- <Search/> -->
       </div>
       <div id="operation-container">
         <TrendOperation/>
@@ -14,7 +14,7 @@
 
 <script>
 import TrendList from "../components/TrendList";
-import Search from "../components/Search";
+// import Search from "../components/Search";
 import TrendOperation from "../components/TrendOperation";
 
 // import ToolBar from "../components/ToolBar";
@@ -22,7 +22,7 @@ import TrendOperation from "../components/TrendOperation";
 export default {
   components: {
     TrendList,
-    Search,
+    // Search,
     TrendOperation
   }
 };
