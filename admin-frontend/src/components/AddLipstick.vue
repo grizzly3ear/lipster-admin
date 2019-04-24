@@ -52,13 +52,13 @@
               <v-flex xs12>
                 <v-text-field label="Image*" required></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6>
+              <!-- <v-flex xs12 sm6>
                 <v-autocomplete
                   :items="['Skiing', 'Ice hockey', 'Soccer', 'Basketball', 'Hockey', 'Reading', 'Writing', 'Coding', 'Basejump']"
                   label="Interests"
                   multiple
                 ></v-autocomplete>
-              </v-flex>
+              </v-flex> -->
             </v-layout>
           </v-container>
           <small>*indicates required field</small>

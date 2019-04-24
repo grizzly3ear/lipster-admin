@@ -1,8 +1,11 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home";
-import Lipsticks from "./views/Lipsticks";
-import Trends from "./views/Trends";
+import LipstickBrand from "./views/LipstickBrand";
+import LipstickDetail from "./views/LipstickDetail";
+import Trend from "./views/Trends";
+import Store from "./views/Store";
+import LipstickColor from "./views/LipstickColor";
 
 
 
@@ -19,15 +22,29 @@ export default new Router({
       component: Home
     },
     {
-      path: '/Lipsticks',
-      name: 'Lipsticks',
-      component: Lipsticks
+      path: '/lipstick',
+      name: 'LipstickBrand',
+      component: LipstickBrand
     },
     {
-      path: '/Trends',
-      name: 'Trends',
-      component:Trends
+      path: '/trend',
+      name: 'Trend',
+      component:Trend
+    },
+    {
+      path: '/lipstickDetail/:id',
+      name: 'LipstickDetail',
+      component:LipstickDetail
+    },
+    {
+      path: '/store',
+      name: 'Store',
+      component:Store
+    },
+    {
+      path: '/lipstickColor',
+      name: 'LipstickColor',
+      component:LipstickColor
     }
-  
   ]
 });
