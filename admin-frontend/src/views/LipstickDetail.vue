@@ -9,6 +9,7 @@
         <OperationDetail/>
       </div>
     </v-toolbar>
+    <hr>
     <div class="title">
       <p>List Lipstick Detail</p>
     </div>
