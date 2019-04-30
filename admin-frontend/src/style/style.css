@@ -97,6 +97,11 @@
     width: 60px;
 }
 
+
+ .v-btn {
+  color: #D42D5E;
+}
+
 #search-container{
     float: left;
     width: 30%;
@@ -175,16 +180,21 @@
 
 .brand-container   {
   background-color: white;
+  text-align: center;
+  /* display: inline-block; */
+  width: 320px;
+  height: 280px;
+  border-radius: 10px;
+  border: 3px solid #D3D3D3;
+}
+
+.brand{
   color: black;
-  padding: 10px 50px;
+  padding: 20px 30px 10px 30px;
   text-align: center;
   text-decoration: none;
-  /* display: inline-block; */
-  width: 300px;
-  height: 50px;
+  display: inline-block;
   font-size: 18px;
-  border-radius: 10px;
-  border: 3px solid #FFC5B5;
 }
 
 .brand-list{
@@ -202,17 +212,24 @@
 }
 
 .detail-container   {
-  background-color: #FFC5B5;
+  background-color: #FFC5B5;  
+  width: 650px;
+  height: 335px; 
+  border-radius: 10px;
+  margin: 0 20px;
+}
+
+.detail{
   color: black;
-  padding: 30px 50px;
+  padding: 30px 50px 0 50px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-   width: 600px;
-  height: 300px; 
   font-size: 18px;
-  border-radius: 10px;
-  margin: 0 20px;
+}
+
+.operation-tab{
+  float: right;
 }
 
 td .detail-name{
@@ -261,5 +278,51 @@ hr{
   width: 180px;
   text-align: center;
   margin: 0 60px;
+}
+
+.lip-example{
+  width: 100px;
+}
+
+.color-box{
+  width: 20px;
+  height: 20px;
+  border: 3px solid black;
+  background-color: #DC143C;
+}
+
+#color-list{
+  width: 100%;;
+}
+
+.theme--light.v-btn:not(.v-btn--icon):not(.v-btn--flat) {
+  background-color: #D42D5E;
+}
+
+/* .detail-dialog{
+  height: 78%;
+} */
+
+#color-list th{
+  font-size: 16px;
+}
+
+#color-list td{
+  font-size: 16px;
+}
+
+.color-skin-box{
+  width: 20px;
+  height: 20px;
+  border: 3px solid black;
+  background-color: #eac086;
+}
+
+img.lipstickList{
+  margin: 0 !important;
+}
+
+.operation-side{
+  float: left;
 }
 

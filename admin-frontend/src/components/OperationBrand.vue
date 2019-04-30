@@ -4,22 +4,23 @@
     <v-spacer></v-spacer>
     
     
-    <EditLipstick/>
+    <!-- <EditBrand/> -->
+    
+    <AddBrand/>
     <ConfirmDelete/>
-    <AddLipstick/>
 
   </v-toolbar>
 </template>
 
 <script>
-import AddLipstick from "../components/AddLipstick";
-import EditLipstick from "../components/EditLipstick";
+import AddBrand from "../components/AddBrand";
+// import EditBrand from "../components/EditBrand";
 import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddLipstick,
-    EditLipstick,
+    AddBrand,
+    // EditBrand,
     ConfirmDelete
   }
 };

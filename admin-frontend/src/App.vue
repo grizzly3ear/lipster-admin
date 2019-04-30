@@ -6,6 +6,7 @@
           <v-img class="lipster" :src="require('./assets/logo-3.png')"/>
         </div>
         <v-spacer></v-spacer>
+        
         <!-- <v-toolbar-items>
           <v-btn flat to="/Lipsticks">Lipsticks</v-btn>
           <v-btn flat to="/Trends">Trends</v-btn>
@@ -43,12 +44,11 @@
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld";
 
 export default {
   name: "App",
   components: {
-    HelloWorld
+
   },
   data() {
     return {
@@ -58,13 +58,11 @@ export default {
         { title: "Trend", image: require('./assets/mirror.png'), link: '/trend'},
         { title: "Logout", image: require('./assets/exit.png'), link: '/'}
       ],
+      text: '',
       right: null
     };
   },
   method: {
-    linkToPage(title){
-
-    }
   }
 };
 </script>
