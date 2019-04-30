@@ -4,22 +4,22 @@
     <v-spacer></v-spacer>
     
     
-    <EditTrend/>
-    <ConfirmDelete/>
+    <!-- <EditTrend/> -->
     <AddTrend/>
+    <ConfirmDelete/>
 
   </v-toolbar>
 </template>
 
 <script>
 import AddTrend from "../components/AddTrend";
-import EditTrend from "../components/EditTrend";
+// import EditTrend from "../components/EditTrend";
 import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
     AddTrend,
-    EditTrend,
+    // EditTrend,
     ConfirmDelete
   }
 };

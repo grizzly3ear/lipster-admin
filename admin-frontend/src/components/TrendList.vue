@@ -16,11 +16,10 @@
           hide-details
         ></v-checkbox>
       </td>
-      <td>{{ props.item.id }}</td>
       <td>{{ props.item.title }}</td>
       <td>{{ props.item.year }}</td>
       <td>{{ props.item.image }}</td>
-      <td>{{ props.item.skin_color }}</td>
+      <td><div class="color-skin-box" ></div> {{ props.item.skin_color }}</td>
       <td>{{ props.item.lipstick_color_id }}</td>
       <td><EditTrend/></td>
       <td><ConfirmDelete/></td>
@@ -43,12 +42,6 @@ import ConfirmDelete from "../components/ConfirmDelete";
       return {
         selected: [],
         headers: [
-          {
-            text: 'ID',
-            align: 'left',
-            sortable: false,
-            value: 'id'
-          },
           { text: 'Title', value: 'title' },
           { text: 'Year', value: 'year' },
           { text: 'Image', value: 'image' },
@@ -85,6 +78,30 @@ import ConfirmDelete from "../components/ConfirmDelete";
           },
           {
             id: 4,
+            title: 'Hot Summer Lipstick',
+            year: 2019,
+            image: 'summer2019.png',
+            skin_color: '#365454',
+            lipstick_color_id: 1
+          },
+          {
+            id: 5,
+            title: 'Hot Summer Lipstick',
+            year: 2019,
+            image: 'summer2019.png',
+            skin_color: '#365454',
+            lipstick_color_id: 1
+          },
+          {
+            id: 6,
+            title: 'Hot Summer Lipstick',
+            year: 2019,
+            image: 'summer2019.png',
+            skin_color: '#365454',
+            lipstick_color_id: 1
+          },
+          {
+            id: 7,
             title: 'Hot Summer Lipstick',
             year: 2019,
             image: 'summer2019.png',

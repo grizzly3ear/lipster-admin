@@ -3,7 +3,7 @@
     <v-dialog v-model="dialog" persistent max-width="600px">
       <template v-slot:activator="{ on }">
         <v-btn icon v-on="on">
-          <v-img :src="require('../assets/pen-blue.png')"/>
+          <v-img :src="require('../assets/edit.png')"/>
         </v-btn>
       </template>
       <v-card>
@@ -29,10 +29,10 @@
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
-        <v-card-actions>
+        <v-card-actions style="margin: 0 187px 0 187px">
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1"  @click="dialog = false">Close</v-btn>
-          <v-btn color="blue darken-1"  @click="dialog = false">Update</v-btn>
+          <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
+          <div  @click="dialog = false" style="margin: 30px"><v-btn color="blue darken-1" @click="onEditClick">Edit</v-btn></div>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -40,7 +40,20 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
+  methods: {
+      onEditClick: function (e) {
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1000
+        })
+      }
+    },
   data: () => ({
     dialog: false
   })
