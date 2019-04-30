@@ -3,10 +3,10 @@
     <div class="body-content">
     <v-toolbar card prominent id="tool-container">
       <div id="search-container">
-        <SearchBrand/>
+        <SearchColor/>
       </div>
       <div id="operation-container">
-        <OperationBrand/>
+        <OperationColor/>
       </div>
     </v-toolbar>
     <hr>
@@ -19,14 +19,14 @@
 </template>
 
 <script>
-import SearchBrand from "../components/SearchBrand";
-import OperationBrand from "../components/OperationBrand";
+import SearchColor from "../components/SearchColor";
+import OperationColor from "../components/OperationColor";
 import ColorList from "../components/ColorList";
 
 export default {
   components: {
-    SearchBrand,
-    OperationBrand,
+    SearchColor,
+    OperationColor,
     ColorList
   }
 };
