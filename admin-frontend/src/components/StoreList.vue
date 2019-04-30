@@ -12,12 +12,12 @@
               </div>
               
               <!-- <router-link :to="`/lipstickDetail`"> -->
-              <router-link :to="{ name: 'LipstickDetail', params: { id: lipstick.id}}">
+              <!-- <router-link :to="{ name: 'LipstickDetail', params: { id: lipstick.id}}"> -->
                 <img class="store" :src="require('../assets/store.png')"/>
                 <div class="brand-container">
                   <label class="brand" v-text="lipstick.brand"></label>
                 </div>
-              </router-link>
+              <!-- </router-link> -->
             </div>
           </v-flex>
         </v-list>

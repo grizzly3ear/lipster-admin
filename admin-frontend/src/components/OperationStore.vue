@@ -4,22 +4,22 @@
     <v-spacer></v-spacer>
     
     
-    <EditLipstick/>
+    <!-- <EditLipstick/> -->
     <ConfirmDelete/>
-    <AddLipstick/>
+    <!-- <AddLipstick/> -->
 
   </v-toolbar>
 </template>
 
 <script>
-import AddLipstick from "../components/AddLipstick";
-import EditLipstick from "../components/EditLipstick";
+// import AddLipstick from "../components/AddLipstick";
+// import EditLipstick from "../components/EditLipstick";
 import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddLipstick,
-    EditLipstick,
+    // AddLipstick,
+    // EditLipstick,
     ConfirmDelete
   }
 };
