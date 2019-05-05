@@ -16,7 +16,7 @@
           hide-details
         ></v-checkbox>
       </td>
-      <td><img class='lip-example' :src='require('../assets/lip-example.jpg')'/></td>
+      <td><img class='lip-example' :src='require("../assets/lip-example.jpg")'/></td>
       <td>{{ props.item.color_name }}</td>
       <td><div class='color-box' ></div>  {{ props.item.rgb }}</td>
       <td>{{ props.item.color_code }}</td>      

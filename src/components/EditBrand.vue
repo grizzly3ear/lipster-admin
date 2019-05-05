@@ -3,12 +3,12 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require('../assets/edit.png')'/>
+          <v-img :src='require("../assets/edit.png")'/>
         </v-btn>
       </template>
       <v-card>
         <v-card-title>
-          <span class='headline'>Add Brand</span>
+          <span class='headline'>Edit Brand</span>
         </v-card-title>
         <v-card-text>
           <v-container grid-list-md>

@@ -3,7 +3,7 @@
     <div id='header'>
       <v-toolbar app>
         <div class='logo'>
-          <v-img class='lipster' :src='require('./assets/logo-3.png')'/>
+          <v-img class='lipster' :src='require("./assets/logo-3.png")'/>
         </div>
         <v-spacer></v-spacer>
         

@@ -5,19 +5,33 @@
         <v-list v-for='lipstick in lipsticks' :key='lipstick.id'>
           <v-flex xs12 sm6 md4>
             <div class='brand-list'>
-              
               <div class='check-brand'>
-                <v-checkbox v-model='selected' primary hide-details></v-checkbox>
-                
+                <v-checkbox v-model="selected" primary hide-details></v-checkbox>
               </div>
-              
-              <!-- <router-link :to='`/lipstickDetail`'> -->
-              <!-- <router-link :to='{ name: 'LipstickDetail', params: { id: lipstick.id}}'> -->
-                <img class='store' :src='require('../assets/store.png')'/>
-                <div class='brand-container'>
-                  <label class='brand' v-text='lipstick.brand'></label>
+              <div  class='brand-container'>
+                <div class='operation-tab'>
+              <div class='operation-side'><EditBrand/></div>
+              <div class='operation-side'><ConfirmDelete/></div>
+              </div>
+              <!-- <router-link :to='{ name: "LipstickDetail", params: { id: lipstick.id}}'> -->
+                <div class='brand'>
+                  <table>
+                    <tr>
+                      <td rowspan='3'>
+                        <img class='lipstickList' :src="require('../assets/store.png')">
+                      </td>
+                    </tr>
+                    <tr></tr>
+                    <tr></tr>
+                    <tr>
+                      <td>
+                        <label class='brand' v-text='lipstick.brand'></label>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               <!-- </router-link> -->
+              </div>
             </div>
           </v-flex>
         </v-list>
@@ -28,10 +42,18 @@
 
 
 <script>
+import EditBrand from "../components/EditBrand";
+import ConfirmDelete from "../components/ConfirmDelete";
+
 export default {
+  components: {
+    EditBrand,
+    ConfirmDelete
+  },
   data() {
     return {
       selected: [],
+      info: [],
       lipsticks: [
     {
       'id': 1,
@@ -148,10 +170,45 @@ export default {
           'colors': [
             
           ]
+        },
+        {
+          id: 12,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 13,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 14,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 15,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 16,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 17,
+          brand: "Naree",
+          detail: []
+        },
+        {
+          id: 18,
+          brand: "Naree",
+          detail: []
         }
       ]
     }
-  ]
+    ]
     }
   }
 }

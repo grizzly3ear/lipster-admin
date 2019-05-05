@@ -5,20 +5,20 @@
     
     
     <!-- <EditLipstick/> -->
+    <AddBrand/>
     <ConfirmDelete/>
-    <!-- <AddLipstick/> -->
 
   </v-toolbar>
 </template>
 
 <script>
-// import AddLipstick from '../components/AddLipstick'
+import AddBrand from '../components/AddBrand'
 // import EditLipstick from '../components/EditLipstick'
 import ConfirmDelete from '../components/ConfirmDelete'
 
 export default {
   components: {
-    // AddLipstick,
+    AddBrand,
     // EditLipstick,
     ConfirmDelete
   }

@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require('../assets/edit.png')'/>
+          <v-img :src='require("@/assets/edit.png")'/>
         </v-btn>
       </template>
       <v-card>

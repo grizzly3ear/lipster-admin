@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require('../assets/edit.png')'/>
+          <v-img :src='require("../assets/edit.png")'/>
         </v-btn>
       </template>
       <v-card>
@@ -17,7 +17,7 @@
                 <v-text-field label='Name*' required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-select :items='['Tint', 'Matte', 'Balm']' label='Type*' required></v-select>
+                <v-select :items='["Tint", "Matte", "Balm"]' label='Type*' required></v-select>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field label='Max Price*' required></v-text-field>

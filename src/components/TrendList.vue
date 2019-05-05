@@ -20,7 +20,7 @@
       <td>{{ props.item.year }}</td>
       <td>{{ props.item.image }}</td>
       <td><div class='color-skin-box' ></div> {{ props.item.skin_color }}</td>
-      <td>{{ props.item.lipstick_color_id }}</td>
+      <td><div class='color-box' ></div>#DC143C</td>
       <td><EditTrend/></td>
       <td><ConfirmDelete/></td>
       
@@ -46,7 +46,7 @@ import ConfirmDelete from '../components/ConfirmDelete'
           { text: 'Year', value: 'year' },
           { text: 'Image', value: 'image' },
           { text: 'Skin color', value: 'skin_color' },
-          { text: 'Lipstick color ID', value: 'lipstick_color_id' },
+          { text: 'Lipstick color', value: 'lipstick_color_id' },
           { text: 'Edit' },
           { text: 'Delete' }
       
