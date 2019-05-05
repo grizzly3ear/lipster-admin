@@ -1,17 +1,17 @@
 <template>
 
-  <v-data-table id="table-list"
-    v-model="selected"
-    :headers="headers"
-    :items="desserts"
-    item-key="name"
+  <v-data-table id='table-list'
+    v-model='selected'
+    :headers='headers'
+    :items='desserts'
+    item-key='name'
     select-all
-    class="elevation-1"
+    class='elevation-1'
   >
-    <template v-slot:items="props">
+    <template v-slot:items='props'>
       <td>
         <v-checkbox
-          v-model="props.selected"
+          v-model='props.selected'
           primary
           hide-details
         ></v-checkbox>
@@ -19,7 +19,7 @@
       <td>{{ props.item.title }}</td>
       <td>{{ props.item.year }}</td>
       <td>{{ props.item.image }}</td>
-      <td><div class="color-skin-box" ></div> {{ props.item.skin_color }}</td>
+      <td><div class='color-skin-box' ></div> {{ props.item.skin_color }}</td>
       <td>{{ props.item.lipstick_color_id }}</td>
       <td><EditTrend/></td>
       <td><ConfirmDelete/></td>
@@ -30,8 +30,8 @@
 </template>
 
 <script>
-import EditTrend from "../components/EditTrend";
-import ConfirmDelete from "../components/ConfirmDelete";
+import EditTrend from '../components/EditTrend'
+import ConfirmDelete from '../components/ConfirmDelete'
 
   export default {
     components: {

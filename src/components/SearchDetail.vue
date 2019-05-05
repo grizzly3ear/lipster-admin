@@ -1,16 +1,16 @@
 <template>
 
-    <v-autocomplete  id="search"
-      v-model="select"
-      :loading="loading"
-      :items="items"
-      :search-input.sync="search"
+    <v-autocomplete  id='search'
+      v-model='select'
+      :loading='loading'
+      :items='items'
+      :search-input.sync='search'
       cache-items
-      class="mx-3"
+      class='mx-3'
       flat
       hide-no-data
       hide-details
-      label="Search detail"
+      label='Search detail'
       solo-inverted
     ></v-autocomplete>
 

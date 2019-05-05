@@ -1,7 +1,7 @@
 <template>
-  <v-layout class="operation-icon">
-    <v-btn  icon @click="onDeleteClick">
-      <v-img :src="require('../assets/bin.png')"/>
+  <v-layout class='operation-icon'>
+    <v-btn  icon @click='onDeleteClick'>
+      <v-img :src='require('../assets/bin.png')'/>
     </v-btn>
   </v-layout>
 </template>
@@ -14,7 +14,7 @@ import Swal from 'sweetalert2'
       onDeleteClick: function (e) {
       Swal.fire({
         title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        text: 'You won't be able to revert this!',
         type: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',

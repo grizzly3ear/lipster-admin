@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar id="tool-bar">
+  <v-toolbar id='tool-bar'>
 
     <v-spacer></v-spacer>
     
@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import AddColor from "../components/AddColor";
-// import EditColor from "../components/EditColor";
-import ConfirmDelete from "../components/ConfirmDelete";
+import AddColor from '../components/AddColor'
+// import EditColor from '../components/EditColor'
+import ConfirmDelete from '../components/ConfirmDelete'
 
 export default {
   components: {
@@ -22,7 +22,7 @@ export default {
     // EditColor,
     ConfirmDelete
   }
-};
+}
 </script>
 
 

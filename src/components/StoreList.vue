@@ -2,20 +2,20 @@
   <v-layout>
     <v-container grid-list-md>
       <v-layout wrap>
-        <v-list v-for="lipstick in lipsticks" :key="lipstick.id">
+        <v-list v-for='lipstick in lipsticks' :key='lipstick.id'>
           <v-flex xs12 sm6 md4>
-            <div class="brand-list">
+            <div class='brand-list'>
               
-              <div class="check-brand">
-                <v-checkbox v-model="selected" primary hide-details></v-checkbox>
+              <div class='check-brand'>
+                <v-checkbox v-model='selected' primary hide-details></v-checkbox>
                 
               </div>
               
-              <!-- <router-link :to="`/lipstickDetail`"> -->
-              <!-- <router-link :to="{ name: 'LipstickDetail', params: { id: lipstick.id}}"> -->
-                <img class="store" :src="require('../assets/store.png')"/>
-                <div class="brand-container">
-                  <label class="brand" v-text="lipstick.brand"></label>
+              <!-- <router-link :to='`/lipstickDetail`'> -->
+              <!-- <router-link :to='{ name: 'LipstickDetail', params: { id: lipstick.id}}'> -->
+                <img class='store' :src='require('../assets/store.png')'/>
+                <div class='brand-container'>
+                  <label class='brand' v-text='lipstick.brand'></label>
                 </div>
               <!-- </router-link> -->
             </div>
@@ -34,125 +34,125 @@ export default {
       selected: [],
       lipsticks: [
     {
-      "id": 1,
-      "brand": "Dior",
-      "detail": [
+      'id': 1,
+      'brand': 'Dior',
+      'detail': [
         {
-          "id": 1,
-          "name": "Addict Stellar Shine",
-          "max_price": 1080,
-          "min_price": 980,
-          "type": "balm",
-          "opacity": 78,
-          "description": "the iconic case with the Dior Addict Stellar Shine design bears a Dior logo in pink, the signature colour of the House of Dior",
-          "composition": "A METHYL HYDROGENATED ROSINATE",
-          "apply": "A METHYL HYDROGENATED ROSINATE",
-          "colors": [
+          'id': 1,
+          'name': 'Addict Stellar Shine',
+          'max_price': 1080,
+          'min_price': 980,
+          'type': 'balm',
+          'opacity': 78,
+          'description': 'the iconic case with the Dior Addict Stellar Shine design bears a Dior logo in pink, the signature colour of the House of Dior',
+          'composition': 'A METHYL HYDROGENATED ROSINATE',
+          'apply': 'A METHYL HYDROGENATED ROSINATE',
+          'colors': [
             {
-              "id": 1,
-              "color_name": "Be Dior",
-              "rgb": "#121221",
-              "color_code": "976",
-              "image": [
+              'id': 1,
+              'color_name': 'Be Dior',
+              'rgb': '#121221',
+              'color_code': '976',
+              'image': [
                 {
-                  "id": 1,
-                  "image": "bedior.png"
+                  'id': 1,
+                  'image': 'bedior.png'
                 }
               ]
             },
             {
-              "id": 2,
-              "color_name": "Lucky",
-              "rgb": "#787456",
-              "color_code": "536",
-              "image": [
+              'id': 2,
+              'color_name': 'Lucky',
+              'rgb': '#787456',
+              'color_code': '536',
+              'image': [
                 {
-                  "id": 2,
-                  "image": "lucky.png"
+                  'id': 2,
+                  'image': 'lucky.png'
                 }
               ]
             }
           ]
         },
         {
-          "id": 2,
-          "name": "ooooo",
-          "max_price": 45,
-          "min_price": 41,
-          "type": "oo",
-          "opacity": 89,
-          "description": "ooooooooo",
-          "composition": "oooo oooooooooo",
-          "apply": "oooooooooo",
-          "colors": [
+          'id': 2,
+          'name': 'ooooo',
+          'max_price': 45,
+          'min_price': 41,
+          'type': 'oo',
+          'opacity': 89,
+          'description': 'ooooooooo',
+          'composition': 'oooo oooooooooo',
+          'apply': 'oooooooooo',
+          'colors': [
             
           ]
         }
       ]
     },
     {
-      "id": 2,
-      "brand": "Naree",
-      "detail": [
+      'id': 2,
+      'brand': 'Naree',
+      'detail': [
         
       ]
     },
     {
-      "id": 4,
-      "brand": "AAAAAA",
-      "detail": [
+      'id': 4,
+      'brand': 'AAAAAA',
+      'detail': [
         
       ]
     },
     {
-      "id": 9,
-      "brand": "BBBBB",
-      "detail": [
+      'id': 9,
+      'brand': 'BBBBB',
+      'detail': [
         
       ]
     },
     {
-      "id": 10,
-      "brand": "TTTTTTTTT",
-      "detail": [
+      'id': 10,
+      'brand': 'TTTTTTTTT',
+      'detail': [
         {
-          "id": 5,
-          "name": "ttCCCt",
-          "max_price": 1117,
-          "min_price": 457,
-          "type": "cccy",
-          "opacity": 85,
-          "description": "ttt",
-          "composition": "ttt",
-          "apply": "tttt",
-          "colors": [
+          'id': 5,
+          'name': 'ttCCCt',
+          'max_price': 1117,
+          'min_price': 457,
+          'type': 'cccy',
+          'opacity': 85,
+          'description': 'ttt',
+          'composition': 'ttt',
+          'apply': 'tttt',
+          'colors': [
             
           ]
         }
       ]
     },
     {
-      "id": 11,
-      "brand": "OOO",
-      "detail": [
+      'id': 11,
+      'brand': 'OOO',
+      'detail': [
         {
-          "id": 6,
-          "name": "OO",
-          "max_price": 1117,
-          "min_price": 457,
-          "type": "oo",
-          "opacity": 85,
-          "description": "ooooo",
-          "composition": "oo",
-          "apply": "oooo oooo",
-          "colors": [
+          'id': 6,
+          'name': 'OO',
+          'max_price': 1117,
+          'min_price': 457,
+          'type': 'oo',
+          'opacity': 85,
+          'description': 'ooooo',
+          'composition': 'oo',
+          'apply': 'oooo oooo',
+          'colors': [
             
           ]
         }
       ]
     }
   ]
-    };
+    }
   }
-};
+}
 </script>

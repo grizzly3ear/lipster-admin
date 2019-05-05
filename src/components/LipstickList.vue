@@ -1,17 +1,17 @@
 <template>
 
-  <v-data-table id="table-list"
-    v-model="selected"
-    :headers="headers"
-    :items="desserts"
-    item-key="name"
+  <v-data-table id='table-list'
+    v-model='selected'
+    :headers='headers'
+    :items='desserts'
+    item-key='name'
     select-all
-    class="elevation-1"
+    class='elevation-1'
   >
-    <template v-slot:items="props">
+    <template v-slot:items='props'>
       <td>
         <v-checkbox
-          v-model="props.selected"
+          v-model='props.selected'
           primary
           hide-details
         ></v-checkbox>
@@ -23,7 +23,7 @@
       <td>{{ props.item.min_price }}</td>
       <td>{{ props.item.type }}</td>
       <td>{{ props.item.opacity }}</td>
-      <td class="spacial_col">{{ props.item.description }}</td>
+      <td class='spacial_col'>{{ props.item.description }}</td>
       <td>{{ props.item.composition }}</td>
       <td>{{ props.item.apply }}</td>
       <td>{{ props.item.color_name }}</td>
@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import EditLipstick from "../components/EditLipstick";
-import ConfirmDelete from "../components/ConfirmDelete";
+import EditLipstick from '../components/EditLipstick'
+import ConfirmDelete from '../components/ConfirmDelete'
 
   export default {
     components: {

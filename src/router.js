@@ -1,19 +1,19 @@
-import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home";
-import LipstickBrand from "./views/LipstickBrand";
-import LipstickDetail from "./views/LipstickDetail";
-import Trend from "./views/Trends";
-import Store from "./views/Store";
-import LipstickColor from "./views/LipstickColor";
+import Vue from 'vue'
+import Router from 'vue-router'
+import Home from './views/Home'
+import LipstickBrand from './views/LipstickBrand'
+import LipstickDetail from './views/LipstickDetail'
+import Trend from './views/Trends'
+import Store from './views/Store'
+import LipstickColor from './views/LipstickColor'
 
 
 
 
-Vue.use(Router);
+Vue.use(Router)
 
 export default new Router({
-  mode: "history",
+  mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
@@ -47,4 +47,4 @@ export default new Router({
       component:LipstickColor
     }
   ]
-});
+})

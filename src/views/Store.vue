@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="body-content">
-    <v-toolbar card prominent id="tool-container">
-      <div id="search-container">
+    <div class='body-content'>
+    <v-toolbar card prominent id='tool-container'>
+      <div id='search-container'>
         <SearchStore/>
       </div>
-      <div id="operation-container">
+      <div id='operation-container'>
         <OperationStore/>
       </div>
     </v-toolbar>
     <hr>
-    <div class="title">
+    <div class='title'>
       <p>List Store</p>
     </div>
       <StoreList/>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SearchStore from "../components/SearchStore";
-import OperationStore from "../components/OperationStore";
-import StoreList from "../components/StoreList";
+import SearchStore from '../components/SearchStore'
+import OperationStore from '../components/OperationStore'
+import StoreList from '../components/StoreList'
 
 export default {
   components: {
@@ -29,5 +29,5 @@ export default {
     OperationStore,
     StoreList
   }
-};
+}
 </script>

@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="body-content">
-    <v-toolbar card prominent id="tool-container">
-      <div id="search-container">
+    <div class='body-content'>
+    <v-toolbar card prominent id='tool-container'>
+      <div id='search-container'>
         <SearchColor/>
       </div>
-      <div id="operation-container">
+      <div id='operation-container'>
         <OperationColor/>
       </div>
     </v-toolbar>
     <hr>
-    <div class="title">
+    <div class='title'>
       <p>List Lipstick Color</p>
     </div>
       <ColorList/>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SearchColor from "../components/SearchColor";
-import OperationColor from "../components/OperationColor";
-import ColorList from "../components/ColorList";
+import SearchColor from '../components/SearchColor'
+import OperationColor from '../components/OperationColor'
+import ColorList from '../components/ColorList'
 
 export default {
   components: {
@@ -29,5 +29,5 @@ export default {
     OperationColor,
     ColorList
   }
-};
+}
 </script>
