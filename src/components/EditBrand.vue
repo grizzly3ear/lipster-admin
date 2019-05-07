@@ -14,7 +14,7 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label='Name*' required></v-text-field>
+                <v-text-field v-model='name' label='Name*' required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -31,21 +31,30 @@
 
 <script>
 import Swal from 'sweetalert2'
+import axios from "axios";
 
 export default {
   methods: {
-      onEditClick: function (e) {
+    async onEditClick(){
+      await axios.put(`http://18.136.104.217/api/lipstick/brand/` + this.brand.id,
+      {
+      name: this.name 
+      })
       Swal.fire({
         position: 'center',
         type: 'success',
-        title: 'Your work has been saved',
+        title: 'This brand has been updated',
         showConfirmButton: false,
         timer: 1000
-})
-      }
+      })
     },
+  },
+  props: [
+    'brand'
+  ],
   data: () => ({
-    dialog: false
+    dialog: false,
+    name: ''
   })
 }
 </script>
