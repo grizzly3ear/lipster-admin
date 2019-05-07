@@ -14,7 +14,7 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label='Brand*' required></v-text-field>
+                <v-text-field v-model='name' label='Brand*' required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -33,10 +33,19 @@
 
 <script>
 import Swal from 'sweetalert2'
+import axios from "axios";
 
 export default {
   methods: {
-    onAddClick: function(e) {
+    async onAddClick() {
+      let formData = new FormData()
+      formData.append('name', this.name)
+      await axios.post(`http://18.136.104.217/api/lipstick`, 
+      formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       Swal.fire({
         position: 'center',
         type: 'success',
@@ -47,7 +56,8 @@ export default {
     }
   },
   data: () => ({
-    dialog: false
+    dialog: false,
+    name: ''
   })
 }
 </script>
