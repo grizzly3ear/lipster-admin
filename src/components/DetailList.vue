@@ -4,7 +4,7 @@
     v-model='selected'
     :headers='headers'
     :items='details'
-    item-key='name'
+    item-key='id'
     select-all
     class='elevation-1'
   >

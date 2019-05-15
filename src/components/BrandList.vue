@@ -2,7 +2,7 @@
   <v-layout>
     <v-container grid-list-md>
       <v-layout wrap>
-        <v-list v-for='brand in brands.data' :key='brand.id'>
+        <v-list v-for='brand in brands' :key='brand.id'>
           <BrandCard :brand='brand'/>
         </v-list>
       </v-layout>
@@ -13,27 +13,26 @@
 
 <script>
 import BrandCard from '@/components/BrandCard'
-import axios from "axios";
+import axios from '../utils/axios.js'
 
 export default {
   name: 'brandList',
   components: {
     BrandCard
   },
-    methods: {
-      async getBrand() {
-        const { data } = await axios.get(`http://18.136.104.217/api/lipstick`)
-        this.brands = data
-      }
-    },
-    async mounted () {
-      this.getBrand()
-    },
+  methods: {
+    async getBrand() {
+      const { data } = await axios.get(`brand`)
+      this.brands = data
+    }
+  },
+  async mounted () {
+    this.getBrand()
+  },
   data() {
     return {
       info: [],
-      selected: [],
-      brands: {},
+      brands: [],
     }
   }
 }
