@@ -1,7 +1,7 @@
 <template>
   <v-layout class='operation-icon'>
     <v-btn  icon @click='onDeleteClick'>
-      <v-img :src='require("@/assets/bin.png")'/>
+      <v-icon color="black">delete</v-icon>
     </v-btn>
   </v-layout>
 </template>
