@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require("../assets/edit.png")'/>
+          <v-icon color="black">edit</v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -14,13 +14,13 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='Color Name*' required></v-text-field>
+                <v-text-field v-model='color_name' label='Color Name*' required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='RGB*' required></v-text-field>
+                <v-text-field v-model='rgb' label='RGB*' required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='Color Name*' required></v-text-field>
+                <v-text-field v-model='color_code' label='Color Code*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field label='Image*' required></v-text-field>
@@ -40,21 +40,46 @@
 
 <script>
 import Swal from 'sweetalert2'
+import axios from "axios";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
-  methods: {
-      onEditClick: function (e) {
-      Swal.fire({
-        position: 'center',
-        type: 'success',
-        title: 'Your work has been saved',
-        showConfirmButton: false,
-        timer: 1000
-})
-      }
-    },
+     methods: {
+       ...mapActions([
+      'setColor'
+      ]),
+    async onEditClick(){
+        await axios.put(`http://18.136.104.217/api/lipstick/color/` + this.props.item.id,
+        {
+        color_name: this.color_name,
+        rgb: this.rgb,
+        color_code: this.color_code,
+        lipstick_detail_id: this.props.item.lipstick_detail_id
+        })
+        Swal.fire({
+          position: 'center',
+          type: 'success',
+          title: 'Your work has been saved',
+          showConfirmButton: false,
+          timer: 1000
+        })
+        const { data } = await axios.get(`http://18.136.104.217/api/lipstick/detail/` + this.$route.params.id)
+        this.setColor(data)
+      },
+  },
+  props: [
+    'props'
+  ],
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+    color_name: '',
+    rgb: '',
+    color_code: ''
+  }),
+  computed: {
+    ...mapGetters([
+      'getColor'
+    ])
+  }
 }
 </script>

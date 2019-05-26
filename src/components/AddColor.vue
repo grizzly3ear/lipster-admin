@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require("../assets/add.png")'/>
+          <v-icon color="black">add_box</v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -14,16 +14,16 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='Color Name*' required></v-text-field>
+                <v-text-field v-model='color_name' label='Color Name*' required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='RGB*' required></v-text-field>
+                <v-text-field v-model='rgb' label='RGB*' required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field label='Color Name*' required></v-text-field>
+                <v-text-field v-model='color_code' label='Color Name*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label='Image*' required></v-text-field>
+                <v-text-field v-model='image' label='Image*' required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -40,21 +40,47 @@
 
 <script>
 import Swal from 'sweetalert2'
+import axios from "axios";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
     methods: {
-      onAddClick: function (e) {
+      ...mapActions([
+      'setColor'
+    ]),
+    async onAddClick() {
+      let formData = new FormData()
+      formData.append('color_name', this.color_name)
+      formData.append('rgb', this.rgb)
+      formData.append('color_code', this.color_code)
+      formData.append('lipstick_detail_id', this.$route.params.id)
+      await axios.post(`http://18.136.104.217/api/lipstick`, 
+      formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
       Swal.fire({
         position: 'center',
         type: 'success',
         title: 'Your work has been saved',
         showConfirmButton: false,
         timer: 1000
-})
-      }
-    },
+      })
+      const { data } = await axios.get(`http://18.136.104.217/api/lipstick/detail/` + this.$route.params.id)
+      this.setColor(data)
+    }
+  },
   data: () => ({
-    dialog: false
-  })
+    dialog: false,
+    color_name: '',
+    rgb: '',
+    color_code: ''
+  }),
+  computed: {
+    ...mapGetters([
+      'getColor'
+    ])
+  }
 }
 </script>

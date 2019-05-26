@@ -1,27 +1,29 @@
 <template>
 
   <v-data-table id='color-list'
-    v-model='selected'
     :headers='headers'
-    :items='colors'
-    item-key='name'
+    :items='getColor.data.colors'
+    item-key='getColor.data.colors.id'
     select-all
     class='elevation-1'
   >
     <template v-slot:items='props'>
       <td>
-        <v-checkbox
-          v-model='props.selected'
-          primary
-          hide-details
-        ></v-checkbox>
+        <SelectLipstickColorCard :props='props'/>
       </td>
-      <td><img class='lip-example' :src='require("../assets/lip-example.jpg")'/></td>
+      <td>
+        <v-list v-for='image in props.item.images' :key='image.id'> 
+          <img class="image-container" :src="image.image"/>
+        </v-list>
+      </td>
       <td>{{ props.item.color_name }}</td>
-      <td><div class='color-box' ></div>  {{ props.item.rgb }}</td>
+      <td>
+        <div v-html='renderColorBox(props.item.rgb)'></div>
+        {{ props.item.rgb }}
+      </td>
       <td>{{ props.item.color_code }}</td>      
-      <td><EditColor/></td>
-      <td><ConfirmDelete/></td>
+      <td><EditColor :props='props'/></td>
+      <td><DeleteColor :props='props'/></td>
       <td></td>
     </template>
   </v-data-table>
@@ -29,13 +31,35 @@
 </template>
 
 <script>
-import EditColor from '../components/EditColor'
-import ConfirmDelete from '../components/ConfirmDelete'
+import EditColor from '@/components/EditColor'
+import DeleteColor from '@/components/DeleteColor'
+import SelectLipstickColorCard from '@/components/SelectLipstickColorCard'
+import axios from "axios";
+import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: {
       EditColor,
-      ConfirmDelete
+      DeleteColor,
+      SelectLipstickColorCard
+    },
+    methods: {
+      ...mapActions([
+      'setColor'
+    ]),
+      async getColors() {
+        const { data } = await axios.get(`http://18.136.104.217/api/lipstick/detail/` + this.$route.params.id)
+        this.colors = data
+        this.setColor(data)
+      },
+      renderColorBox(rgb) {
+        return (
+          `<div class='color-box' style="background-color: ${rgb}"></div>`
+        )
+      }
+    },
+    async mounted () {
+      this.getColors()
     },
     data () {
       return {
@@ -47,98 +71,18 @@ import ConfirmDelete from '../components/ConfirmDelete'
           { text: 'Color Code', value: 'color_code' },
           { text: 'Edit' },
           { text: 'Delete'},
-          { text: ''}
-      
+          { text: ''}     
         ],
-              colors: [
-                {
-                  id: 1,
-                  color_name: 'Be Dior',
-                  rgb: '#DC143C',
-                  color_code: '976',
-                  image: [
-                    {
-                      id: 1,
-                      image: '../assests/lip-example.jpg'
-                    }
-                  ]
-                },
-                {
-                  id: 2,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                },
-                {
-                  id: 3,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                },
-                {
-                  id: 4,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                },
-                {
-                  id: 5,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                },
-                {
-                  id: 6,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                },
-                {
-                  id: 7,
-                  color_name: 'Lucky',
-                  rgb: '#DC143C',
-                  color_code: '536',
-                  image: [
-                    {
-                      id: 2,
-                      image: 'lucky.png'
-                    }
-                  ]
-                }
-              ]
+        colors: {},
       }
-    }
+    },
+  computed: {
+    ...mapGetters([
+      'getColor'
+    ])
+  }
   }
 </script>
+
 
 

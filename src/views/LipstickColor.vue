@@ -13,6 +13,9 @@
     <div class='title'>
       <p>List Lipstick Color</p>
     </div>
+    <div>
+      <Breadcrumb/>
+    </div>
       <ColorList/>
     </div>
   </div>
@@ -22,12 +25,14 @@
 import SearchColor from '../components/SearchColor'
 import OperationColor from '../components/OperationColor'
 import ColorList from '../components/ColorList'
+import Breadcrumb from '../components/Breadcrumb'
 
 export default {
   components: {
     SearchColor,
     OperationColor,
-    ColorList
+    ColorList,
+    Breadcrumb
   }
 }
 </script>
