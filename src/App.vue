@@ -53,7 +53,7 @@ export default {
   data() {
     return {
       items: [
-        { title: 'Lipstick', image: require('./assets/lipstick.png'), link: '/lipstick'},
+        { title: 'Lipstick', image: require('./assets/lipstick.png'), link: '/lipstickBrand'},
         { title: 'Store', image: require('./assets/store.png'), link: '/store'},
         { title: 'Trend', image: require('./assets/mirror.png'), link: '/trend'},
         { title: 'Logout', image: require('./assets/exit.png'), link: '/'}

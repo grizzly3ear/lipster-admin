@@ -22,7 +22,7 @@ export default new Router({
       component: Home
     },
     {
-      path: '/lipstick',
+      path: '/lipstickBrand',
       name: 'LipstickBrand',
       component: LipstickBrand
     },
@@ -42,7 +42,7 @@ export default new Router({
       component:Store
     },
     {
-      path: '/lipstickColor',
+      path: '/lipstickColor/:id',
       name: 'LipstickColor',
       component:LipstickColor
     }
