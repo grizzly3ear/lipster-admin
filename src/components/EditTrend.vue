@@ -25,6 +25,9 @@
               <v-flex xs12>
                 <v-text-field v-model='skin_color' label='Skin color*' required></v-text-field>
               </v-flex>
+               <v-flex xs12>
+                <v-text-field v-model='description' label='Description*' required></v-text-field>
+              </v-flex>
               <v-flex xs12>
                 <v-text-field v-model='lipstick_color_id' label='Lipstick color ID*' required></v-text-field>
               </v-flex>
@@ -32,7 +35,6 @@
           </v-container>
           <small>*indicates required field</small>
         </v-card-text>
-        {{props}}
         <v-card-actions style='margin: 0 187px 0 187px'>
           <v-spacer></v-spacer>
           <v-btn color='blue darken-1' @click='dialog = false'>Close</v-btn>
@@ -46,9 +48,13 @@
 <script>
 import Swal from 'sweetalert2'
 import axios from "axios";
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   methods: {
+    ...mapActions([
+      'setTrend'
+    ]),
     async onEditClick(){
         await axios.put(`http://18.136.104.217/api/trend/` + this.props.item.id,
         {
@@ -56,6 +62,7 @@ export default {
         year: this.year,
         image: this.image,
         skin_color: this.skin_color,
+        description: this.description,
         lipstick_color_id: this.lipstick_color_id,
         })
         Swal.fire({
@@ -65,6 +72,8 @@ export default {
             showConfirmButton: false,
             timer: 1000
           })
+          const { data } = await axios.get(`http://18.136.104.217/api/trend`)
+          this.setTrend(data)
       },
   },
   props: [
@@ -76,7 +85,13 @@ export default {
     year: null,
     image: '',
     skin_color: '',
+    description: '',
     lipstick_color_id: null
-  })
+  }),
+  computed: {
+    ...mapGetters([
+      'getTrend'
+    ])
+  }
 }
 </script>

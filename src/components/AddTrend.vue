@@ -26,6 +26,9 @@
                 <v-text-field v-model='skin_color' label='Skin color*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
+                <v-text-field v-model='description' label='Description*' required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <v-text-field v-model='lipstick_color_id' label='Lipstick color ID*' required></v-text-field>
               </v-flex>
             </v-layout>
@@ -43,17 +46,22 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import Swal from 'sweetalert2'
 import axios from "axios";
 
 export default {
     methods: {
+    ...mapActions([
+      'setTrend'
+    ]),
     async onAddClick() {
       let formData = new FormData()
       formData.append('title', this.title)
       formData.append('year', this.year)
       formData.append('image', this.image)
       formData.append('skin_color', this.skin_color)
+      formData.append('description', this.description)
       formData.append('lipstick_color_id', this.lipstick_color_id)
       await axios.post(`http://18.136.104.217/api/trend`, 
       formData, {
@@ -68,6 +76,8 @@ export default {
         showConfirmButton: false,
         timer: 1000
       })
+      const { data } = await axios.get(`http://18.136.104.217/api/trend`)
+      this.setTrend(data)
     }
   },
   data: () => ({
@@ -76,7 +86,13 @@ export default {
     year: null,
     image: '',
     lipstick_color_id: null,
-    skin_color: ''
-  })
+    skin_color: '',
+    description: ''
+  }),
+  computed: {
+    ...mapGetters([
+      'getTrend'
+    ])
+  }
 }
 </script>

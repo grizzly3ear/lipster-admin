@@ -2,7 +2,7 @@
 
   <v-data-table id='table-list'
     :headers='headers'
-    :items='trends.data'
+    :items='getTrend.data'
     item-key='name'
     select-all
     class='elevation-1'
@@ -22,6 +22,7 @@
         <div v-html='renderColorBox(props.item.color.rgb)'></div>
         {{ props.item.color.rgb }}
       </td>
+      <td>{{ props.item.description }}</td>
       <td><EditTrend :props='props'/></td>
       <td><DeleteTrend :props='props'/></td>
       
@@ -35,6 +36,7 @@ import EditTrend from '../components/EditTrend'
 import DeleteTrend from '../components/DeleteTrend'
 import SelectTrendCard from '../components/SelectTrendCard'
 import axios from "axios";
+import { mapGetters, mapActions } from 'vuex'
 
   export default {
     components: {
@@ -43,9 +45,13 @@ import axios from "axios";
       SelectTrendCard
     },
     methods: {
-      async getTrend() {
+      ...mapActions([
+        'setTrend'
+      ]),
+      async getTrends() {
         const { data } = await axios.get(`http://18.136.104.217/api/trend`)
         this.trends = data
+        this.setTrend(data)
       },
       renderSkinColorBox(rgb) {
         return (
@@ -59,7 +65,7 @@ import axios from "axios";
       }
     },
     async mounted () {
-      this.getTrend()
+      this.getTrends()
     },
     data () {
       return {
@@ -72,13 +78,19 @@ import axios from "axios";
           { text: 'Image', value: 'image' },
           { text: 'Skin color', value: 'skin_color' },
           { text: 'Lipstick color', value: 'lipstick_color_id' },
+          { text: 'Description', value: 'Description' },
           { text: 'Edit' },
           { text: 'Delete' }
       
         ],
       }
-    }
+    },
+    computed: {
+    ...mapGetters([
+      'getTrend'
+    ])
   }
+}
 </script>
 
 
