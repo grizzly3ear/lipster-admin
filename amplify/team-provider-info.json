@@ -1,0 +1,14 @@
+{
+    "lipster": {
+        "awscloudformation": {
+            "AuthRoleName": "lipster-admin-lipster-20190526184238-authRole",
+            "UnauthRoleArn": "arn:aws:iam::420923166798:role/lipster-admin-lipster-20190526184238-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::420923166798:role/lipster-admin-lipster-20190526184238-authRole",
+            "Region": "ap-southeast-1",
+            "DeploymentBucketName": "lipster-admin-lipster-20190526184238-deployment",
+            "UnauthRoleName": "lipster-admin-lipster-20190526184238-unauthRole",
+            "StackName": "lipster-admin-lipster-20190526184238",
+            "StackId": "arn:aws:cloudformation:ap-southeast-1:420923166798:stack/lipster-admin-lipster-20190526184238/e41a6120-7fab-11e9-8513-0a93d0164408"
+        }
+    }
+}
