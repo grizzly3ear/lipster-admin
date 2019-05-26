@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require("../assets/add.png")'/>
+          <v-icon color="black">add_box</v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -14,16 +14,19 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field label='Title*' required></v-text-field>
+                <v-text-field v-model='title' label='Title*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label='Year*' required></v-text-field>
+                <v-text-field v-model='year' label='Year*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label='Image*' required></v-text-field>
+                <v-text-field v-model='image' label='Image*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field label='Lipstick color ID*' required></v-text-field>
+                <v-text-field v-model='skin_color' label='Skin color*' required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model='lipstick_color_id' label='Lipstick color ID*' required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -41,21 +44,39 @@
 
 <script>
 import Swal from 'sweetalert2'
+import axios from "axios";
 
 export default {
-  methods: {
-      onAddClick: function (e) {
-        Swal.fire({
-          position: 'center',
-          type: 'success',
-          title: 'Your work has been saved',
-          showConfirmButton: false,
-          timer: 1000
-        })
-      }
-    },
+    methods: {
+    async onAddClick() {
+      let formData = new FormData()
+      formData.append('title', this.title)
+      formData.append('year', this.year)
+      formData.append('image', this.image)
+      formData.append('skin_color', this.skin_color)
+      formData.append('lipstick_color_id', this.lipstick_color_id)
+      await axios.post(`http://18.136.104.217/api/trend`, 
+      formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      Swal.fire({
+        position: 'center',
+        type: 'success',
+        title: 'Your work has been saved',
+        showConfirmButton: false,
+        timer: 1000
+      })
+    }
+  },
   data: () => ({
-    dialog: false
+    dialog: false,
+    title: '',
+    year: null,
+    image: '',
+    lipstick_color_id: null,
+    skin_color: ''
   })
 }
 </script>

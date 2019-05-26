@@ -1,28 +1,29 @@
 <template>
 
   <v-data-table id='table-list'
-    v-model='selected'
     :headers='headers'
-    :items='desserts'
+    :items='trends.data'
     item-key='name'
     select-all
     class='elevation-1'
   >
     <template v-slot:items='props'>
       <td>
-        <v-checkbox
-          v-model='props.selected'
-          primary
-          hide-details
-        ></v-checkbox>
+        <SelectTrendCard :props='props'/>
       </td>
       <td>{{ props.item.title }}</td>
       <td>{{ props.item.year }}</td>
-      <td>{{ props.item.image }}</td>
-      <td><div class='color-skin-box' ></div> {{ props.item.skin_color }}</td>
-      <td><div class='color-box' ></div>#DC143C</td>
-      <td><EditTrend/></td>
-      <td><ConfirmDelete/></td>
+      <td> <img class="image-container" :src="props.item.image"/></td>
+      <td>
+        <div v-html='renderSkinColorBox(props.item.skin_color)'></div> 
+        {{ props.item.skin_color }}
+      </td>
+      <td>
+        <div v-html='renderColorBox(props.item.color.rgb)'></div>
+        {{ props.item.color.rgb }}
+      </td>
+      <td><EditTrend :props='props'/></td>
+      <td><DeleteTrend :props='props'/></td>
       
     </template>
   </v-data-table>
@@ -31,16 +32,40 @@
 
 <script>
 import EditTrend from '../components/EditTrend'
-import ConfirmDelete from '../components/ConfirmDelete'
+import DeleteTrend from '../components/DeleteTrend'
+import SelectTrendCard from '../components/SelectTrendCard'
+import axios from "axios";
 
   export default {
     components: {
       EditTrend,
-      ConfirmDelete
+      DeleteTrend,
+      SelectTrendCard
+    },
+    methods: {
+      async getTrend() {
+        const { data } = await axios.get(`http://18.136.104.217/api/trend`)
+        this.trends = data
+      },
+      renderSkinColorBox(rgb) {
+        return (
+          `<div class='color-box' style="background-color: ${rgb}"></div>`
+        )
+      },
+      renderColorBox(rgb) {
+        return (
+          `<div class='color-box' style="background-color: ${rgb}"></div>`
+        )
+      }
+    },
+    async mounted () {
+      this.getTrend()
     },
     data () {
       return {
         selected: [],
+        trends: {},
+        props: {},
         headers: [
           { text: 'Title', value: 'title' },
           { text: 'Year', value: 'year' },
@@ -51,64 +76,6 @@ import ConfirmDelete from '../components/ConfirmDelete'
           { text: 'Delete' }
       
         ],
-        desserts: [
-          {
-            id: 1,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 2,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 3,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 4,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 5,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 6,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          },
-          {
-            id: 7,
-            title: 'Hot Summer Lipstick',
-            year: 2019,
-            image: 'summer2019.png',
-            skin_color: '#365454',
-            lipstick_color_id: 1
-          }
-        ]
       }
     }
   }
