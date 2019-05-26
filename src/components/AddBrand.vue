@@ -16,6 +16,9 @@
               <v-flex xs12>
                 <v-text-field v-model='name' label='Brand*' required></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model='image' label='Image*' required></v-text-field>
+              </v-flex>
             </v-layout>
           </v-container>
           <small>*indicates required field</small>
@@ -44,6 +47,7 @@ export default {
     async onAddClick() {
       let formData = new FormData()
       formData.append('name', this.name)
+      formData.append('image', this.image)
       await axios.post(`http://18.136.104.217/api/brand`, 
       formData, {
         headers: {
@@ -64,7 +68,8 @@ export default {
   },
   data: () => ({
     dialog: false,
-    name: ''
+    name: '',
+    image: ''
   }),
   computed: {
     ...mapGetters([
