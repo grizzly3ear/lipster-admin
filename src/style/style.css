@@ -36,7 +36,7 @@
   
 #nav{
     float: left;
-    width: 10%;
+    width: 15%;
     height: 100%;
     margin-top: 10px !important;
 }
@@ -46,7 +46,7 @@
 }
 
 .theme--light.v-table tbody tr:not(:last-child){
-  height: 80px !important;
+  height: 55px !important;
 }
   
   .nav-icon{
@@ -54,11 +54,11 @@
   }
   
   .nav-title{
-    font-size: 18px;
+    font-size: 14px;
   }
   
   .v-list--dense .v-list__tile:not(.v-list__tile--avatar){
-    height: 80px !important;
+    height: 55px !important;
   }
   
   #header .theme--light.v-toolbar{
@@ -167,7 +167,7 @@
 }
 
 .v-datatable__actions__select{
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .v-datatable__actions__pagination{
@@ -175,15 +175,15 @@
 }
 
 .v-datatable__actions__select .v-select__selections .v-select__selection--comma{
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .brand-container   {
   background-color: white;
   text-align: center;
   /* display: inline-block; */
-  width: 320px;
-  height: 280px;
+  width: 220px;
+  height: 180px;
   border-radius: 10px;
   border: 3px solid #D3D3D3;
 }
@@ -194,7 +194,7 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .brand-list{
@@ -225,7 +225,7 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
 }
 
 .operation-tab{
