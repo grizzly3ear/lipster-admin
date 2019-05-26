@@ -2,7 +2,7 @@
   <v-layout>
     <v-container grid-list-md>
       <v-layout wrap>
-        <v-list v-for='brand in brands' :key='brand.id'>
+        <v-list v-for='brand in getBrand.data' :key='brand.id'>
           <BrandCard :brand='brand'/>
         </v-list>
       </v-layout>
@@ -12,6 +12,7 @@
 
 
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import BrandCard from '@/components/BrandCard'
 import axios from '../utils/axios.js'
 
@@ -20,20 +21,29 @@ export default {
   components: {
     BrandCard
   },
-  methods: {
-    async getBrand() {
-      const { data } = await axios.get(`brand`)
-      this.brands = data
-    }
-  },
-  async mounted () {
-    this.getBrand()
-  },
+    methods: {
+      ...mapActions([
+        'setBrand'
+      ]),
+      async getBrands() {
+        const { data } = await axios.get(`http://18.136.104.217/api/lipstick`)
+        this.brands = data
+        this.setBrand(data)
+      }
+    },
+    async mounted () {
+      this.getBrands()
+    },
   data() {
     return {
       info: [],
       brands: [],
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getBrand'
+    ])
   }
 }
 </script>

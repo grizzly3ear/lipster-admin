@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import SearchBrand from '../components/SearchBrand'
-import OperationBrand from '../components/OperationBrand'
-import BrandList from '../components/BrandList'
+import SearchBrand from '@/components/SearchBrand'
+import OperationBrand from '@/components/OperationBrand'
+import BrandList from '@/components/BrandList'
 
 export default {
   components: {

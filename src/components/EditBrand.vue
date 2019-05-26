@@ -3,7 +3,7 @@
     <v-dialog v-model='dialog' persistent max-width='600px'>
       <template v-slot:activator='{ on }'>
         <v-btn icon v-on='on'>
-          <v-img :src='require("../assets/edit.png")'/>
+          <v-icon color="black">edit</v-icon>
         </v-btn>
       </template>
       <v-card>
@@ -32,11 +32,15 @@
 <script>
 import Swal from 'sweetalert2'
 import axios from "axios";
+import { mapActions, mapGetters } from 'vuex'
 
 export default {
   methods: {
+    ...mapActions([
+      'setBrand'
+    ]),
     async onEditClick(){
-      await axios.put(`http://18.136.104.217/api/lipstick/brand/` + this.brand.id,
+      await axios.put(`http://18.136.104.217/api/brand/` + this.brand.id,
       {
       name: this.name 
       })
@@ -47,6 +51,8 @@ export default {
         showConfirmButton: false,
         timer: 1000
       })
+      const { data } = await axios.get(`http://18.136.104.217/api/lipstick`)
+      this.setBrand(data)
     },
   },
   props: [
@@ -55,6 +61,11 @@ export default {
   data: () => ({
     dialog: false,
     name: ''
-  })
+  }),
+  computed: {
+    ...mapGetters([
+      'getBrand'
+    ])
+  }
 }
 </script>

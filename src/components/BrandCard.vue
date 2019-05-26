@@ -40,6 +40,7 @@
 
 
 <script>
+import { mapActions, mapGetters } from 'vuex'
 import EditBrand from '@/components/EditBrand'
 import DeleteBrand from '@/components/DeleteBrand'
 import axios from "axios";
@@ -50,6 +51,11 @@ export default {
     EditBrand,
     DeleteBrand
   },
+  methods: {
+    ...mapActions([
+      'setBrand'
+    ])
+  },
   props: [
         'brand'
         ],
@@ -59,6 +65,11 @@ export default {
       selected: [],
       
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getBrand'
+    ])
   }
 }
 </script>
