@@ -2,7 +2,7 @@
   <v-layout>
     <v-container grid-list-md>
       <v-layout wrap>
-        <v-list v-for='brand in getBrand.data' :key='brand.id'>
+        <v-list v-for='brand in getBrand' :key='brand.id'>
           <BrandCard :brand='brand'/>
         </v-list>
       </v-layout>
@@ -26,7 +26,7 @@ export default {
         'setBrand'
       ]),
       async getBrands() {
-        const { data } = await axios.get(`http://18.136.104.217/api/lipstick`)
+        const { data } = await axios.get(`brand`)
         this.brands = data
         this.setBrand(data)
       }

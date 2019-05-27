@@ -1,39 +1,43 @@
 <template>
   <v-layout>
     <v-flex xs12 sm6 md4>
-      <div class='brand-list'>
+      <v-container>
         <div class='check-brand'>
           <v-checkbox v-model='selected' primary hide-details></v-checkbox>
         </div>
-        <div class='brand-container'>
-          <div class='operation-tab'>
-            <div class='operation-side'>
-              <EditBrand :brand='brand'/>
-            </div>
-            <div class='operation-side'>
-              <DeleteBrand :brand='brand'/>
-            </div>
-          </div>
-          <router-link :to='{ name: "LipstickDetail", params: {id: brand.id}}'>
-            <div class='brand'>
-              <table>
-                <tr>
-                  <td rowspan='3'>
-                    <img class='lipstickList' :src='require("@/assets/lipstickList.png")'>
-                  </td>
-                </tr>
-                <tr></tr>
-                <tr></tr>
-                <tr>
-                  <td>
+        <v-container class='brand-container'>
+          <v-layout column>
+            <v-flex offset-md7 md3>
+              <v-layout row>
+                <v-flex>
+                  <EditBrand :brand='brand'/> 
+                </v-flex>
+                <v-flex>
+                  <DeleteBrand :brand='brand'/>
+                </v-flex>
+              </v-layout>
+            </v-flex>
+            <v-flex>
+              <router-link :to='{ name: "LipstickDetail", params: {id: brand.id}}'>
+                <v-layout column>
+                  <v-flex offset-md1>
+                    <v-img
+                      :src='imagePlaceholder'
+                      class='lipstickList'
+                      aspect-ratio = 0.8
+                      position = 'center center'
+                    >
+                    </v-img>
+                  </v-flex>
+                  <v-flex style='margin-top: -50px'>
                     <label class='brand' v-text='brand.name'></label>
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </router-link>
-        </div>
-      </div>
+                  </v-flex>
+                </v-layout>
+              </router-link>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-container>
     </v-flex>
   </v-layout>
 </template>
@@ -63,7 +67,7 @@ export default {
     return {
       info: [],
       selected: [],
-      
+      imagePlaceholder: require('@/assets/lipstickList.png')
     }
   },
   computed: {
