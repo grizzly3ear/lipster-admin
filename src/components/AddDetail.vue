@@ -17,13 +17,13 @@
                 <v-text-field v-model='name' label='Name*' required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                  <v-combobox 
-                    v-model="type" 
-                    :items='types.data'
-                    label="Type*"
-                    item-text='type'
-                    return-object
-                  ></v-combobox>
+                <v-combobox 
+                  v-model="type" 
+                  :items='types.data'
+                  label="Type*"
+                  item-text='type'
+                  return-object
+                ></v-combobox>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field v-model='max_price' label='Max Price*' required></v-text-field>
@@ -48,7 +48,7 @@
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style='margin: 0 187px 0 187px'>
-          <v-btn color='blue darken-1'  @click='dialog = false'>Close</v-btn>
+          <v-btn color='blue darken-1'  @click='closeDialog'>Close</v-btn>
           <div @click='dialog = false' style='margin: 30px'><v-btn color='blue darken-1'  @click='onAddClick'>Save</v-btn></div>
         </v-card-actions>
       </v-card>
@@ -58,14 +58,14 @@
 
 <script>
 import Swal from 'sweetalert2'
-import axios from "axios";
+import axios from '../utils/axios'
 import { mapGetters, mapActions } from 'vuex'
 
 export default {
-    methods: {
-      ...mapActions([
-        'setDetail'
-      ]),
+  methods: {
+    ...mapActions([
+      'setDetail'
+    ]),
     async onAddClick() {
       let formData = new FormData()
       formData.append('name', this.name)
@@ -77,7 +77,7 @@ export default {
       formData.append('composition', this.composition)
       formData.append('apply', this.apply)
       formData.append('lipstick_brand_id', this.$route.params.id)
-      await axios.post(`http://18.136.104.217/api/lipstick/detail`, 
+      await axios.post(`lipstick/detail`, 
       formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -93,30 +93,35 @@ export default {
       const { data } = await axios.get(`http://18.136.104.217/api/brand/` + this.$route.params.id)
       this.setDetail(data)
     },
-    async getType(){
-      const { data } = await axios.get(`http://localhost:8000/api/lipstick/type`)
+    async getType() {
+      const { data } = await axios.get(`lipstick/detail/type`)
       this.types = data
-      // for (var item in this.details.data){
-        
-      //   console.log(item);
-      // }
+    },
+    closeDialog() {
+      this.dialog = false
+      this.name = ''
+      this.type = ''
+      this.max_price = 0
+      this.min_price = 0
+      this.opacity = 1
+      this.composition = ''
+      this.description = ''
+      this.apply = ''
     }
   },
   async mounted () {
       this.getType()
     },
   data: () => ({
-    
     dialog: false,
     name: '',
     type: '',
-    max_price: null,
-    min_price: null,
-    opacity: null,
+    max_price: 0,
+    min_price: 0,
+    opacity: 1,
     composition: '',
     description: '',
     apply: '',
-    details: {},
     types: []
   }),
   computed: {

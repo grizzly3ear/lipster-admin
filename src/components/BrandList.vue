@@ -27,8 +27,8 @@ export default {
       ]),
       async getBrands() {
         const { data } = await axios.get(`brand`)
-        this.brands = data
-        this.setBrand(data)
+        console.log(data.data)
+        this.setBrand(data.data)
       }
     },
     async mounted () {
