@@ -36,7 +36,6 @@
 </template>
 
 <script>
-import DetailCard from '@/components/DetailCard'
 import axios from "../utils/axios"
 import EditDetail from '@/components/EditDetail'
 import DeleteDetail from '@/components/DeleteDetail'
@@ -45,7 +44,6 @@ import { mapGetters, mapActions } from 'vuex'
 
 export default {
   components: {
-    // DetailCard,
     EditDetail,
     DeleteDetail,
     SelectLipstickDetailCard
