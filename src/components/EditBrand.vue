@@ -55,8 +55,8 @@ export default {
         showConfirmButton: false,
         timer: 1000
       })
-      const { data } = await axios.get(`http://18.136.104.217/api/lipstick`)
-      this.setBrand(data)
+      const { data } = await axios.get(`http://18.136.104.217/api/brand`)
+      this.setBrand(data.data)
     },
   },
   props: [
