@@ -41,7 +41,6 @@ export default {
               )
             }).finally(() => {
               axios.get(`brand`).then(({data}) => {
-                console.log(data)
                 this.setBrand(data.data)
               })
             })
