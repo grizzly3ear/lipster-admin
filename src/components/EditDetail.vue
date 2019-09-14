@@ -72,8 +72,10 @@ export default {
         description: this.description,
         composition: this.composition, 
         apply: this.apply, 
-        lipstick_brand_id: this.props.item.lipstick_brand_id
+        lipstick_brand_id: this.$route.params.id
         })
+        
+
         Swal.fire({
             position: 'center',
             type: 'success',
@@ -81,8 +83,8 @@ export default {
             showConfirmButton: false,
             timer: 1000
           })
-          const { data } = await axios.get(`http://18.136.104.217/api/brand/` + this.$route.params.id)
-          this.setDetail(data)
+          const { data } = await axios.get(`http://18.136.104.217/api/brand/` + this.$route.params.id + `/detail`)
+          this.setDetail(data.data)
       },
   },
   props: [
