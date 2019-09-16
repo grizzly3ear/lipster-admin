@@ -1,36 +1,30 @@
 <template>
   <v-layout>
     <v-flex xs12 sm6 md4>
-      <v-container>
-        <div class='check-brand'>
-          <v-checkbox v-model='selected' primary hide-details></v-checkbox>
-        </div>
-        <v-container class='brand-container'>
+      <v-container style="padding: 0 !imaportant;">
+        <!-- <div class="check-brand">
+          <v-checkbox v-model="selected" primary hide-details></v-checkbox>
+        </div>-->
+        <v-container class="brand-container">
           <v-layout column>
             <v-flex offset-md7 md3>
               <v-layout row>
                 <v-flex>
-                  <EditBrand :brand='brand'/> 
+                  <EditBrand :brand="brand" />
                 </v-flex>
                 <v-flex>
-                  <DeleteBrand :brand='brand'/>
+                  <DeleteBrand :brand="brand" />
                 </v-flex>
               </v-layout>
             </v-flex>
             <v-flex>
-              <router-link :to='{ name: "LipstickDetail", params: {id: brand.id}}'>
+              <router-link :to="{ name: 'LipstickDetail', params: {id: brand.id}}">
                 <v-layout column>
-                  <v-flex offset-md1>
-                    <v-img
-                      :src='imagePlaceholder'
-                      class='lipstickList'
-                      aspect-ratio = 0.8
-                      position = 'center center'
-                    >
-                    </v-img>
+                  <v-flex>
+                    <v-img :src="brand.image" class="brandList" position="center center"></v-img>
                   </v-flex>
-                  <v-flex style='margin-top: -50px'>
-                    <label class='brand' v-text='brand.name'></label>
+                  <v-flex style="margin-top: -150px">
+                    <label class="brand" v-text="brand.name"></label>
                   </v-flex>
                 </v-layout>
               </router-link>
@@ -44,36 +38,30 @@
 
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
-import EditBrand from '@/components/EditBrand'
-import DeleteBrand from '@/components/DeleteBrand'
+import { mapActions, mapGetters } from "vuex";
+import EditBrand from "@/components/EditBrand";
+import DeleteBrand from "@/components/DeleteBrand";
 import axios from "axios";
 
 export default {
-  name: 'brandCard',
+  name: "brandCard",
   components: {
     EditBrand,
     DeleteBrand
   },
   methods: {
-    ...mapActions([
-      'setBrand'
-    ])
+    ...mapActions(["setBrand"])
   },
-  props: [
-        'brand'
-        ],
+  props: ["brand"],
   data() {
     return {
       info: [],
-      selected: [],
-      imagePlaceholder: require('@/assets/lipstickList.png')
-    }
+      selected: []
+      // imagePlaceholder: require("@/assets/lipstickList.png")
+    };
   },
   computed: {
-    ...mapGetters([
-      'getBrand'
-    ])
+    ...mapGetters(["getBrand"])
   }
-}
+};
 </script>
