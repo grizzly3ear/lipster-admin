@@ -23,7 +23,10 @@
                 <v-text-field v-model="color_code" label="Color Name*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="image" label="Image*" required></v-text-field>
+                <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
+                <div class="image-preview">
+                  <img class="preview" :src="selectedFile" />
+                </div>
               </v-flex>
             </v-layout>
           </v-container>
@@ -47,6 +50,37 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   methods: {
+    onFileSelected: function(event) {
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.selectedFile = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    },
+    async encodeToBase64(files) {
+      var attach;
+      var reader;
+
+      attach = await this.FileToBase64(files, reader);
+
+      return attach.split(",")[1];
+    },
+
+    FileToBase64(files, reader) {
+      reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      return new Promise((resolve, reject) => {
+        reader.onerror = () => {
+          reader.abort();
+          reject("Can not upload this image");
+        };
+        reader.onload = function() {
+          resolve(reader.result);
+        };
+      });
+    },
     ...mapActions(["setColor"]),
     async onAddClick() {
       let formData = new FormData();
@@ -64,7 +98,8 @@ export default {
         }
       );
       let formImage = new FormData();
-      formImage.append("image", this.image);
+      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
+      formImage.append("image", imageToBase64);
       formImage.append("lipstick_color_id", newColor.data.id);
       await axios.post(`http://18.136.104.217/api/lipstick/image`, formImage, {
         headers: {
@@ -91,7 +126,8 @@ export default {
     color_name: "",
     rgb: "",
     color_code: "",
-    image: ""
+    image: "",
+    selectedFile: null
   }),
   computed: {
     ...mapGetters(["getColor"])

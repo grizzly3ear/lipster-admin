@@ -14,16 +14,19 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="color_name" label="Color Name*" required></v-text-field>
+                <v-text-field v-model="props.item.color_name" label="Color Name*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="rgb" label="RGB*" required></v-text-field>
+                <v-text-field v-model="props.item.rgb" label="RGB*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="color_code" label="Color Code*" required></v-text-field>
+                <v-text-field v-model="props.item.color_code" label="Color Code*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="image" label="Image*" required></v-text-field>
+                <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
+                <div class="image-preview">
+                  <img class="preview" :src="selectedFile" />
+                </div>
               </v-flex>
             </v-layout>
           </v-container>
@@ -47,23 +50,55 @@ import { mapGetters, mapActions } from "vuex";
 
 export default {
   methods: {
+    onFileSelected: function(event) {
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.selectedFile = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    },
+    async encodeToBase64(files) {
+      var attach;
+      var reader;
+
+      attach = await this.FileToBase64(files, reader);
+
+      return attach.split(",")[1];
+    },
+
+    FileToBase64(files, reader) {
+      reader = new FileReader();
+      reader.readAsDataURL(files[0]);
+
+      return new Promise((resolve, reject) => {
+        reader.onerror = () => {
+          reader.abort();
+          reject("Can not upload this image");
+        };
+        reader.onload = function() {
+          resolve(reader.result);
+        };
+      });
+    },
     ...mapActions(["setColor"]),
     async onEditClick() {
       await axios.put(
         `http://18.136.104.217/api/lipstick/color/` + this.props.item.id,
         {
-          color_name: this.color_name,
-          rgb: this.rgb,
-          color_code: this.color_code,
+          color_name: this.props.item.color_name,
+          rgb: this.props.item.rgb,
+          color_code: this.props.item.color_code,
           lipstick_detail_id: this.$route.params.id
         }
       );
       //TODO: loop images
+      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
       await axios.put(
         `http://18.136.104.217/api/lipstick/image/` +
           this.props.item.images[0].id,
         {
-          image: this.image,
+          image: imageToBase64,
           lipstick_color_id: this.props.item.id
         }
       );
@@ -89,7 +124,8 @@ export default {
     color_name: "",
     rgb: "",
     color_code: "",
-    image: ""
+    image: "",
+    selectedFile: null
   }),
   computed: {
     ...mapGetters(["getColor"])
