@@ -1,50 +1,53 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-import Home from './views/Home'
-import LipstickBrand from './views/LipstickBrand'
-import LipstickDetail from './views/LipstickDetail'
-import Trend from './views/Trends'
-import Store from './views/Store'
-import LipstickColor from './views/LipstickColor'
+import Vue from "vue";
+import Router from "vue-router";
+import Home from "./views/Home";
+import LipstickBrand from "./views/LipstickBrand";
+import LipstickDetail from "./views/LipstickDetail";
+import TrendCollection from "./views/TrendCollection";
+import Trend from "./views/Trends";
+import Store from "./views/Store";
+import LipstickColor from "./views/LipstickColor";
 
-
-
-
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes: [
     {
-      path: '/',
-      name: 'home',
+      path: "/",
+      name: "home",
       component: Home
     },
     {
-      path: '/lipstickBrand',
-      name: 'LipstickBrand',
+      path: "/lipstickBrand",
+      name: "LipstickBrand",
       component: LipstickBrand
     },
     {
-      path: '/trend',
-      name: 'Trend',
-      component:Trend
+      path: "/trend/:id",
+      name: "Trend",
+      component: Trend
     },
     {
-      path: '/lipstickDetail/:id',
-      name: 'LipstickDetail',
-      component:LipstickDetail
+      path: "/trendCollection",
+      name: "TrendCollection",
+      component: TrendCollection
     },
     {
-      path: '/store',
-      name: 'Store',
-      component:Store
+      path: "/lipstickDetail/:id",
+      name: "LipstickDetail",
+      component: LipstickDetail
     },
     {
-      path: '/lipstickColor/:id',
-      name: 'LipstickColor',
-      component:LipstickColor
+      path: "/store",
+      name: "Store",
+      component: Store
+    },
+    {
+      path: "/lipstickColor/:id",
+      name: "LipstickColor",
+      component: LipstickColor
     }
   ]
-})
+});

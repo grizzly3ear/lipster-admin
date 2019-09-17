@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -9,57 +9,67 @@ export default new Vuex.Store({
     brand: [],
     detail: [],
     color: [],
-    trend: []
+    trend: [],
+    trendCollection: []
   },
   mutations: {
     setSelectedForDelete: (state, id) => {
-      state.selectedForDelete.push(id)
+      state.selectedForDelete.push(id);
     },
     setBrand: (state, brand) => {
-      state.brand = brand
+      state.brand = brand;
     },
     setDetail: (state, detail) => {
-      state.detail = detail
+      state.detail = detail;
     },
     setColor: (state, color) => {
-      state.color = color
+      state.color = color;
+    },
+    setTrendCollection: (state, trendCollection) => {
+      state.trendCollection = trendCollection;
     },
     setTrend: (state, trend) => {
-      state.trend = trend
+      state.trend = trend;
     }
   },
   actions: {
-    setSelectedForDelete: ({commit}, id) => {
-      commit('setSelectedForDelete', id)
+    setSelectedForDelete: ({ commit }, id) => {
+      commit("setSelectedForDelete", id);
     },
-    setBrand: ({commit}, brand) => {
-      commit('setBrand', brand)
-    }, 
-    setDetail: ({commit}, detail) => {
-      commit('setDetail', detail)
-    }, 
-    setColor: ({commit}, color) => {
-      commit('setColor', color)
+    setBrand: ({ commit }, brand) => {
+      commit("setBrand", brand);
     },
-    setTrend: ({commit}, trend) => {
-      commit('setTrend', trend)
+    setDetail: ({ commit }, detail) => {
+      commit("setDetail", detail);
+    },
+    setColor: ({ commit }, color) => {
+      commit("setColor", color);
+    },
+    setTrendCollection: ({ commit }, trendCollection) => {
+      commit("setTrendCollection", trendCollection);
+    },
+    setTrend: ({ commit }, trend) => {
+      commit("setTrend", trend);
     }
   },
   getters: {
-    getSelectedForDelete: (state) => {
-      return state.selectedForDelete
+    getSelectedForDelete: state => {
+      return state.selectedForDelete;
     },
-    getBrand: (state) => {
-      return state.brand
+    getBrand: state => {
+      return state.brand;
     },
-    getDetail: (state) => {
-      return state.detail
-    }, 
-    getColor: (state) => {
-      return state.color
+    getDetail: state => {
+      return state.detail;
     },
-    getTrend: (state) => {
-      return state.trend
+    getColor: state => {
+      return state.color;
+    },
+    getTrendCollection: state => {
+      return state.trendCollection;
+    },
+    getTrend: state => {
+      return state.trend;
     }
   }
-})
+});
