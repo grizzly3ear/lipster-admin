@@ -1,27 +1,27 @@
 <template>
   <div>
-    <div class='body-content'>
-    <v-toolbar card prominent id='tool-container'>
-      <div id='search-container'>
-        <SearchBrand/>
+    <div class="body-content">
+      <v-toolbar card prominent id="tool-container">
+        <div id="search-container">
+          <SearchBrand />
+        </div>
+        <div id="operation-container">
+          <OperationBrand />
+        </div>
+      </v-toolbar>
+      <hr />
+      <div class="title">
+        <p>List Brand</p>
       </div>
-      <div id='operation-container'>
-        <OperationBrand/>
-      </div>
-    </v-toolbar>
-    <hr>
-    <div class='title'>
-      <p>List Lipstick Brand</p>
-    </div>
-      <BrandList/>
+      <BrandList />
     </div>
   </div>
 </template>
 
 <script>
-import SearchBrand from '@/components/SearchBrand'
-import OperationBrand from '@/components/OperationBrand'
-import BrandList from '@/components/BrandList'
+import SearchBrand from "@/components/SearchBrand";
+import OperationBrand from "@/components/OperationBrand";
+import BrandList from "@/components/BrandList";
 
 export default {
   components: {
@@ -29,5 +29,5 @@ export default {
     OperationBrand,
     BrandList
   }
-}
+};
 </script>
