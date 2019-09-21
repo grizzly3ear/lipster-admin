@@ -23,6 +23,9 @@
                 <v-text-field v-model="color_code" label="Color Name*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
+                <v-text-field v-model="composition" label="Composition*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
@@ -87,6 +90,7 @@ export default {
       formData.append("color_name", this.color_name);
       formData.append("rgb", this.rgb);
       formData.append("color_code", this.color_code);
+      formData.append("composition", this.composition);
       formData.append("lipstick_detail_id", this.$route.params.id);
       let newColor = await axios.post(
         `http://18.136.104.217/api/lipstick/color`,
@@ -126,6 +130,7 @@ export default {
     color_name: "",
     rgb: "",
     color_code: "",
+    composition: "",
     image: "",
     selectedFile: null
   }),

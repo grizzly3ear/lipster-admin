@@ -22,6 +22,9 @@
               <v-flex xs12 sm6 md4>
                 <v-text-field v-model="props.item.color_code" label="Color Code*" required></v-text-field>
               </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field v-model="props.item.composition" label="Composition" required></v-text-field>
+              </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
@@ -89,6 +92,7 @@ export default {
           color_name: this.props.item.color_name,
           rgb: this.props.item.rgb,
           color_code: this.props.item.color_code,
+          composition: this.props.item.composition,
           lipstick_detail_id: this.$route.params.id
         }
       );
@@ -125,6 +129,7 @@ export default {
     rgb: "",
     color_code: "",
     image: "",
+    composition: "",
     selectedFile: null
   }),
   computed: {

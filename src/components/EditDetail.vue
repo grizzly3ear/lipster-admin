@@ -14,11 +14,11 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="name" label="Name*" required></v-text-field>
+                <v-text-field v-model="props.item.name" label="Name*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-combobox
-                  v-model="type"
+                  v-model="props.item.type"
                   :items="types.data"
                   label="Type*"
                   item-text="type"
@@ -26,22 +26,19 @@
                 ></v-combobox>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="max_price" label="Max Price*" required></v-text-field>
+                <v-text-field v-model="props.item.max_price" label="Max Price*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="min_price" label="Min Price*" required></v-text-field>
+                <v-text-field v-model="props.item.min_price" label="Min Price*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="opacity" label="Opacity*" required></v-text-field>
+                <v-text-field v-model="props.item.opacity" label="Opacity*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="description" label="Description*" required></v-text-field>
+                <v-text-field v-model="props.item.description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="composition" label="Composition*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field v-model="apply" label="Apply*" required></v-text-field>
+                <v-text-field v-model="props.item.apply" label="Apply*" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-container>
@@ -70,14 +67,13 @@ export default {
       await axios.put(
         `http://18.136.104.217/api/lipstick/detail/` + this.props.item.id,
         {
-          name: this.name,
-          max_price: this.max_price,
-          min_price: this.min_price,
-          type: this.type,
-          opacity: this.opacity,
-          description: this.description,
-          composition: this.composition,
-          apply: this.apply,
+          name: this.props.item.name,
+          max_price: this.props.item.max_price,
+          min_price: this.props.item.min_price,
+          type: this.props.item.type,
+          opacity: this.props.item.opacity,
+          description: this.props.item.description,
+          apply: this.props.item.apply,
           lipstick_brand_id: this.$route.params.id
         }
       );
@@ -113,7 +109,6 @@ export default {
     type: "",
     opacity: null,
     description: "",
-    composition: "",
     apply: "",
     lipstick_brand_id: null,
     types: []

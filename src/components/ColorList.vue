@@ -22,6 +22,7 @@
         {{ props.item.rgb }}
       </td>
       <td>{{ props.item.color_code }}</td>
+      <td>{{ props.item.composition }}</td>
       <td>
         <EditColor :props="props" />
       </td>
@@ -72,6 +73,7 @@ export default {
         { text: "Color Name", value: "color_name" },
         { text: "RGB", value: "rgb" },
         { text: "Color Code", value: "color_code" },
+        { text: "Composition", value: "composition" },
         { text: "Edit" },
         { text: "Delete" },
         { text: "" }

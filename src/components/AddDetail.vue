@@ -38,9 +38,6 @@
                 <v-text-field v-model="description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="composition" label="Composition*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12>
                 <v-text-field v-model="apply" label="Apply*" required></v-text-field>
               </v-flex>
             </v-layout>
@@ -74,7 +71,6 @@ export default {
       formData.append("min_price", this.min_price);
       formData.append("opacity", this.opacity);
       formData.append("description", this.description);
-      formData.append("composition", this.composition);
       formData.append("apply", this.apply);
       formData.append("lipstick_brand_id", this.$route.params.id);
       await axios.post(`lipstick/detail`, formData, {
@@ -108,7 +104,6 @@ export default {
       this.max_price = 0;
       this.min_price = 0;
       this.opacity = 1;
-      this.composition = "";
       this.description = "";
       this.apply = "";
     }
@@ -123,7 +118,6 @@ export default {
     max_price: 0,
     min_price: 0,
     opacity: 1,
-    composition: "",
     description: "",
     apply: "",
     types: []
