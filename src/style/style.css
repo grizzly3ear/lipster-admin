@@ -322,6 +322,11 @@ img.lipstickList {
   margin: 0 !important;
 }
 
+img.storeList {
+  margin: 0 !important;
+  width: 200px;
+}
+
 .operation-side {
   float: left;
 }

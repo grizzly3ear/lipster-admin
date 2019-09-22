@@ -10,7 +10,8 @@ export default new Vuex.Store({
     detail: [],
     color: [],
     trend: [],
-    trendCollection: []
+    trendCollection: [],
+    store: []
   },
   mutations: {
     setSelectedForDelete: (state, id) => {
@@ -30,6 +31,9 @@ export default new Vuex.Store({
     },
     setTrend: (state, trend) => {
       state.trend = trend;
+    },
+    setStore: (state, store) => {
+      state.store = store;
     }
   },
   actions: {
@@ -50,6 +54,9 @@ export default new Vuex.Store({
     },
     setTrend: ({ commit }, trend) => {
       commit("setTrend", trend);
+    },
+    setStore: ({ commit }, store) => {
+      commit("setStore", store);
     }
   },
   getters: {
@@ -70,6 +77,9 @@ export default new Vuex.Store({
     },
     getTrend: state => {
       return state.trend;
+    },
+    getStore: state => {
+      return state.store;
     }
   }
 });

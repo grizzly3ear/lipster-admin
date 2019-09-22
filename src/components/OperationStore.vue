@@ -1,28 +1,25 @@
 <template>
-  <v-toolbar id='tool-bar'>
-
+  <v-toolbar id="tool-bar">
     <v-spacer></v-spacer>
-    
-    
-    <!-- <EditLipstick/> -->
-    <AddBrand/>
-    <ConfirmDelete/>
 
+    <!-- <EditLipstick/> -->
+    <AddStore />
+    <ConfirmDelete />
   </v-toolbar>
 </template>
 
 <script>
-import AddBrand from '../components/AddBrand'
+import AddStore from "../components/AddStore";
 // import EditLipstick from '../components/EditLipstick'
-import ConfirmDelete from '../components/ConfirmDelete'
+import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddBrand,
+    AddStore,
     // EditLipstick,
     ConfirmDelete
   }
-}
+};
 </script>
 
 
