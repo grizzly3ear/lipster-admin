@@ -15,17 +15,17 @@
               </v-layout>
             </v-flex>
             <v-flex>
-              <!-- <router-link :to="{ name: 'LipstickDetail', params: {id: brand.id}}"> -->
-              <v-layout column>
-                <v-flex>
-                  <!-- <v-img :src="store.image" class="brandList" position="center center"></v-img> -->
-                  <img class="storeList" :src="require('../assets/shop.jpg')" />
-                </v-flex>
-                <v-flex style="margin-top: -150px">
-                  <label class="brand" v-text="store.name"></label>
-                </v-flex>
-              </v-layout>
-              <!-- </router-link> -->
+              <router-link :to="{ name: 'StoreAddress', params: {id: store.id}}">
+                <v-layout column>
+                  <v-flex>
+                    <!-- <v-img :src="store.image" class="brandList" position="center center"></v-img> -->
+                    <img class="storeList" :src="require('../assets/shop.jpg')" />
+                  </v-flex>
+                  <v-flex style="margin-top: -150px">
+                    <label class="brand" v-text="store.name"></label>
+                  </v-flex>
+                </v-layout>
+              </router-link>
             </v-flex>
           </v-layout>
         </v-container>
@@ -59,7 +59,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getBrand"])
+    ...mapGetters(["getStore"])
   }
 };
 </script>

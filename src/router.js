@@ -7,6 +7,7 @@ import TrendCollection from "./views/TrendCollection";
 import Trend from "./views/Trends";
 import Store from "./views/Store";
 import LipstickColor from "./views/LipstickColor";
+import StoreAddress from "./views/StoreAddress";
 
 Vue.use(Router);
 
@@ -43,6 +44,11 @@ export default new Router({
       path: "/store",
       name: "Store",
       component: Store
+    },
+    {
+      path: "/StoreAddress/:id",
+      name: "StoreAddress",
+      component: StoreAddress
     },
     {
       path: "/lipstickColor/:id",
