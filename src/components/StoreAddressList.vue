@@ -9,7 +9,7 @@
   >
     <template v-slot:items="props">
       <td>
-        <!-- <SelectLipstickDetailCard :props='props'/> -->
+        <SelectStoreAddressCard :props="props" />
       </td>
       <!-- <router-link :to='{ name: "LipstickColor", params: {id: props.item.id}}'> -->
       <td
@@ -33,14 +33,14 @@
 import axios from "../utils/axios";
 import EditStoreAddress from "@/components/EditStoreAddress";
 import DeleteStoreAddress from "@/components/DeleteStoreAddress";
-// import SelectLipstickDetailCard from '@/components/SelectLipstickDetailCard'
+import SelectStoreAddressCard from "@/components/SelectStoreAddressCard";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     EditStoreAddress,
-    DeleteStoreAddress
-    // SelectLipstickDetailCard
+    DeleteStoreAddress,
+    SelectStoreAddressCard
   },
   methods: {
     ...mapActions(["setStoreAddress"]),
