@@ -182,10 +182,11 @@
   background-color: white;
   text-align: center;
   /* display: inline-block; */
-  width: 280px;
-  height: 290px;
+  width: 281px;
+  height: 350px;
   /* border-radius: 10px; */
   border: 1px solid white;
+  padding: 0 27px 150px 27px;
 }
 
 .brand {
@@ -254,6 +255,7 @@ td .detail-name {
 
 .brandList {
   width: 380px;
+  height: 380px;
   text-align: center;
   margin: 0;
 }
@@ -324,7 +326,7 @@ img.lipstickList {
 
 img.storeList {
   margin: 0 !important;
-  width: 200px;
+  width: 220px;
 }
 
 .operation-side {
@@ -340,4 +342,12 @@ img.preview {
   background-color: white;
   border: 1px solid #ddd;
   padding: 5px;
+}
+
+.img-upper-force {
+  margin-top: -15px;
+}
+
+.name-upper-force {
+  margin-top: -130px;
 }

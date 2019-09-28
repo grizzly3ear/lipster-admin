@@ -17,10 +17,10 @@
             <v-flex>
               <router-link :to="{ name: 'Trend', params: {id: trendCollection.id}}">
                 <v-layout column>
-                  <v-flex>
+                  <v-flex class="img-upper-force">
                     <v-img :src="trendCollection.image" class="brandList" position="center center"></v-img>
                   </v-flex>
-                  <v-flex style="margin-top: -150px">
+                  <v-flex class="name-upper-force">
                     <label class="brand" v-text="trendCollection.name"></label>
                   </v-flex>
                 </v-layout>

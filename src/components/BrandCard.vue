@@ -20,10 +20,10 @@
             <v-flex>
               <router-link :to="{ name: 'LipstickDetail', params: {id: brand.id}}">
                 <v-layout column>
-                  <v-flex>
+                  <v-flex class="img-upper-force">
                     <v-img :src="brand.image" class="brandList" position="center center"></v-img>
                   </v-flex>
-                  <v-flex style="margin-top: -150px">
+                  <v-flex class="name-upper-force">
                     <label class="brand" v-text="brand.name"></label>
                   </v-flex>
                 </v-layout>

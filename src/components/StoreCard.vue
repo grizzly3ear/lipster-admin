@@ -21,7 +21,7 @@
                     <!-- <v-img :src="store.image" class="brandList" position="center center"></v-img> -->
                     <img class="storeList" :src="require('../assets/shop.jpg')" />
                   </v-flex>
-                  <v-flex style="margin-top: -150px">
+                  <v-flex>
                     <label class="brand" v-text="store.name"></label>
                   </v-flex>
                 </v-layout>
