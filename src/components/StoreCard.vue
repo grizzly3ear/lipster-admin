@@ -17,11 +17,10 @@
             <v-flex>
               <router-link :to="{ name: 'StoreAddress', params: {id: store.id}}">
                 <v-layout column>
-                  <v-flex>
-                    <!-- <v-img :src="store.image" class="brandList" position="center center"></v-img> -->
-                    <img class="storeList" :src="require('../assets/shop.jpg')" />
+                  <v-flex class="img-upper-force">
+                    <v-img :src="store.image" class="brandList" position="center center"></v-img>
                   </v-flex>
-                  <v-flex>
+                  <v-flex class="name-upper-force">
                     <label class="brand" v-text="store.name"></label>
                   </v-flex>
                 </v-layout>
@@ -55,7 +54,6 @@ export default {
     return {
       info: [],
       selected: []
-      // imagePlaceholder: require("@/assets/lipstickList.png")
     };
   },
   computed: {

@@ -16,12 +16,12 @@
               <v-flex xs12>
                 <v-text-field v-model="name" label="name*" required></v-text-field>
               </v-flex>
-              <!-- <v-flex xs12>
+              <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
                 </div>
-              </v-flex>-->
+              </v-flex>
             </v-layout>
           </v-container>
           <small>*indicates required field</small>
@@ -44,44 +44,44 @@ import axios from "axios";
 
 export default {
   methods: {
-    // onFileSelected: function(event) {
-    //   var input = event.target;
-    //   var reader = new FileReader();
-    //   reader.onload = e => {
-    //     this.selectedFile = e.target.result;
-    //   };
-    //   reader.readAsDataURL(input.files[0]);
-    // },
-    // async encodeToBase64(files) {
-    //   var attach;
-    //   var reader;
+    onFileSelected: function(event) {
+      var input = event.target;
+      var reader = new FileReader();
+      reader.onload = e => {
+        this.selectedFile = e.target.result;
+      };
+      reader.readAsDataURL(input.files[0]);
+    },
+    async encodeToBase64(files) {
+      var attach;
+      var reader;
 
-    //   attach = await this.FileToBase64(files, reader);
+      attach = await this.FileToBase64(files, reader);
 
-    //   return attach.split(",")[1];
-    // },
+      return attach.split(",")[1];
+    },
 
-    // FileToBase64(files, reader) {
-    //   reader = new FileReader();
-    //   reader.readAsDataURL(files[0]);
+    FileToBase64(files, reader) {
+      reader = new FileReader();
+      reader.readAsDataURL(files[0]);
 
-    //   return new Promise((resolve, reject) => {
-    //     reader.onerror = () => {
-    //       reader.abort();
-    //       reject("Can not upload this image");
-    //     };
-    //     reader.onload = function() {
-    //       resolve(reader.result);
-    //     };
-    //   });
-    // },
+      return new Promise((resolve, reject) => {
+        reader.onerror = () => {
+          reader.abort();
+          reject("Can not upload this image");
+        };
+        reader.onload = function() {
+          resolve(reader.result);
+        };
+      });
+    },
     ...mapActions(["setStore"]),
     async onAddClick() {
       let formData = new FormData();
-      //   let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
+      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
 
       formData.append("name", this.name);
-      //   formData.append("image", imageToBase64);
+      formData.append("image", imageToBase64);
       await axios.post(`http://18.136.104.217/api/store`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -104,7 +104,7 @@ export default {
   data: () => ({
     dialog: false,
     name: "",
-    // image: "",
+    image: "",
     selectedFile: null
   }),
   computed: {
