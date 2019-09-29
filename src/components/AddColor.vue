@@ -20,7 +20,7 @@
                 <v-text-field v-model="rgb" label="RGB*" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="color_code" label="Color Name*" required></v-text-field>
+                <v-text-field v-model="color_code" label="Color Code*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="composition" label="Composition*" required></v-text-field>
