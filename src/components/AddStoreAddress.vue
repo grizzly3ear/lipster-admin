@@ -22,6 +22,12 @@
               <v-flex xs12>
                 <v-text-field v-model="longtitude" label="Longtitute*" required></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="period" label="Time Available" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="tel" label="Tel" required></v-text-field>
+              </v-flex>
             </v-layout>
           </v-container>
           <small>*indicates required field</small>
@@ -50,6 +56,8 @@ export default {
       formData.append("address_detail", this.address_detail);
       formData.append("latitude", this.latitude);
       formData.append("longtitude", this.longtitude);
+      formData.append("period", this.period);
+      formData.append("tel", this.tel);
       formData.append("store_id", this.$route.params.id);
       await axios.post(`http://18.136.104.217/api/store/address`, formData, {
         headers: {
@@ -82,6 +90,8 @@ export default {
       this.address_detail = "";
       this.latitude = 0;
       this.longtitude = 0;
+      this.period = "";
+      this.tel = "";
     }
   },
   async mounted() {
@@ -91,7 +101,9 @@ export default {
     dialog: false,
     address_detail: "",
     latitude: 0,
-    longtitude: 0
+    longtitude: 0,
+    period: "",
+    tel: ""
     // types: []
   }),
   computed: {

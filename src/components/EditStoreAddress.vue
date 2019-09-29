@@ -22,6 +22,12 @@
               <v-flex xs12>
                 <v-text-field v-model="props.item.longtitude" label="Longtitude*" required></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="props.item.period" label="Time Available" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="props.item.tel" label="Tel" required></v-text-field>
+              </v-flex>
             </v-layout>
           </v-container>
           <small>*indicates required field</small>
@@ -52,6 +58,8 @@ export default {
           address_detail: this.props.item.address_detail,
           latitude: this.props.item.latitude,
           longtitude: this.props.item.longtitude,
+          period: this.props.item.period,
+          tel: this.props.item.tel,
           store_id: this.$route.params.id
         }
       );
@@ -75,6 +83,8 @@ export default {
     detail: "",
     latitude: null,
     longtitude: null,
+    period: null,
+    tel: null,
     store_id: null
   }),
   computed: {

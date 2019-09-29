@@ -18,6 +18,8 @@
       <!-- </router-link> -->
       <td>{{ props.item.latitude }}</td>
       <td>{{ props.item.longtitude }}</td>
+      <td>{{ props.item.period }}</td>
+      <td>{{ props.item.tel }}</td>
       <td>
         <EditStoreAddress :props="props" />
       </td>
@@ -63,6 +65,8 @@ export default {
         { text: "Detail", value: "address_detail" },
         { text: "Latitude", value: "latitude" },
         { text: "Longtitude", value: "longtitude" },
+        { text: "Time Available", value: "period" },
+        { text: "Tel", value: "tel" },
         { text: "Edit" },
         { text: "Delete" },
         { text: "" }
