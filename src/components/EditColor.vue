@@ -28,7 +28,9 @@
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
-                  <img class="preview" :src="selectedFile" />
+                  <v-list v-for="image in selectedFile" :key="image.id">
+                    <img class="preview" :src="image.image" />
+                  </v-list>
                 </div>
               </v-flex>
             </v-layout>
@@ -132,6 +134,9 @@ export default {
     composition: "",
     selectedFile: null
   }),
+  beforeMount() {
+    this.selectedFile = this.props.item.images;
+  },
   computed: {
     ...mapGetters(["getColor"])
   }
