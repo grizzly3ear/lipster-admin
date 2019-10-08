@@ -104,7 +104,7 @@ export default {
   data: () => ({
     dialog: false,
     name: "",
-    image: "",
+    image: null,
     selectedFile: null
   }),
   computed: {

@@ -79,7 +79,7 @@ export default {
     async onEditClick() {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
 
-      await axios.put(`http://18.136.104.217/api/brand/` + this.brand.id, {
+      await axios.put(`http://18.136.104.217/api/brand/${this.brand.id}`, {
         name: this.brand.name,
         image: imageToBase64
       });
@@ -101,6 +101,9 @@ export default {
     image: "",
     selectedFile: null
   }),
+  beforeMount() {
+    this.selectedFile = this.brand.image;
+  },
   computed: {
     ...mapGetters(["getBrand"])
   }
