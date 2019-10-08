@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import SearchDetail from "../components/SearchDetail";
 import OperationDetail from "../components/OperationDetail";
 import DetailList from "../components/DetailList";
@@ -33,6 +33,12 @@ export default {
   },
   computed: {
     ...mapGetters(["getBreadcrumbs"])
+  },
+  methods: {
+    ...mapActions(["setBreadcrumbs"])
+  },
+  mounted() {
+    this.setBreadcrumbs([]);
   }
 };
 </script>
