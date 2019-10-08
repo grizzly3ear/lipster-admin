@@ -19,6 +19,7 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
 import SearchBrand from "@/components/SearchBrand";
 import OperationBrand from "@/components/OperationBrand";
 import BrandList from "@/components/BrandList";
@@ -28,6 +29,12 @@ export default {
     SearchBrand,
     OperationBrand,
     BrandList
+  },
+  methods: {
+    ...mapActions(["setBreadcrumbs"])
+  },
+  mounted() {
+    this.setBreadcrumbs([]);
   }
 };
 </script>

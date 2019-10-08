@@ -18,7 +18,10 @@
               </v-layout>
             </v-flex>
             <v-flex>
-              <router-link :to="{ name: 'LipstickDetail', params: {id: brand.id}}">
+              <router-link
+                :to="{ name: 'LipstickDetail', params: {id: brand.id}}"
+                @click.native="onClickBrandCard(brand)"
+              >
                 <v-layout column>
                   <v-flex class="img-upper-force">
                     <v-img :src="brand.image" class="brandList" position="center center"></v-img>
@@ -50,7 +53,14 @@ export default {
     DeleteBrand
   },
   methods: {
-    ...mapActions(["setBrand"])
+    ...mapActions(["setBrand", "pushBreadcrumb"]),
+    onClickBrandCard(brand) {
+      this.pushBreadcrumb({
+        text: brand.name,
+        disabled: true,
+        href: `lipstickDetail/${brand.id}`
+      });
+    }
   },
   props: ["brand"],
   data() {

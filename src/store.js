@@ -12,7 +12,8 @@ export default new Vuex.Store({
     trend: [],
     trendCollection: [],
     store: [],
-    storeAddress: []
+    storeAddress: [],
+    breadcrumbs: []
   },
   mutations: {
     setSelectedForDelete: (state, id) => {
@@ -38,6 +39,15 @@ export default new Vuex.Store({
     },
     setStoreAddress: (state, storeAddress) => {
       state.storeAddress = storeAddress;
+    },
+    setBreadcrumbs: (state, breadcrumbs) => {
+      state.breadcrumbs = breadcrumbs;
+    },
+    pushBreadcrumb: (state, breadcrumb) => {
+      state.breadcrumbs.push(breadcrumb);
+    },
+    popBreadcrumb: state => {
+      state.breadcrumbs.pop();
     }
   },
   actions: {
@@ -64,6 +74,15 @@ export default new Vuex.Store({
     },
     setStoreAddress: ({ commit }, storeAddress) => {
       commit("setStoreAddress", storeAddress);
+    },
+    setBreadcrumbs: ({ commit }, breadcrumbs) => {
+      commit("setBreadcrumbs", breadcrumbs);
+    },
+    pushBreadcrumb: ({ commit }, breadcrumb) => {
+      commit("pushBreadcrumb", breadcrumb);
+    },
+    popBreadcrumb: ({ commit }) => {
+      commit("popBreadcrumb");
     }
   },
   getters: {
@@ -90,6 +109,9 @@ export default new Vuex.Store({
     },
     getStoreAddress: state => {
       return state.storeAddress;
+    },
+    getBreadcrumbs: state => {
+      return state.breadcrumbs;
     }
   }
 });

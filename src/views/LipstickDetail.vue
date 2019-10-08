@@ -1,34 +1,38 @@
 <template>
   <div>
-    <div class='body-content'>
-    <v-toolbar card prominent id='tool-container'>
-      <div id='search-container'>
-        <SearchDetail/>
+    <div class="body-content">
+      <v-toolbar card prominent id="tool-container">
+        <div id="search-container">
+          <SearchDetail />
+        </div>
+        <div id="operation-container">
+          <OperationDetail />
+        </div>
+      </v-toolbar>
+      <hr />
+      <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
+      <div class="title">
+        <p>List Lipstick Detail</p>
       </div>
-      <div id='operation-container'>
-        <OperationDetail/>
-      </div>
-    </v-toolbar>
-    <hr>
-    <div class='title'>
-      <p>List Lipstick Detail</p>
+      <DetailList />
     </div>
-    <DetailList/>
-  </div>
   </div>
 </template>
 
 <script>
-import SearchDetail from '../components/SearchDetail'
-import OperationDetail from '../components/OperationDetail'
-import DetailList from '../components/DetailList'
-
+import { mapGetters } from "vuex";
+import SearchDetail from "../components/SearchDetail";
+import OperationDetail from "../components/OperationDetail";
+import DetailList from "../components/DetailList";
 
 export default {
   components: {
     SearchDetail,
     OperationDetail,
     DetailList
+  },
+  computed: {
+    ...mapGetters(["getBreadcrumbs"])
   }
-}
+};
 </script>
