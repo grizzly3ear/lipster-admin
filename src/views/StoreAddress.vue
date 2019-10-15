@@ -10,6 +10,7 @@
         </div>
       </v-toolbar>
       <hr />
+      <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
       <div class="title">
         <p>List Store Address</p>
       </div>
@@ -19,6 +20,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import SearchDetail from "../components/SearchDetail";
 import OperationStoreAddress from "../components/OperationStoreAddress";
 import StoreAddressList from "../components/StoreAddressList";
@@ -28,6 +30,9 @@ export default {
     SearchDetail,
     OperationStoreAddress,
     StoreAddressList
+  },
+  computed: {
+    ...mapGetters(["getBreadcrumbs"])
   }
 };
 </script>

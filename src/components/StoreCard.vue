@@ -15,7 +15,10 @@
               </v-layout>
             </v-flex>
             <v-flex>
-              <router-link :to="{ name: 'StoreAddress', params: {id: store.id}}">
+              <router-link
+                :to="{ name: 'StoreAddress', params: {id: store.id}}"
+                @click.native="onClickStoreCard(store)"
+              >
                 <v-layout column>
                   <v-flex class="img-upper-force">
                     <v-img :src="store.image" class="brandList" position="center center"></v-img>
@@ -47,7 +50,14 @@ export default {
     DeleteStore
   },
   methods: {
-    ...mapActions(["setStore"])
+    ...mapActions(["setStore", "pushBreadcrumb"]),
+    onClickStoreCard(store) {
+      this.pushBreadcrumb({
+        text: store.name,
+        disabled: true,
+        href: `/Store`
+      });
+    }
   },
   props: ["store"],
   data() {
