@@ -106,6 +106,9 @@ export default {
     image: "",
     selectedFile: null
   }),
+  beforeMount() {
+    this.selectedFile = this.trendCollection.image;
+  },
   computed: {
     ...mapGetters(["getTrendCollection"])
   }

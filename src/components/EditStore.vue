@@ -101,6 +101,9 @@ export default {
     image: "",
     selectedFile: null
   }),
+  beforeMount() {
+    this.selectedFile = this.store.image;
+  },
   computed: {
     ...mapGetters(["getStore"])
   }
