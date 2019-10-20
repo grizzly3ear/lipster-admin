@@ -19,7 +19,7 @@
               <v-flex xs12>
                 <v-combobox
                   v-model="type"
-                  :items="types.data"
+                  :items="types"
                   label="Type*"
                   item-text="type"
                   return-object
@@ -66,7 +66,7 @@ export default {
     async onAddClick() {
       let formData = new FormData();
       formData.append("name", this.name);
-      formData.append("type", this.type);
+      formData.append("type", this.type.type);
       formData.append("max_price", this.max_price);
       formData.append("min_price", this.min_price);
       formData.append("opacity", this.opacity);
@@ -95,7 +95,7 @@ export default {
     },
     async getType() {
       const { data } = await axios.get(`lipstick/detail/type`);
-      this.types = data;
+      this.types = data.data;
     },
     closeDialog() {
       this.dialog = false;

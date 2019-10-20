@@ -19,7 +19,7 @@
               <v-flex xs12 sm6 md4>
                 <v-combobox
                   v-model="props.item.type"
-                  :items="types.data"
+                  :items="types"
                   label="Type*"
                   item-text="type"
                   return-object
@@ -70,7 +70,7 @@ export default {
           name: this.props.item.name,
           max_price: this.props.item.max_price,
           min_price: this.props.item.min_price,
-          type: this.props.item.type,
+          type: this.props.item.type.type,
           opacity: this.props.item.opacity,
           description: this.props.item.description,
           apply: this.props.item.apply,
@@ -94,7 +94,7 @@ export default {
       const { data } = await axios.get(
         `http://18.136.104.217/api/lipstick/detail/type`
       );
-      this.types = data;
+      this.types = data.data;
     }
   },
   async mounted() {
