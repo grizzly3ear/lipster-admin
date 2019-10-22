@@ -24,7 +24,6 @@
                       item-text="name"
                       item-value="id"
                     ></v-select>
-                    {{brand_id}}
                   </v-flex>
                 </v-layout>
               </v-container>
