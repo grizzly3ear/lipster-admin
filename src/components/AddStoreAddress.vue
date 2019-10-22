@@ -14,13 +14,16 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
+                <v-text-field v-model="name" label="Name*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <v-text-field v-model="address_detail" label="Addrss Detail*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="latitude" label="Latitute*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="longtitude" label="Longtitute*" required></v-text-field>
+                <v-text-field v-model="longitude" label="Longitute*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="period" label="Time Available" required></v-text-field>
@@ -53,9 +56,10 @@ export default {
     ...mapActions(["setStoreAddress"]),
     async onAddClick() {
       let formData = new FormData();
+      formData.append("name", this.name);
       formData.append("address_detail", this.address_detail);
       formData.append("latitude", this.latitude);
-      formData.append("longtitude", this.longtitude);
+      formData.append("longitude", this.longitude);
       formData.append("period", this.period);
       formData.append("tel", this.tel);
       formData.append("store_id", this.$route.params.id);
@@ -87,9 +91,10 @@ export default {
     // },
     closeDialog() {
       this.dialog = false;
+      this.name = "";
       this.address_detail = "";
       this.latitude = 0;
-      this.longtitude = 0;
+      this.longitude = 0;
       this.period = "";
       this.tel = "";
     }
@@ -99,9 +104,10 @@ export default {
   },
   data: () => ({
     dialog: false,
+    name: "",
     address_detail: "",
     latitude: 0,
-    longtitude: 0,
+    longitude: 0,
     period: "",
     tel: ""
     // types: []

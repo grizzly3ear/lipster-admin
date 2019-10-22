@@ -14,13 +14,16 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
+                <v-text-field v-model="props.item.name" label="Name*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <v-text-field v-model="props.item.address_detail" label="Detail*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="props.item.latitude" label="Latitude*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="props.item.longtitude" label="Longtitude*" required></v-text-field>
+                <v-text-field v-model="props.item.longitude" label="Longitude*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field v-model="props.item.period" label="Time Available" required></v-text-field>
@@ -55,9 +58,10 @@ export default {
       await axios.put(
         `http://18.136.104.217/api/store/address/${this.props.item.id}`,
         {
+          name: this.props.item.name,
           address_detail: this.props.item.address_detail,
           latitude: this.props.item.latitude,
-          longtitude: this.props.item.longtitude,
+          longitude: this.props.item.longitude,
           period: this.props.item.period,
           tel: this.props.item.tel,
           store_id: this.$route.params.id
@@ -80,9 +84,10 @@ export default {
   props: ["props"],
   data: () => ({
     dialog: false,
+    name: "",
     detail: "",
     latitude: null,
-    longtitude: null,
+    longitude: null,
     period: null,
     tel: null,
     store_id: null

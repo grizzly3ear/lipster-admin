@@ -11,13 +11,14 @@
       <td>
         <SelectStoreAddressCard :props="props" />
       </td>
-      <!-- <router-link :to='{ name: "LipstickColor", params: {id: props.item.id}}'> -->
-      <td
-        style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
-      >{{ props.item.address_detail }}</td>
-      <!-- </router-link> -->
+      <td>{{ props.item.name }}</td>
+      <router-link :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}">
+        <td
+          style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
+        >{{ props.item.address_detail }}</td>
+      </router-link>
       <td>{{ props.item.latitude }}</td>
-      <td>{{ props.item.longtitude }}</td>
+      <td>{{ props.item.longitude }}</td>
       <td>{{ props.item.period }}</td>
       <td>{{ props.item.tel }}</td>
       <td>
@@ -26,7 +27,6 @@
       <td>
         <DeleteStoreAddress :props="props" />
       </td>
-      <td></td>
     </template>
   </v-data-table>
 </template>
@@ -62,14 +62,14 @@ export default {
       props: {},
       selected: [],
       headers: [
+        { text: "Branch Name", value: "name" },
         { text: "Detail", value: "address_detail" },
         { text: "Latitude", value: "latitude" },
-        { text: "Longtitude", value: "longtitude" },
+        { text: "Longitude", value: "longitude" },
         { text: "Time Available", value: "period" },
         { text: "Tel", value: "tel" },
         { text: "Edit" },
-        { text: "Delete" },
-        { text: "" }
+        { text: "Delete" }
       ],
       storeAddresses: {}
     };
