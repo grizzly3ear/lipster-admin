@@ -13,6 +13,7 @@ export default new Vuex.Store({
     trendCollection: [],
     store: [],
     storeAddress: [],
+    lipstickOfStoreAddress: [],
     breadcrumbs: []
   },
   mutations: {
@@ -39,6 +40,9 @@ export default new Vuex.Store({
     },
     setStoreAddress: (state, storeAddress) => {
       state.storeAddress = storeAddress;
+    },
+    setLipstickOfStoreAddress: (state, lipstickOfStoreAddress) => {
+      state.lipstickOfStoreAddress = lipstickOfStoreAddress;
     },
     setBreadcrumbs: (state, breadcrumbs) => {
       state.breadcrumbs = breadcrumbs;
@@ -75,6 +79,9 @@ export default new Vuex.Store({
     setStoreAddress: ({ commit }, storeAddress) => {
       commit("setStoreAddress", storeAddress);
     },
+    setLipstickOfStoreAddress: ({ commit }, lipstickOfStoreAddress) => {
+      commit("setLipstickOfStoreAddress", lipstickOfStoreAddress);
+    },
     setBreadcrumbs: ({ commit }, breadcrumbs) => {
       commit("setBreadcrumbs", breadcrumbs);
     },
@@ -109,6 +116,9 @@ export default new Vuex.Store({
     },
     getStoreAddress: state => {
       return state.storeAddress;
+    },
+    getLipstickOfStoreAddress: state => {
+      return state.lipstickOfStoreAddress;
     },
     getBreadcrumbs: state => {
       return state.breadcrumbs;
