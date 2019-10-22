@@ -26,12 +26,6 @@
                 ></v-combobox>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field v-model="max_price" label="Max Price*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="min_price" label="Min Price*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
                 <v-text-field v-model="opacity" label="Opacity*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
@@ -67,8 +61,6 @@ export default {
       let formData = new FormData();
       formData.append("name", this.name);
       formData.append("type", this.type.type);
-      formData.append("max_price", this.max_price);
-      formData.append("min_price", this.min_price);
       formData.append("opacity", this.opacity);
       formData.append("description", this.description);
       formData.append("apply", this.apply);
@@ -101,9 +93,7 @@ export default {
       this.dialog = false;
       this.name = "";
       this.type = "";
-      this.max_price = 0;
-      this.min_price = 0;
-      this.opacity = 1;
+      this.opacity = 0.5;
       this.description = "";
       this.apply = "";
     }
@@ -115,8 +105,6 @@ export default {
     dialog: false,
     name: "",
     type: "",
-    max_price: 0,
-    min_price: 0,
     opacity: 1,
     description: "",
     apply: "",

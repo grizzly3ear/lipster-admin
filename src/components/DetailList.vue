@@ -19,8 +19,6 @@
           style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
         >{{ props.item.name }}</td>
       </router-link>
-      <td>{{ props.item.min_price }}</td>
-      <td>{{ props.item.max_price }}</td>
       <td>{{ props.item.type }}</td>
       <td>{{ props.item.opacity }}</td>
       <td>
@@ -71,8 +69,6 @@ export default {
       selected: [],
       headers: [
         { text: "Name", value: "name" },
-        { text: "Min Price", value: "min_price" },
-        { text: "Max Price", value: "min_price" },
         { text: "Type", value: "type" },
         { text: "Opacity", value: "opacity" },
         { text: "Edit" },

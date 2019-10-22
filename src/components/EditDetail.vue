@@ -16,7 +16,7 @@
               <v-flex xs12>
                 <v-text-field v-model="props.item.name" label="Name*" required></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-combobox
                   v-model="props.item.type"
                   :items="types"
@@ -25,13 +25,7 @@
                   return-object
                 ></v-combobox>
               </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="props.item.max_price" label="Max Price*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="props.item.min_price" label="Min Price*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-text-field v-model="props.item.opacity" label="Opacity*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
@@ -68,8 +62,6 @@ export default {
         `http://18.136.104.217/api/lipstick/detail/` + this.props.item.id,
         {
           name: this.props.item.name,
-          max_price: this.props.item.max_price,
-          min_price: this.props.item.min_price,
           type: this.props.item.type.type,
           opacity: this.props.item.opacity,
           description: this.props.item.description,
@@ -104,8 +96,6 @@ export default {
   data: () => ({
     dialog: false,
     name: "",
-    max_price: null,
-    min_price: null,
     type: "",
     opacity: null,
     description: "",
