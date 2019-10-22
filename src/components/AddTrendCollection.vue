@@ -14,7 +14,10 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="name" label="name*" required></v-text-field>
+                <v-text-field v-model="name" label="Name*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -81,6 +84,7 @@ export default {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
 
       formData.append("name", this.name);
+      formData.append("description", this.description);
       formData.append("image", imageToBase64);
       await axios.post(`http://18.136.104.217/api/trend/collection`, formData, {
         headers: {
@@ -106,6 +110,7 @@ export default {
   data: () => ({
     dialog: false,
     name: "",
+    description: "",
     image: "",
     selectedFile: null
   }),

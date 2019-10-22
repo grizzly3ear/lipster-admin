@@ -14,7 +14,10 @@
           <v-container grid-list-md>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="trendCollection.name" label="Name*" required></v-text-field>
+                <v-text-field v-model="props.item.name" label="Name*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field v-model="props.item.description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -27,9 +30,10 @@
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
+          <v-spacer></v-spacer>
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
           <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onEditClick">Save</v-btn>
+            <v-btn color="blue darken-1" @click="onEditClick">Edit</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -40,7 +44,7 @@
 <script>
 import Swal from "sweetalert2";
 import axios from "axios";
-import { mapActions, mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   methods: {
@@ -78,36 +82,38 @@ export default {
     ...mapActions(["setTrendCollection"]),
     async onEditClick() {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
-
       await axios.put(
-        `http://18.136.104.217/api/trend/collection/` + this.trendCollection.id,
+        `http://18.136.104.217/api/trend/collection/` + this.props.item.id,
         {
-          name: this.trendCollection.name,
+          name: this.props.item.name,
+          description: this.props.item.description,
           image: imageToBase64
         }
       );
+      this.$forceUpdate();
       Swal.fire({
         position: "center",
         type: "success",
-        title: "This brand has been updated",
+        title: "Your work has been saved",
         showConfirmButton: false,
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection`
+        `http://18.136.104.217/api/trend/collection/${this.props.item.id}`
       );
       this.setTrendCollection(data.data);
     }
   },
-  props: ["trendCollection"],
+  props: ["props"],
   data: () => ({
     dialog: false,
     name: "",
-    image: "",
+    image: null,
+    description: "",
     selectedFile: null
   }),
   beforeMount() {
-    this.selectedFile = this.trendCollection.image;
+    this.selectedFile = this.props.item.image;
   },
   computed: {
     ...mapGetters(["getTrendCollection"])

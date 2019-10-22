@@ -8,7 +8,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "../utils/axios";
+import axios from "axios";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -27,7 +27,7 @@ export default {
         if (result.value) {
           axios
             .delete(
-              `http://18.136.104.217/api/trend/collection/${this.trendCollection.id}`
+              `http://18.136.104.217/api/trend/collection/` + this.props.item.id
             )
             .then(result => {
               Swal.fire("Deleted!", "This item has been deleted.", "success");
@@ -50,7 +50,7 @@ export default {
       });
     }
   },
-  props: ["trendCollection"],
+  props: ["props"],
   data() {
     return {};
   },
