@@ -8,6 +8,7 @@ import Trend from "./views/Trends";
 import Store from "./views/Store";
 import LipstickColor from "./views/LipstickColor";
 import StoreAddress from "./views/StoreAddress";
+import LipstickOfStoreAddress from "./views/LipstickOfStoreAddress";
 
 Vue.use(Router);
 
@@ -54,6 +55,11 @@ export default new Router({
       path: "/lipstickColor/:id",
       name: "LipstickColor",
       component: LipstickColor
+    },
+    {
+      path: "/lipstickOfStoreAddress/:id",
+      name: "LipstickOfStoreAddress",
+      component: LipstickOfStoreAddress
     }
   ]
 });
