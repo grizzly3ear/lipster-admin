@@ -7,7 +7,6 @@
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td></td>
       <router-link :to="{ name: 'Trend', params: {id: props.item.id}}">
         <td
           style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
@@ -17,6 +16,7 @@
         <img class="image-container" :src="props.item.image" />
       </td>
       <td>{{ props.item.description }}</td>
+      <td>{{ props.item.release_date }}</td>
       <td>
         <EditTrendCollection :props="props" />
       </td>
@@ -56,10 +56,10 @@ export default {
       selected: [],
       props: {},
       headers: [
-        { text: "", value: "" },
         { text: "Name", value: "name" },
         { text: "Image", value: "image" },
-        { text: "Description", value: "Description" },
+        { text: "Description", value: "description" },
+        { text: "Release Date", value: "release_date" },
         { text: "Edit" },
         { text: "Delete" },
         { text: "" }

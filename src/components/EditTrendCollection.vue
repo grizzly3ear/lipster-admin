@@ -20,6 +20,9 @@
                 <v-text-field v-model="props.item.description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
+                <v-text-field v-model="props.item.release_date" label="Release Date*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
@@ -87,6 +90,7 @@ export default {
         {
           name: this.props.item.name,
           description: this.props.item.description,
+          release_date: this.props.item.release_date,
           image: imageToBase64
         }
       );
@@ -110,6 +114,8 @@ export default {
     name: "",
     image: null,
     description: "",
+    release_date: "",
+    datetime: null,
     selectedFile: null
   }),
   beforeMount() {

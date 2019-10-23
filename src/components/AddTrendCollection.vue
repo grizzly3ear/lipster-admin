@@ -20,6 +20,9 @@
                 <v-text-field v-model="description" label="Description*" required></v-text-field>
               </v-flex>
               <v-flex xs12>
+                <v-text-field v-model="release_date" label="Release Date*" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
@@ -85,6 +88,7 @@ export default {
 
       formData.append("name", this.name);
       formData.append("description", this.description);
+      formData.append("release_date", this.release_date);
       formData.append("image", imageToBase64);
       await axios.post(`http://18.136.104.217/api/trend/collection`, formData, {
         headers: {
@@ -111,6 +115,7 @@ export default {
     dialog: false,
     name: "",
     description: "",
+    release_date: null,
     image: "",
     selectedFile: null
   }),
