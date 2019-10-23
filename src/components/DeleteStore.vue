@@ -26,7 +26,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete(`http://18.136.104.217/api/store/${this.store.id}`)
+            .delete(`api/store/${this.store.id}`)
             .then(result => {
               Swal.fire("Deleted!", "This item has been deleted.", "success");
             })
@@ -38,7 +38,7 @@ export default {
               );
             })
             .finally(() => {
-              axios.get(`http://18.136.104.217/api/store`).then(({ data }) => {
+              axios.get(`api/store`).then(({ data }) => {
                 this.setStore(data.data);
               });
             });

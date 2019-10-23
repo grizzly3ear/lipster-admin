@@ -48,7 +48,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -93,7 +93,7 @@ export default {
       formData.append("composition", this.composition);
       formData.append("lipstick_detail_id", this.$route.params.id);
       let newColor = await axios.post(
-        `http://18.136.104.217/api/lipstick/color`,
+        `api/lipstick/color`,
         formData,
         {
           headers: {
@@ -105,7 +105,7 @@ export default {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
       formImage.append("image", imageToBase64);
       formImage.append("lipstick_color_id", newColor.data.id);
-      await axios.post(`http://18.136.104.217/api/lipstick/image`, formImage, {
+      await axios.post(`api/lipstick/image`, formImage, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -118,7 +118,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/lipstick/detail/` +
+        `api/lipstick/detail/` +
           this.$route.params.id +
           `?part=color`
       );

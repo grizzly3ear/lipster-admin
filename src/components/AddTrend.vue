@@ -50,7 +50,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   methods: {
@@ -95,7 +95,7 @@ export default {
       formData.append("description", this.description);
       formData.append("lipstick_color", this.lipstick_color);
       formData.append("trend_group_id", this.$route.params.id);
-      await axios.post(`http://18.136.104.217/api/trend`, formData, {
+      await axios.post(`api/trend`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -109,7 +109,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection/${this.$route.params.id}` +
+        `api/trend/collection/${this.$route.params.id}` +
           `?part=trend`
       );
       this.setTrend(data.data.trends);

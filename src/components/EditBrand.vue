@@ -39,7 +39,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -79,7 +79,7 @@ export default {
     async onEditClick() {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
 
-      await axios.put(`http://18.136.104.217/api/brand/${this.brand.id}`, {
+      await axios.put(`api/brand/${this.brand.id}`, {
         name: this.brand.name,
         image: imageToBase64
       });
@@ -90,7 +90,7 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
-      const { data } = await axios.get(`http://18.136.104.217/api/brand`);
+      const { data } = await axios.get(`api/brand`);
       this.setBrand(data.data);
     }
   },

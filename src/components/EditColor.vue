@@ -48,7 +48,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -87,7 +87,7 @@ export default {
     ...mapActions(["setColor"]),
     async onEditClick() {
       await axios.put(
-        `http://18.136.104.217/api/lipstick/color/` + this.props.item.id,
+        `api/lipstick/color/` + this.props.item.id,
         {
           color_name: this.props.item.color_name,
           rgb: this.props.item.rgb,
@@ -99,7 +99,7 @@ export default {
       //TODO: loop images
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
       await axios.put(
-        `http://18.136.104.217/api/lipstick/image/` +
+        `api/lipstick/image/` +
           this.props.item.images[0].id,
         {
           image: imageToBase64,
@@ -115,7 +115,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/lipstick/detail/` +
+        `api/lipstick/detail/` +
           this.$route.params.id +
           `?part=color`
       );

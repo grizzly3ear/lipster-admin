@@ -48,7 +48,7 @@ export default {
     ...mapActions(["setStoreAddress"]),
     async getStoreAddresses() {
       const { data } = await axios.get(
-        `http://18.136.104.217/api/store/${this.$route.params.id}?part=address`
+        `api/store/${this.$route.params.id}?part=address`
       );
       this.setStoreAddress(data.data.addresses);
     }

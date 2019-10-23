@@ -63,7 +63,7 @@ export default {
       formData.append("period", this.period);
       formData.append("tel", this.tel);
       formData.append("store_id", this.$route.params.id);
-      await axios.post(`http://18.136.104.217/api/store/address`, formData, {
+      await axios.post(`api/store/address`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -78,17 +78,11 @@ export default {
       });
 
       const { data } = await axios.get(
-        `http://18.136.104.217/api/store/` +
-          this.$route.params.id +
-          `?part=address`
+        `api/store/` + this.$route.params.id + `?part=address`
       );
 
       this.setStoreAddress(data.data.addresses);
     },
-    // async getType() {
-    //   const { data } = await axios.get(`lipstick/detail/type`);
-    //   this.types = data;
-    // },
     closeDialog() {
       this.dialog = false;
       this.name = "";
@@ -99,9 +93,7 @@ export default {
       this.tel = "";
     }
   },
-  async mounted() {
-    // this.getType();
-  },
+  async mounted() {},
   data: () => ({
     dialog: false,
     name: "",
@@ -110,7 +102,6 @@ export default {
     longitude: 0,
     period: "",
     tel: ""
-    // types: []
   }),
   computed: {
     ...mapGetters(["getStoreAddress"])

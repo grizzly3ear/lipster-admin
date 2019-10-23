@@ -38,7 +38,7 @@
 import EditColor from "@/components/EditColor";
 import DeleteColor from "@/components/DeleteColor";
 import SelectLipstickColorCard from "@/components/SelectLipstickColorCard";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -51,7 +51,7 @@ export default {
     ...mapActions(["setColor"]),
     async getColors() {
       const { data } = await axios.get(
-        `http://18.136.104.217/api/lipstick/detail/` +
+        `api/lipstick/detail/` +
           this.$route.params.id +
           `?part=color`
       );

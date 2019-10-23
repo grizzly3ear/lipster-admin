@@ -7,7 +7,7 @@
 </template>
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapActions, mapGetters } from "vuex";
 
 export default {
@@ -26,7 +26,7 @@ export default {
         if (result.value) {
           axios
             .delete(
-              `http://18.136.104.217/api/store/address/lipsticks/${this.props.item.id_pivot}`
+              `api/store/address/lipsticks/${this.props.item.id_pivot}`
             )
             .then(result => {
               Swal.fire("Deleted!", "This item has been deleted.", "success");
@@ -41,7 +41,7 @@ export default {
             .finally(() => {
               axios
                 .get(
-                  `http://18.136.104.217/api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
+                  `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
                 )
                 .then(({ data }) => {
                   this.setLipstickOfStoreAddress(data.data);

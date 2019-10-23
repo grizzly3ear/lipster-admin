@@ -46,7 +46,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   methods: {
@@ -90,7 +90,7 @@ export default {
       formData.append("description", this.description);
       formData.append("release_date", this.release_date);
       formData.append("image", imageToBase64);
-      await axios.post(`http://18.136.104.217/api/trend/collection`, formData, {
+      await axios.post(`api/trend/collection`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -105,7 +105,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection`
+        `api/trend/collection`
       );
       this.setTrendCollection(data.data);
     }

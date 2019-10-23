@@ -38,7 +38,7 @@
 import { mapActions, mapGetters } from "vuex";
 import EditTrendCollection from "@/components/EditTrendCollection";
 import DeleteTrendCollection from "@/components/DeleteTrendCollection";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   name: "trendCollectionCard",

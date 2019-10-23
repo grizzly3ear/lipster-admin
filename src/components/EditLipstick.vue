@@ -39,7 +39,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -47,7 +47,7 @@ export default {
     ...mapActions(["setLipstickOfStoreAddress"]),
     async onEditClick() {
       await axios.put(
-        `http://18.136.104.217/api/store/address/lipsticks/` +
+        `api/store/address/lipsticks/` +
           this.props.item.id_pivot,
         {
           price: this.props.item.price,
@@ -64,7 +64,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
+        `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
       );
       this.setLipstickOfStoreAddress(data.data);
     }

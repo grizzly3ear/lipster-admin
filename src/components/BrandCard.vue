@@ -44,7 +44,7 @@
 import { mapActions, mapGetters } from "vuex";
 import EditBrand from "@/components/EditBrand";
 import DeleteBrand from "@/components/DeleteBrand";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   name: "brandCard",
@@ -58,7 +58,7 @@ export default {
       this.pushBreadcrumb({
         text: brand.name,
         disabled: true,
-        href: `lipstickDetail/${brand.id}`
+        href: `/lipstickBrand`
       });
     }
   },

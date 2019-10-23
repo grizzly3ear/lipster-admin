@@ -41,7 +41,7 @@
 import { mapActions, mapGetters } from "vuex";
 import EditStore from "@/components/EditStore";
 import DeleteStore from "@/components/DeleteStore";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   name: "storeCard",

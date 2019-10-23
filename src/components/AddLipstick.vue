@@ -116,18 +116,18 @@ export default {
       this.page--;
     },
     async getBrands() {
-      const { data } = await axios.get(`brand`);
+      const { data } = await axios.get(`api/brand`);
       this.brands = data;
     },
     async getDetails() {
       console.log(">>>>>");
       console.log(this.brand_id);
-      const { data } = await axios.get(`brand/${this.brand_id}/detail`);
+      const { data } = await axios.get(`api/brand/${this.brand_id}/detail`);
       this.details = data;
     },
     async getColors() {
       const { data } = await axios.get(
-        `lipstick/detail/${this.detail_id}?part=color`
+        `api/lipstick/detail/${this.detail_id}?part=color`
       );
       this.colors = data.data.colors;
     },
@@ -145,15 +145,11 @@ export default {
         formData.append("price", this.price);
         formData.append("lipstick_color_id", this.selected[i]);
         formData.append("store_address_id", this.$route.params.id);
-        await axios.post(
-          `http://18.136.104.217/api/store/address/lipsticks`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data"
-            }
+        await axios.post(`api/store/address/lipsticks`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
           }
-        );
+        });
       }
       this.dialog = false;
       this.$forceUpdate();
@@ -166,7 +162,7 @@ export default {
       });
 
       const { data } = await axios.get(
-        `http://18.136.104.217/api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
+        `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
       );
 
       this.setLipstickOfStoreAddress(data.data);

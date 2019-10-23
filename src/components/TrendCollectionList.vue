@@ -31,7 +31,7 @@
 <script>
 import EditTrendCollection from "../components/EditTrendCollection";
 import DeleteTrendCollection from "../components/DeleteTrendCollection";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -43,7 +43,7 @@ export default {
     ...mapActions(["setTrendCollection"]),
     async getTrendCollections() {
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection`
+        `api/trend/collection`
       );
       this.setTrendCollection(data.data);
     }

@@ -40,7 +40,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 
 export default {
   methods: {
@@ -82,7 +82,7 @@ export default {
 
       formData.append("name", this.name);
       formData.append("image", imageToBase64);
-      await axios.post(`http://18.136.104.217/api/store`, formData, {
+      await axios.post(`api/store`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
         }
@@ -96,7 +96,7 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
-      const { data } = await axios.get(`http://18.136.104.217/api/store`);
+      const { data } = await axios.get(`api/store`);
       this.setStore(data.data);
     }
   },

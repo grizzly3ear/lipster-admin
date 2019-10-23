@@ -48,7 +48,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -56,7 +56,7 @@ export default {
     ...mapActions(["setStoreAddress"]),
     async onEditClick() {
       await axios.put(
-        `http://18.136.104.217/api/store/address/${this.props.item.id}`,
+        `api/store/address/${this.props.item.id}`,
         {
           name: this.props.item.name,
           address_detail: this.props.item.address_detail,
@@ -76,7 +76,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/store/${this.$route.params.id}?part=address`
+        `api/store/${this.$route.params.id}?part=address`
       );
       this.setStoreAddress(data.data.addresses);
     }

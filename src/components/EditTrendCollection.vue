@@ -46,7 +46,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -86,7 +86,7 @@ export default {
     async onEditClick() {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
       await axios.put(
-        `http://18.136.104.217/api/trend/collection/` + this.props.item.id,
+        `api/trend/collection/` + this.props.item.id,
         {
           name: this.props.item.name,
           description: this.props.item.description,
@@ -103,7 +103,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection/${this.props.item.id}`
+        `api/trend/collection/${this.props.item.id}`
       );
       this.setTrendCollection(data.data);
     }

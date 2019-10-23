@@ -7,7 +7,7 @@
 </template>
 <script>
 import Swal from 'sweetalert2'
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapActions, mapGetters } from 'vuex'
 
 export default {
@@ -26,7 +26,7 @@ export default {
                 confirmButtonText: 'Yes, delete it!'
             }).then((result) => {
                 if (result.value) {
-                    axios.delete(`http://18.136.104.217/api/lipstick/detail/` + this.props.item.id).then(result => {
+                    axios.delete(`api/lipstick/detail/` + this.props.item.id).then(result => {
                         Swal.fire(
                             'Deleted!',
                             'This item has been deleted.',
@@ -39,7 +39,7 @@ export default {
                             'warning'
                         )
                     }).finally(() => {
-                        axios.get(`http://18.136.104.217/api/brand/${this.$route.params.id}/detail`).then(({ data }) => {
+                        axios.get(`api/brand/${this.$route.params.id}/detail`).then(({ data }) => {
                             this.setDetail(data.data)
                         })
                     })

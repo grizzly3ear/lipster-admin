@@ -48,7 +48,9 @@ export default {
   methods: {
     ...mapActions(["setDetail", "pushBreadcrumb"]),
     async getDetails() {
-      const { data } = await axios.get(`brand/${this.$route.params.id}/detail`);
+      const { data } = await axios.get(
+        `api/brand/${this.$route.params.id}/detail`
+      );
       this.setDetail(data.data);
     },
     onClickDetailList(detail) {

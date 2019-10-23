@@ -80,13 +80,13 @@ export default {
       });
 
       const { data } = await axios.get(
-        `http://18.136.104.217/api/brand/` + this.$route.params.id + `/detail`
+        `api/brand/` + this.$route.params.id + `/detail`
       );
 
       this.setDetail(data.data);
     },
     async getType() {
-      const { data } = await axios.get(`lipstick/detail/type`);
+      const { data } = await axios.get(`api/lipstick/detail/type`);
       this.types = data.data;
     },
     closeDialog() {

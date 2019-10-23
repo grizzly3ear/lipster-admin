@@ -49,7 +49,7 @@
 
 <script>
 import Swal from "sweetalert2";
-import axios from "axios";
+import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
@@ -88,7 +88,7 @@ export default {
     ...mapActions(["setTrend"]),
     async onEditClick() {
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
-      await axios.put(`http://18.136.104.217/api/trend/` + this.props.item.id, {
+      await axios.put(`api/trend/` + this.props.item.id, {
         title: this.props.item.title,
         image: imageToBase64,
         skin_color: this.props.item.skin_color,
@@ -105,7 +105,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `http://18.136.104.217/api/trend/collection/${this.$route.params.id}` +
+        `api/trend/collection/${this.$route.params.id}` +
           `?part=trend`
       );
       this.setTrend(data.data.trends);
