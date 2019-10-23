@@ -84,16 +84,19 @@ export default {
     },
     ...mapActions(["setTrendCollection"]),
     async onEditClick() {
-      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
-      await axios.put(
-        `api/trend/collection/` + this.props.item.id,
-        {
-          name: this.props.item.name,
-          description: this.props.item.description,
-          release_date: this.props.item.release_date,
-          image: imageToBase64
-        }
-      );
+      let image = null;
+      try {
+        let image = await this.encodeToBase64(this.$refs.files.files);
+      } catch (e) {
+        console.error(e);
+        image = null;
+      }
+      await axios.put(`api/trend/collection/` + this.props.item.id, {
+        name: this.props.item.name,
+        description: this.props.item.description,
+        release_date: this.props.item.release_date,
+        image: image
+      });
       this.$forceUpdate();
       Swal.fire({
         position: "center",

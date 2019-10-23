@@ -86,26 +86,39 @@ export default {
     },
     ...mapActions(["setColor"]),
     async onEditClick() {
-      await axios.put(
-        `api/lipstick/color/` + this.props.item.id,
-        {
-          color_name: this.props.item.color_name,
-          rgb: this.props.item.rgb,
-          color_code: this.props.item.color_code,
-          composition: this.props.item.composition,
-          lipstick_detail_id: this.$route.params.id
-        }
-      );
-      //TODO: loop images
-      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
-      await axios.put(
-        `api/lipstick/image/` +
-          this.props.item.images[0].id,
-        {
-          image: imageToBase64,
+      await axios.put(`api/lipstick/color/` + this.props.item.id, {
+        color_name: this.props.item.color_name,
+        rgb: this.props.item.rgb,
+        color_code: this.props.item.color_code,
+        composition: this.props.item.composition,
+        lipstick_detail_id: this.$route.params.id
+      });
+      let image = null;
+      let formData = null;
+      try {
+        image = await this.encodeToBase64(this.$refs.files.files);
+      } catch (e) {
+        console.error(e);
+        image = null;
+      }
+
+      console.log(this.props.item.images[0]);
+
+      if (this.props.item.images[0]) {
+        await axios.put(`api/lipstick/image/${this.props.item.images[0].id}`, {
+          image: image,
           lipstick_color_id: this.props.item.id
-        }
-      );
+        });
+      } else {
+        formData = new FormData();
+        formData.append("lipstick_color_id", this.props.item.id);
+        formData.append("image", image);
+        await axios.post(`api/lipstick/image`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data"
+          }
+        });
+      }
 
       Swal.fire({
         position: "center",
@@ -115,9 +128,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `api/lipstick/detail/` +
-          this.$route.params.id +
-          `?part=color`
+        `api/lipstick/detail/` + this.$route.params.id + `?part=color`
       );
       this.setColor(data);
     }

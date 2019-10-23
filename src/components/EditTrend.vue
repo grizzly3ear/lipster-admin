@@ -87,10 +87,16 @@ export default {
     },
     ...mapActions(["setTrend"]),
     async onEditClick() {
-      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
+      let image = null;
+      try {
+        let image = await this.encodeToBase64(this.$refs.files.files);
+      } catch (e) {
+        console.error(e);
+        image = null;
+      }
       await axios.put(`api/trend/` + this.props.item.id, {
         title: this.props.item.title,
-        image: imageToBase64,
+        image: image,
         skin_color: this.props.item.skin_color,
         description: this.props.item.description,
         lipstick_color: this.props.item.lipstick_color,
@@ -105,8 +111,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `api/trend/collection/${this.$route.params.id}` +
-          `?part=trend`
+        `api/trend/collection/${this.$route.params.id}` + `?part=trend`
       );
       this.setTrend(data.data.trends);
     }

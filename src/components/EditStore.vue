@@ -77,11 +77,17 @@ export default {
     },
     ...mapActions(["setStore"]),
     async onEditClick() {
-      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
+      let image = null;
+      try {
+        let image = await this.encodeToBase64(this.$refs.files.files);
+      } catch (e) {
+        console.error(e);
+        image = null;
+      }
 
       await axios.put(`api/store/` + this.store.id, {
         name: this.store.name,
-        image: imageToBase64
+        image: image
       });
       Swal.fire({
         position: "center",

@@ -77,11 +77,16 @@ export default {
     },
     ...mapActions(["setBrand"]),
     async onEditClick() {
-      let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
-
+      let image = null;
+      try {
+        let image = await this.encodeToBase64(this.$refs.files.files);
+      } catch (e) {
+        console.error(e);
+        image = null;
+      }
       await axios.put(`api/brand/${this.brand.id}`, {
         name: this.brand.name,
-        image: imageToBase64
+        image: image
       });
       Swal.fire({
         position: "center",

@@ -58,17 +58,14 @@ export default {
   methods: {
     ...mapActions(["setDetail"]),
     async onEditClick() {
-      await axios.put(
-        `api/lipstick/detail/` + this.props.item.id,
-        {
-          name: this.props.item.name,
-          type: this.props.item.type.type,
-          opacity: this.props.item.opacity,
-          description: this.props.item.description,
-          apply: this.props.item.apply,
-          lipstick_brand_id: this.$route.params.id
-        }
-      );
+      await axios.put(`api/lipstick/detail/` + this.props.item.id, {
+        name: this.props.item.name,
+        type: this.props.item.type,
+        opacity: this.props.item.opacity,
+        description: this.props.item.description,
+        apply: this.props.item.apply,
+        lipstick_brand_id: this.$route.params.id
+      });
       this.$forceUpdate();
       Swal.fire({
         position: "center",
@@ -83,9 +80,7 @@ export default {
       this.setDetail(data.data);
     },
     async getType() {
-      const { data } = await axios.get(
-        `api/lipstick/detail/type`
-      );
+      const { data } = await axios.get(`api/lipstick/detail/type`);
       this.types = data.data;
     }
   },
