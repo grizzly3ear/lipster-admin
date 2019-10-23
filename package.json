@@ -4,13 +4,13 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --mode development",
-    "build": "vue-cli-service build",
+    "build": "vue-cli-service build --mode production",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "aws-amplify": "^1.1.40",
     "aws-amplify-vue": "^0.2.17",
-    "axios": "^0.18.0",
+    "../utils/axios.js": "^0.18.0",
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
     "vue-sweetalert2": "^1.6.4",
