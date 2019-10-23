@@ -11,12 +11,14 @@
       <td>
         <SelectStoreAddressCard :props="props" />
       </td>
-      <td>{{ props.item.name }}</td>
-      <router-link :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}">
-        <td
-          style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
-        >{{ props.item.address_detail }}</td>
-      </router-link>
+      <td
+        style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
+      >
+        <router-link
+          :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}"
+        >{{ props.item.name }}</router-link>
+      </td>
+      <td>{{ props.item.address_detail }}</td>
       <td>{{ props.item.latitude }}</td>
       <td>{{ props.item.longitude }}</td>
       <td>{{ props.item.period }}</td>
