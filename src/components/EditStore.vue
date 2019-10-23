@@ -79,7 +79,7 @@ export default {
     async onEditClick() {
       let image = null;
       try {
-        let image = await this.encodeToBase64(this.$refs.files.files);
+        image = await this.encodeToBase64(this.$refs.files.files);
       } catch (e) {
         console.error(e);
         image = null;

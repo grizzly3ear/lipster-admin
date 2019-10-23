@@ -4,18 +4,13 @@
     :headers="headers"
     :items="getStoreAddress"
     item-key="getStoreAddress.id"
-    select-all
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td>
-        <SelectStoreAddressCard :props="props" />
-      </td>
-      <td
-        style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
-      >
+      <td style="text-align: center;">
         <router-link
           :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}"
+          style="text-decoration: none !important; display: inline-block;"
         >{{ props.item.name }}</router-link>
       </td>
       <td>{{ props.item.address_detail }}</td>
@@ -37,14 +32,12 @@
 import axios from "../utils/axios";
 import EditStoreAddress from "@/components/EditStoreAddress";
 import DeleteStoreAddress from "@/components/DeleteStoreAddress";
-import SelectStoreAddressCard from "@/components/SelectStoreAddressCard";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     EditStoreAddress,
-    DeleteStoreAddress,
-    SelectStoreAddressCard
+    DeleteStoreAddress
   },
   methods: {
     ...mapActions(["setStoreAddress"]),

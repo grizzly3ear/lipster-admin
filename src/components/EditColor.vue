@@ -102,8 +102,6 @@ export default {
         image = null;
       }
 
-      console.log(this.props.item.images[0]);
-
       if (this.props.item.images[0]) {
         await axios.put(`api/lipstick/image/${this.props.item.images[0].id}`, {
           image: image,
