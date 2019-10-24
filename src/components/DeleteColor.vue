@@ -25,9 +25,7 @@ export default {
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
         if (result.value) {
-          axios.delete(
-            `api/lipstick/color/` + this.props.item.id
-          );
+          axios.delete(`api/lipstick/color/` + this.props.item.id);
           Swal.fire("Deleted!", "This item has been deleted.", "success")
             .catch(error => {
               Swal.fire(
@@ -38,11 +36,7 @@ export default {
             })
             .finally(() => {
               axios
-                .get(
-                  `api/lipstick/detail/` +
-                    this.$route.params.id +
-                    `?part=color`
-                )
+                .get(`api/lipstick/detail/${this.$route.params.id}?part=color`)
                 .then(({ data }) => {
                   this.setColor(data);
                 });

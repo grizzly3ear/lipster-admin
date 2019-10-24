@@ -120,8 +120,6 @@ export default {
       this.brands = data;
     },
     async getDetails() {
-      console.log(">>>>>");
-      console.log(this.brand_id);
       const { data } = await axios.get(`api/brand/${this.brand_id}/detail`);
       this.details = data;
     },

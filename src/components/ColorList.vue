@@ -50,7 +50,7 @@ export default {
     ...mapActions(["setColor"]),
     async getColors() {
       const { data } = await axios.get(
-        `api/lipstick/detail/` + this.$route.params.id + `?part=color`
+        `api/lipstick/detail/${this.$route.params.id}?part=color`
       );
       this.colors = data.data;
       this.setColor(data);

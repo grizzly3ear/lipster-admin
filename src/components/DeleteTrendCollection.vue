@@ -26,9 +26,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete(
-              `api/trend/collection/` + this.props.item.id
-            )
+            .delete(`api/trend/collection/${this.props.item.id}`)
             .then(result => {
               Swal.fire("Deleted!", "This item has been deleted.", "success");
             })
@@ -40,11 +38,9 @@ export default {
               );
             })
             .finally(() => {
-              axios
-                .get(`api/trend/collection`)
-                .then(({ data }) => {
-                  this.setTrendCollection(data.data);
-                });
+              axios.get(`api/trend/collection?part=trend`).then(({ data }) => {
+                this.setTrendCollection(data.data);
+              });
             });
         }
       });

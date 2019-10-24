@@ -25,9 +25,7 @@ export default {
       }).then(result => {
         if (result.value) {
           axios
-            .delete(
-              `api/store/address/` + this.props.item.id
-            )
+            .delete(`api/store/address/` + this.props.item.id)
             .then(result => {
               Swal.fire("Deleted!", "This item has been deleted.", "success");
             })
@@ -40,10 +38,7 @@ export default {
             })
             .finally(() => {
               axios
-                .get(
-                  `api/store/${this.$route.params.id}` +
-                    `?part=address`
-                )
+                .get(`api/store/${this.$route.params.id}?part=address`)
                 .then(({ data }) => {
                   this.setStoreAddress(data.data.addresses);
                 });

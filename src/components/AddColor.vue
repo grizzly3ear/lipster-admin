@@ -92,15 +92,11 @@ export default {
       formData.append("color_code", this.color_code);
       formData.append("composition", this.composition);
       formData.append("lipstick_detail_id", this.$route.params.id);
-      let newColor = await axios.post(
-        `api/lipstick/color`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data"
-          }
+      let newColor = await axios.post(`api/lipstick/color`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data"
         }
-      );
+      });
       let formImage = new FormData();
       let imageToBase64 = await this.encodeToBase64(this.$refs.files.files);
       formImage.append("image", imageToBase64);
@@ -118,9 +114,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `api/lipstick/detail/` +
-          this.$route.params.id +
-          `?part=color`
+        `api/lipstick/detail/${this.$route.params.id}?part=color`
       );
       this.setColor(data);
     }

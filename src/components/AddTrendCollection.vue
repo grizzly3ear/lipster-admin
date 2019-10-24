@@ -104,9 +104,7 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
-      const { data } = await axios.get(
-        `api/trend/collection`
-      );
+      const { data } = await axios.get(`api/trend/collection?part=trend`);
       this.setTrendCollection(data.data);
     }
   },

@@ -96,7 +96,7 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
-      const { data } = await axios.get(`api/brand`);
+      const { data } = await axios.get(`api/brand?part=detail`);
       this.setBrand(data.data);
     }
   },

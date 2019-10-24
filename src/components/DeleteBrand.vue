@@ -38,7 +38,7 @@ export default {
               );
             })
             .finally(() => {
-              axios.get(`api/brand`).then(({ data }) => {
+              axios.get(`api/brand?part=detail`).then(({ data }) => {
                 this.setBrand(data.data);
               });
             });

@@ -38,7 +38,7 @@ export default {
               );
             })
             .finally(() => {
-              axios.get(`api/store`).then(({ data }) => {
+              axios.get(`api/store?part=address`).then(({ data }) => {
                 this.setStore(data.data);
               });
             });

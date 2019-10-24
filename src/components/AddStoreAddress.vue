@@ -78,7 +78,7 @@ export default {
       });
 
       const { data } = await axios.get(
-        `api/store/` + this.$route.params.id + `?part=address`
+        `api/store/${this.$route.params.id}?part=address`
       );
 
       this.setStoreAddress(data.data.addresses);
