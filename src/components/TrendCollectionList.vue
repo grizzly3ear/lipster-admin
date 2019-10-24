@@ -16,7 +16,7 @@
           <v-icon class="num-trend" color="gray">face</v-icon>
           <label
             class="num-trend"
-            v-text="props.item.trends.length"
+            v-text="(props.item.trends || []).length"
             style="font-size: 14px; color: gray;"
           ></label>
           <label class="num-trend" style="font-size: 14px; color: gray;">{{" "}}trends</label>

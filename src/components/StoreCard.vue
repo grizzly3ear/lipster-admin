@@ -26,11 +26,11 @@
                   <v-flex class="name-upper-force">
                     <label class="brand" v-text="store.name"></label>
                     <label
-                      style="font-size: 14px; color: gray; float: right; margin: 5.5px 0px 0px 0px;"
+                      style="font-size: 14px; color: gray; float: right; margin: 5.5px 0px 0px 0px; margin-left: 2px;"
                     >branches</label>
                     <label
                       class="num-branch"
-                      v-text=" store.addresses.length"
+                      v-text=" (store.addresses || []).length"
                       style="font-size: 16px"
                     ></label>
                     <v-icon class="num-branch" color="gray">store</v-icon>

@@ -28,12 +28,17 @@
                   </v-flex>
                   <v-flex class="name-upper-force">
                     <label class="brand" v-text="brand.name"></label>
-                    <label class="num-collection" style="font-size: 14px; color: gray;">collections</label>
                     <label
                       class="num-collection"
-                      v-text="brand.details.length"
+                      style="font-size: 14px; color: gray; margin-left: 2px;"
+                    >collections</label>
+
+                    <label
+                      class="num-collection"
+                      v-text="(brand.details || []).length"
                       style="font-size: 16px"
                     >{{" "}}</label>
+
                     <!-- <v-tooltip bottom>
                       <template #activator="{ on }">
                         <v-icon class="num-collection" color="gray" v-on="on">color_lens</v-icon>
@@ -74,7 +79,12 @@ export default {
       });
     }
   },
-  props: ["brand"],
+  props: {
+    brand: {
+      type: Object,
+      default: () => []
+    }
+  },
   data() {
     return {
       info: [],

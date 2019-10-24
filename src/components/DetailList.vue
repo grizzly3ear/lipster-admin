@@ -20,7 +20,7 @@
           {{ props.item.name }}
           <br />
           <v-icon color="gray">invert_colors</v-icon>
-          <label v-text="props.item.colors.length" style="font-size: 14px; color: gray;"></label>
+          <label v-text="(props.item.colors || []).length" style="font-size: 14px; color: gray;"></label>
           <label style="font-size: 14px; color: gray;">{{" "}}colors</label>
         </td>
       </router-link>
@@ -28,7 +28,6 @@
       <td>{{ props.item.opacity }}</td>
       <td>{{ props.item.description }}</td>
       <td>{{ props.item.apply }}</td>
-      <td>{{ props.item.colors.length }}</td>
       <td>
         <EditDetail :props="props" />
       </td>
@@ -83,7 +82,6 @@ export default {
         { text: "Opacity", value: "opacity" },
         { text: "Description", value: "description" },
         { text: "Apply", value: "apply" },
-        { text: "Colors" },
         { text: "Edit" },
         { text: "Delete" }
       ],
