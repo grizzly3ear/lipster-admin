@@ -75,7 +75,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `api/brand/` + this.$route.params.id + `/detail`
+        `api/brand/${this.$route.params.id}/detail?part=color`
       );
       this.setDetail(data.data);
     },

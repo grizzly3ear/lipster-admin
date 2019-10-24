@@ -126,7 +126,7 @@ export default {
         timer: 1000
       });
       const { data } = await axios.get(
-        `api/lipstick/detail/` + this.$route.params.id + `?part=color`
+        `api/lipstick/detail/${this.$route.params.id}?part=color`
       );
       this.setColor(data);
     }

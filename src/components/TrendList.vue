@@ -4,13 +4,12 @@
     :headers="headers"
     :items="getTrend"
     item-key="name"
-    select-all
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td>
+      <!-- <td>
         <SelectTrendCard :props="props" />
-      </td>
+      </td>-->
       <td>{{ props.item.title }}</td>
       <td>
         <img class="image-container" :src="props.item.image" />
@@ -51,8 +50,7 @@ export default {
     ...mapActions(["setTrend"]),
     async getTrends() {
       const { data } = await axios.get(
-        `api/trend/collection/${this.$route.params.id}` +
-          `?part=trend`
+        `api/trend/collection/${this.$route.params.id}?part=trend`
       );
       this.trends = data.data.trends;
       this.setTrend(data.data.trends);

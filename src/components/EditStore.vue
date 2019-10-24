@@ -96,7 +96,7 @@ export default {
         showConfirmButton: false,
         timer: 500
       });
-      const { data } = await axios.get(`api/store`);
+      const { data } = await axios.get(`api/store?part=address`);
       this.setStore(data.data);
     }
   },
