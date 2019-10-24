@@ -4,13 +4,12 @@
     :headers="headers"
     :items="getColor.data.colors"
     item-key="getColor.data.colors.id"
-    select-all
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td>
+      <!-- <td>
         <SelectLipstickColorCard :props="props" />
-      </td>
+      </td>-->
       <td>
         <v-list v-for="image in props.item.images" :key="image.id">
           <img class="image-container" :src="image.image" />
@@ -51,9 +50,7 @@ export default {
     ...mapActions(["setColor"]),
     async getColors() {
       const { data } = await axios.get(
-        `api/lipstick/detail/` +
-          this.$route.params.id +
-          `?part=color`
+        `api/lipstick/detail/` + this.$route.params.id + `?part=color`
       );
       this.colors = data.data;
       this.setColor(data);

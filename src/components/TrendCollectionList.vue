@@ -10,7 +10,17 @@
       <router-link :to="{ name: 'Trend', params: {id: props.item.id}}">
         <td
           style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
-        >{{ props.item.name }}</td>
+        >
+          {{ props.item.name }}
+          <br />
+          <v-icon class="num-trend" color="gray">face</v-icon>
+          <label
+            class="num-trend"
+            v-text="props.item.trends.length"
+            style="font-size: 14px; color: gray;"
+          ></label>
+          <label class="num-trend" style="font-size: 14px; color: gray;">{{" "}}trends</label>
+        </td>
       </router-link>
       <td>
         <img class="image-container" :src="props.item.image" />
@@ -42,10 +52,17 @@ export default {
   methods: {
     ...mapActions(["setTrendCollection"]),
     async getTrendCollections() {
-      const { data } = await axios.get(
-        `api/trend/collection`
-      );
+      const { data } = await axios.get(`api/trend/collection?part=trend`);
       this.setTrendCollection(data.data);
+
+      // Split timestamp into [ Y, M, D, h, m, s ]
+      var t = "2010-06-09 13:12:01".split(/[- :]/);
+
+      // Apply each element to the Date function
+      var d = new Date(Date.UTC(t[0], t[1] - 1, t[2], t[3], t[4], t[5]));
+
+      console.log(d);
+      // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
     }
   },
   async mounted() {
@@ -63,7 +80,9 @@ export default {
         { text: "Edit" },
         { text: "Delete" },
         { text: "" }
-      ]
+      ],
+      create_at: null,
+      update_at: null
     };
   },
   computed: {

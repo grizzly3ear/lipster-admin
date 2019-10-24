@@ -4,7 +4,7 @@
       <v-container style="padding: 0 !imaportant;">
         <v-container class="brand-container">
           <v-layout column>
-            <v-flex offset-md7 md3>
+            <v-flex offset-md6 md2>
               <v-layout row>
                 <v-flex>
                   <EditStore :store="store" />
@@ -25,7 +25,17 @@
                   </v-flex>
                   <v-flex class="name-upper-force">
                     <label class="brand" v-text="store.name"></label>
+                    <label
+                      style="font-size: 14px; color: gray; float: right; margin: 5.5px 0px 0px 0px;"
+                    >branches</label>
+                    <label
+                      class="num-branch"
+                      v-text=" store.addresses.length"
+                      style="font-size: 16px"
+                    ></label>
+                    <v-icon class="num-branch" color="gray">store</v-icon>
                   </v-flex>
+                  <v-flex></v-flex>
                 </v-layout>
               </router-link>
             </v-flex>

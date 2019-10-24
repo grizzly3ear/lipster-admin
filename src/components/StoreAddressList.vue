@@ -11,7 +11,14 @@
         <router-link
           :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}"
           style="text-decoration: none !important; display: inline-block;"
-        >{{ props.item.name }}</router-link>
+        >
+          {{ props.item.name }}
+          <br />
+          {{ getLipsticks(props.item.id) ? "" : "" }}
+          <v-icon color="gray">invert_colors</v-icon>
+          <label v-text="numOfLipstick" style="font-size: 14px; color: gray;"></label>
+          <label style="font-size: 14px; color: gray;">{{" "}}items</label>
+        </router-link>
       </td>
       <td>{{ props.item.address_detail }}</td>
       <td>{{ props.item.latitude }}</td>
@@ -40,12 +47,19 @@ export default {
     DeleteStoreAddress
   },
   methods: {
-    ...mapActions(["setStoreAddress"]),
+    ...mapActions(["setStoreAddress", "setLipstickOfStoreAddress"]),
     async getStoreAddresses() {
       const { data } = await axios.get(
         `api/store/${this.$route.params.id}?part=address`
       );
       this.setStoreAddress(data.data.addresses);
+    },
+    async getLipsticks(storeAddressId) {
+      const { data } = await axios.get(
+        `api/store/address/${storeAddressId}/lipstickColors`
+      );
+      this.numOfLipstick = data.data.length;
+      return "";
     }
   },
   async mounted() {
@@ -66,11 +80,12 @@ export default {
         { text: "Edit" },
         { text: "Delete" }
       ],
-      storeAddresses: {}
+      storeAddresses: {},
+      numOfLipstick: 0
     };
   },
   computed: {
-    ...mapGetters(["getStoreAddress"])
+    ...mapGetters(["getStoreAddress", "getLipstickOfStoreAddress"])
   }
 };
 </script>

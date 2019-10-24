@@ -28,6 +28,18 @@
                   </v-flex>
                   <v-flex class="name-upper-force">
                     <label class="brand" v-text="brand.name"></label>
+                    <label class="num-collection" style="font-size: 14px; color: gray;">collections</label>
+                    <label
+                      class="num-collection"
+                      v-text="brand.details.length"
+                      style="font-size: 16px"
+                    >{{" "}}</label>
+                    <!-- <v-tooltip bottom>
+                      <template #activator="{ on }">
+                        <v-icon class="num-collection" color="gray" v-on="on">color_lens</v-icon>
+                      </template>
+                      <span style="color: black;">collection</span>
+                    </v-tooltip>-->
                   </v-flex>
                 </v-layout>
               </router-link>
@@ -44,7 +56,7 @@
 import { mapActions, mapGetters } from "vuex";
 import EditBrand from "@/components/EditBrand";
 import DeleteBrand from "@/components/DeleteBrand";
-import axios from "../utils/axios.js";
+import axios from "axios";
 
 export default {
   name: "brandCard",

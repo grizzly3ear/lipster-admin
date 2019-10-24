@@ -4,23 +4,31 @@
     :headers="headers"
     :items="getDetail"
     item-key="getDetail.id"
-    select-all
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td>
+      <!-- <td>
         <SelectLipstickDetailCard :props="props" />
-      </td>
+      </td>-->
       <router-link
         :to="{ name: 'LipstickColor', params: {id: props.item.id}}"
         @click.native="onClickDetailList(props.item)"
       >
         <td
           style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
-        >{{ props.item.name }}</td>
+        >
+          {{ props.item.name }}
+          <br />
+          <v-icon color="gray">invert_colors</v-icon>
+          <label v-text="props.item.colors.length" style="font-size: 14px; color: gray;"></label>
+          <label style="font-size: 14px; color: gray;">{{" "}}colors</label>
+        </td>
       </router-link>
       <td>{{ props.item.type }}</td>
       <td>{{ props.item.opacity }}</td>
+      <td>{{ props.item.description }}</td>
+      <td>{{ props.item.apply }}</td>
+      <td>{{ props.item.colors.length }}</td>
       <td>
         <EditDetail :props="props" />
       </td>
@@ -49,7 +57,7 @@ export default {
     ...mapActions(["setDetail", "pushBreadcrumb"]),
     async getDetails() {
       const { data } = await axios.get(
-        `api/brand/${this.$route.params.id}/detail`
+        `api/brand/${this.$route.params.id}/detail?part=color`
       );
       this.setDetail(data.data);
     },
@@ -70,12 +78,14 @@ export default {
       props: {},
       selected: [],
       headers: [
-        { text: "Name", value: "name" },
+        { text: "Collection Name", value: "name" },
         { text: "Type", value: "type" },
         { text: "Opacity", value: "opacity" },
+        { text: "Description", value: "description" },
+        { text: "Apply", value: "apply" },
+        { text: "Colors" },
         { text: "Edit" },
-        { text: "Delete" },
-        { text: "" }
+        { text: "Delete" }
       ],
       details: {}
     };

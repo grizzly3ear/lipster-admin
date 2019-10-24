@@ -16,6 +16,8 @@
             </v-flex>
             <v-flex>
               <router-link :to="{ name: 'Trend', params: {id: trendCollection.id}}">
+                <label class="num-branch" v-text=" store.addresses.length" style="font-size: 16px"></label>
+                <v-icon class="num-branch" color="gray">store</v-icon>
                 <v-layout column>
                   <v-flex class="img-upper-force">
                     <v-img :src="trendCollection.image" class="brandList" position="center center"></v-img>

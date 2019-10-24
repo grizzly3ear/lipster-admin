@@ -24,7 +24,7 @@ export default {
   methods: {
     ...mapActions(["setStore"]),
     async getStores() {
-      const { data } = await axios.get(`api/store`);
+      const { data } = await axios.get(`api/store?part=address`);
       this.setStore(data.data);
     }
   },

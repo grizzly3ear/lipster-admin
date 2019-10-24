@@ -24,7 +24,7 @@ export default {
   methods: {
     ...mapActions(["setBrand"]),
     async getBrands() {
-      const { data } = await axios.get(`api/brand`);
+      const { data } = await axios.get(`api/brand?part=detail`);
       this.setBrand(data.data);
     }
   },
