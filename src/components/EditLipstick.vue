@@ -22,13 +22,20 @@
               <v-flex xs12>
                 <v-text-field v-model="props.item.price" label="Price*" required></v-text-field>
               </v-flex>
+              <v-flex xs12>
+                <v-checkbox
+                  v-model="checkbox"
+                  label="Do you want edit all color's price in this collection?"
+                  required
+                ></v-checkbox>
+              </v-flex>
             </v-layout>
           </v-container>
           <small>*user can edit only price field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
+          <div style="margin: 30px">
             <v-btn color="blue darken-1" @click="onEditClick">Save</v-btn>
           </div>
         </v-card-actions>
@@ -46,15 +53,27 @@ export default {
   methods: {
     ...mapActions(["setLipstickOfStoreAddress"]),
     async onEditClick() {
-      await axios.put(
-        `api/store/address/lipsticks/` +
-          this.props.item.id_pivot,
-        {
-          price: this.props.item.price,
-          lipstick_color_id: this.props.item.lipstick_color_id,
-          store_address_id: this.$route.params.id
-        }
-      );
+      if (this.checkbox == true) {
+        this.getLipstickOfStoreAddress.forEach(lipstick => {
+          if (this.props.item.detail.id == lipstick.detail.id) {
+            axios.put(`api/store/address/lipsticks/` + lipstick.id_pivot, {
+              price: this.props.item.price,
+              lipstick_color_id: lipstick.lipstick_color_id,
+              store_address_id: this.$route.params.id
+            });
+          }
+        });
+      } else {
+        await axios.put(
+          `api/store/address/lipsticks/` + this.props.item.id_pivot,
+          {
+            price: this.props.item.price,
+            lipstick_color_id: this.props.item.lipstick_color_id,
+            store_address_id: this.$route.params.id
+          }
+        );
+      }
+      this.dialog = false;
       this.$forceUpdate();
       Swal.fire({
         position: "center",
@@ -63,9 +82,11 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
+
       const { data } = await axios.get(
         `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
       );
+      console.log(data.data);
       this.setLipstickOfStoreAddress(data.data);
     }
   },
@@ -74,7 +95,8 @@ export default {
     dialog: false,
     price: null,
     lipstick_color_id: null,
-    store_address_id: null
+    store_address_id: null,
+    checkbox: false
   }),
   computed: {
     ...mapGetters(["getLipstickOfStoreAddress"])
