@@ -9,6 +9,7 @@
       <v-card>
         <v-card-title>
           <span class="headline">Add Lipstick To This Branch</span>
+          <span style="float:right; margin-left: 250px">{{page}}/3</span>
         </v-card-title>
         <!-- Page 1-->
         <div v-if="page == 1">
