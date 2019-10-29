@@ -20,6 +20,10 @@
             style="font-size: 14px; color: gray;"
           ></label>
           <label class="num-trend" style="font-size: 14px; color: gray;">{{" "}}trends</label>
+          <br />
+          <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
+          <br />
+          <label class="created-at-table">Updated: {{getDate(props.item.updated_at)}}</label>
         </td>
       </router-link>
       <td>
@@ -63,6 +67,9 @@ export default {
 
       console.log(d);
       // -> Wed Jun 09 2010 14:12:01 GMT+0100 (BST)
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {

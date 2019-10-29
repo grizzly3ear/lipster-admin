@@ -107,6 +107,7 @@
   width: 30%;
   height: 76px;
   padding: 5px;
+  color: white;
 }
 
 #operation-container {
@@ -220,6 +221,20 @@
   text-decoration: none;
   padding: 0 !important;
   /* margin: 5px 0px 0px 0px; */
+}
+
+.created-at {
+  color: gray;
+  padding: 0 !important;
+  float: right;
+  font-size: 12px;
+  margin: 0px 0px 0px 50px;
+}
+
+.created-at-table {
+  color: gray;
+  padding: 0 !important;
+  font-size: 12px;
 }
 
 .brand-list {

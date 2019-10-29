@@ -34,6 +34,7 @@
                       style="font-size: 16px"
                     ></label>
                     <v-icon class="num-branch" color="gray">store</v-icon>
+                    <div class="created-at">Created: {{getDate(store.created_at)}}</div>
                   </v-flex>
                   <v-flex></v-flex>
                 </v-layout>
@@ -67,6 +68,9 @@ export default {
         disabled: true,
         href: `/Store`
       });
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   props: ["store"],

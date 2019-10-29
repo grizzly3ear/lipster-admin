@@ -13,7 +13,11 @@
       <td>
         <img class="image-container" :src="props.item.brand.image" />
       </td>
-      <td>{{ props.item.brand.name }}</td>
+      <td style="width: 50px">
+        {{ props.item.brand.name }}
+        <br />
+        <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
+      </td>
       <td>{{ props.item.detail.name }}</td>
       <td>{{ props.item.detail.type }}</td>
       <td>
@@ -61,6 +65,9 @@ export default {
     },
     renderColorBox(rgb) {
       return `<div class='color-box' style="background-color: ${rgb}"></div>`;
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {

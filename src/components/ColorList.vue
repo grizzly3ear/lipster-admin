@@ -15,7 +15,11 @@
           <img class="image-container" :src="image.image" />
         </v-list>
       </td>
-      <td>{{ props.item.color_name }}</td>
+      <td>
+        {{ props.item.color_name }}
+        <br />
+        <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
+      </td>
       <td>
         <div v-html="renderColorBox(props.item.rgb)"></div>
         {{ props.item.rgb }}
@@ -36,15 +40,15 @@
 <script>
 import EditColor from "@/components/EditColor";
 import DeleteColor from "@/components/DeleteColor";
-import SelectLipstickColorCard from "@/components/SelectLipstickColorCard";
+// import SelectLipstickColorCard from "@/components/SelectLipstickColorCard";
 import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     EditColor,
-    DeleteColor,
-    SelectLipstickColorCard
+    DeleteColor
+    // SelectLipstickColorCard
   },
   methods: {
     ...mapActions(["setColor"]),
@@ -57,6 +61,9 @@ export default {
     },
     renderColorBox(rgb) {
       return `<div class='color-box' style="background-color: ${rgb}"></div>`;
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {

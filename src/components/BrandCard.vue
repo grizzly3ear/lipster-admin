@@ -39,12 +39,7 @@
                       style="font-size: 16px"
                     >{{" "}}</label>
 
-                    <!-- <v-tooltip bottom>
-                      <template #activator="{ on }">
-                        <v-icon class="num-collection" color="gray" v-on="on">color_lens</v-icon>
-                      </template>
-                      <span style="color: black;">collection</span>
-                    </v-tooltip>-->
+                    <div class="created-at">Created: {{getDate(brand.created_at)}}</div>
                   </v-flex>
                 </v-layout>
               </router-link>
@@ -77,6 +72,9 @@ export default {
         disabled: true,
         href: `/lipstickBrand`
       });
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   props: {

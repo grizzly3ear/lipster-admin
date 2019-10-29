@@ -22,7 +22,15 @@
         <div v-html="renderColorBox(props.item.lipstick_color)"></div>
         {{ props.item.lipstick_color }}
       </td>
-      <td>{{ props.item.description }}</td>
+      <td>
+        {{ props.item.description }}
+        <br />
+        <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
+        {{" "}}{{" "}}
+        <label
+          class="created-at-table"
+        >Updated: {{getDate(props.item.updated_at)}}</label>
+      </td>
       <td>
         <EditTrend :props="props" />
       </td>
@@ -36,15 +44,15 @@
 <script>
 import EditTrend from "../components/EditTrend";
 import DeleteTrend from "../components/DeleteTrend";
-import SelectTrendCard from "../components/SelectTrendCard";
+// import SelectTrendCard from "../components/SelectTrendCard";
 import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     EditTrend,
-    DeleteTrend,
-    SelectTrendCard
+    DeleteTrend
+    // SelectTrendCard
   },
   methods: {
     ...mapActions(["setTrend"]),
@@ -60,6 +68,9 @@ export default {
     },
     renderColorBox(rgb) {
       return `<div class='color-box' style="background-color: ${rgb}"></div>`;
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {

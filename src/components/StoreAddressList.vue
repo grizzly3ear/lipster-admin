@@ -14,10 +14,14 @@
         >
           {{ props.item.name }}
           <br />
-          {{ getLipsticks(props.item.id) ? "" : "" }}
+          <!-- {{ getLipsticks(props.item.id) ? "" : "" }} -->
           <v-icon color="gray">invert_colors</v-icon>
-          <label v-text="numOfLipstick" style="font-size: 14px; color: gray;"></label>
+          <label v-text="(props.item.lipstick || []).length" style="font-size: 14px; color: gray;"></label>
+          <!-- <label v-text="0" style="font-size: 14px; color: gray;" v-else></label> -->
           <label style="font-size: 14px; color: gray;">{{" "}}items</label>
+          <br />
+          <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
+          <br />
         </router-link>
       </td>
       <td>{{ props.item.address_detail }}</td>
@@ -47,19 +51,26 @@ export default {
     DeleteStoreAddress
   },
   methods: {
-    ...mapActions(["setStoreAddress", "setLipstickOfStoreAddress"]),
+    ...mapActions(["setStoreAddress"]),
     async getStoreAddresses() {
       const { data } = await axios.get(
         `api/store/${this.$route.params.id}?part=address`
       );
-      this.setStoreAddress(data.data.addresses);
+      let store = data.data;
+      store.addresses.forEach(async addresses => {
+        const { data: lipstick } = await this.getLipsticks(addresses.id);
+        addresses.lipstick = [...lipstick];
+      });
+      this.setStoreAddress(store.addresses);
     },
     async getLipsticks(storeAddressId) {
       const { data } = await axios.get(
         `api/store/address/${storeAddressId}/lipstickColors`
       );
-      this.numOfLipstick = data.data.length;
-      return "";
+      return data;
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {
@@ -85,7 +96,12 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["getStoreAddress", "getLipstickOfStoreAddress"])
+    ...mapGetters(["getStoreAddress"])
+  },
+  watch: {
+    getStoreAddresses(val) {
+      console.log(val);
+    }
   }
 };
 </script>

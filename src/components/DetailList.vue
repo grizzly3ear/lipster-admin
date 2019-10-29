@@ -22,6 +22,8 @@
           <v-icon color="gray">invert_colors</v-icon>
           <label v-text="(props.item.colors || []).length" style="font-size: 14px; color: gray;"></label>
           <label style="font-size: 14px; color: gray;">{{" "}}colors</label>
+          <br />
+          <label class="created-at-table">Created: {{getDate(props.item.created_at)}}</label>
         </td>
       </router-link>
       <td>{{ props.item.type }}</td>
@@ -43,14 +45,14 @@
 import axios from "../utils/axios";
 import EditDetail from "@/components/EditDetail";
 import DeleteDetail from "@/components/DeleteDetail";
-import SelectLipstickDetailCard from "@/components/SelectLipstickDetailCard";
+// import SelectLipstickDetailCard from "@/components/SelectLipstickDetailCard";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     EditDetail,
-    DeleteDetail,
-    SelectLipstickDetailCard
+    DeleteDetail
+    // SelectLipstickDetailCard
   },
   methods: {
     ...mapActions(["setDetail", "pushBreadcrumb"]),
@@ -66,6 +68,9 @@ export default {
         disabled: true,
         href: `lipstickDetail/${detail.id}`
       });
+    },
+    getDate(date) {
+      return date.substring(0, 10);
     }
   },
   async mounted() {
