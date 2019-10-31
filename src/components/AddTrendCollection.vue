@@ -11,16 +11,33 @@
           <span class="headline">Add Trend Collection</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="name" label="Name*" required></v-text-field>
+                <v-text-field
+                  v-model="name"
+                  label="Name*"
+                  :rules="nameRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="description" label="Description*" required></v-text-field>
+                <v-text-field
+                  v-model="description"
+                  label="Description*"
+                  :rules="descriptionRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="release_date" label="Release Date*" required></v-text-field>
+                <v-text-field
+                  v-model="release_date"
+                  label="Release Date*"
+                  :rules="releaseDateRules"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -29,13 +46,13 @@
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onAddClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn color="blue darken-1" @click="onAddClick" :disabled="!valid">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -95,7 +112,7 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       });
-
+      this.dialog = false;
       this.$forceUpdate();
       Swal.fire({
         position: "center",
@@ -106,14 +123,31 @@ export default {
       });
       const { data } = await axios.get(`api/trend/collection?part=trend`);
       this.setTrendCollection(data.data);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
   },
-
+  async mounted() {
+    this.validate();
+  },
   data: () => ({
     dialog: false,
+    valid: false,
     name: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => (v && v.length <= 190) || "Name be less than 190 characters"
+    ],
     description: "",
+    descriptionRules: [
+      v => !!v || "Description is required",
+      v => (v && v.length <= 190) || "Description be less than 190 characters"
+    ],
     release_date: null,
+    releaseDateRules: [v => !!v || "Release Date is required"],
     image: "",
     selectedFile: null
   }),

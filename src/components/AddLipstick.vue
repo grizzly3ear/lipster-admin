@@ -15,7 +15,7 @@
         <div v-if="page == 1">
           <template>
             <v-card-text>
-              <v-container grid-list-md>
+              <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
                 <v-layout wrap>
                   <v-flex xs12>
                     <v-select
@@ -24,16 +24,18 @@
                       label="Select brand*"
                       item-text="name"
                       item-value="id"
+                      :rules="[v => !!v || 'Brand is required']"
+                      required
                     ></v-select>
                   </v-flex>
                 </v-layout>
-              </v-container>
+              </v-form>
               <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions style="margin: 0 187px 0 187px">
               <v-btn color="black darken-1" @click="closeDialog">Close</v-btn>
-              <div style="margin: 30px">
-                <v-btn color="blue darken-1" @click="onNextClick">Next</v-btn>
+              <div @click="validate" style="margin: 30px">
+                <v-btn color="blue darken-1" @click="onNextClick" :disabled="!valid">Next</v-btn>
               </div>
             </v-card-actions>
           </template>
@@ -43,7 +45,7 @@
         <div v-else-if="page == 2">
           <template>
             <v-card-text>
-              <v-container grid-list-md>
+              <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
                 <v-layout wrap>
                   <v-flex xs12>
                     <v-select
@@ -52,16 +54,18 @@
                       label="Select collection*"
                       item-text="name"
                       item-value="id"
+                      :rules="[v => !!v || 'Collection is required']"
+                      required
                     ></v-select>
                   </v-flex>
                 </v-layout>
-              </v-container>
+              </v-form>
               <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions style="margin: 0 187px 0 187px">
               <v-btn color="black darken-1" @click="onBackClick">Back</v-btn>
-              <div style="margin: 30px">
-                <v-btn color="blue darken-1" @click="onNextClick">Next</v-btn>
+              <div @click="validate" style="margin: 30px">
+                <v-btn color="blue darken-1" @click="onNextClick" :disabled="!valid">Next</v-btn>
               </div>
             </v-card-actions>
           </template>
@@ -71,7 +75,7 @@
           <!-- Page 3-->
           <template>
             <v-card-text>
-              <v-container grid-list-md>
+              <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
                 <v-layout wrap>
                   <v-flex xs12>
                     <v-select
@@ -82,19 +86,21 @@
                       label="Select lipstick colors"
                       multiple
                       chips
+                      :rules="[v => !!v || 'Color name is required']"
+                      required
                     ></v-select>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field v-model="price" label="Price*" required></v-text-field>
                   </v-flex>
                 </v-layout>
-              </v-container>
+              </v-form>
               <small>*indicates required field</small>
             </v-card-text>
             <v-card-actions style="margin: 0 187px 0 187px">
               <v-btn color="black darken-1" @click="onBackClick">Back</v-btn>
-              <div style="margin: 30px">
-                <v-btn color="blue darken-1" @click="onAddClick">Save</v-btn>
+              <div @click="validate" style="margin: 30px">
+                <v-btn color="blue darken-1" @click="onAddClick" :disabled="!valid">Save</v-btn>
               </div>
             </v-card-actions>
           </template>
@@ -165,15 +171,20 @@ export default {
       );
 
       this.setLipstickOfStoreAddress(data.data);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
   },
   async mounted() {
     this.getBrands();
-    // this.getDetails();
-    // this.getColors();
+    this.validate();
   },
   data: () => ({
     dialog: false,
+    valid: false,
     name: "",
     price: 0,
     brands: [],

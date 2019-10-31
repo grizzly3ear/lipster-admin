@@ -11,34 +11,65 @@
           <span class="headline">Add Store Address</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="name" label="Name*" required></v-text-field>
+                <v-text-field
+                  v-model="name"
+                  label="Name*"
+                  :rules="nameRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="address_detail" label="Addrss Detail*" required></v-text-field>
+                <v-text-field
+                  v-model="address_detail"
+                  label="Addrss Detail*"
+                  :rules="addressDetailRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="latitude" label="Latitute*" required></v-text-field>
+                <v-text-field
+                  v-model="latitude"
+                  label="Latitude*"
+                  :rules="latitudeRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="longitude" label="Longitute*" required></v-text-field>
+                <v-text-field
+                  v-model="longitude"
+                  label="Longitude*"
+                  :rules="longitudeRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="period" label="Time Available" required></v-text-field>
+                <v-text-field
+                  v-model="period"
+                  label="Time Available"
+                  :rules="timeRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
+                <!-- <vue-timepicker></vue-timepicker> -->
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="tel" label="Tel" required></v-text-field>
+                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="closeDialog">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onAddClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn color="blue darken-1" @click="onAddClick" :disabled="!valid">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -48,6 +79,7 @@
 
 <script>
 import Swal from "sweetalert2";
+// import VueTimepicker from "vue2-timepicker";
 import axios from "../utils/axios";
 import { mapGetters, mapActions } from "vuex";
 
@@ -68,6 +100,7 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       });
+      this.dialog = false;
       this.$forceUpdate();
       Swal.fire({
         position: "center",
@@ -91,17 +124,49 @@ export default {
       this.longitude = 0;
       this.period = "";
       this.tel = "";
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
   },
-  async mounted() {},
+  async mounted() {
+    this.validate();
+  },
   data: () => ({
     dialog: false,
+    valid: false,
     name: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => (v && v.length <= 30) || "Name be less than 30 characters"
+    ],
     address_detail: "",
+    addressDetailRules: [
+      v => !!v || "Address detail is required",
+      v => (v && v.length <= 190) || "Address detail be less than 30 characters"
+    ],
     latitude: 0,
+    latitudeRules: [
+      v => !!v || "Latitude is required",
+      v => (v && v.length <= 30) || "Latitude be less than 30 characters"
+    ],
     longitude: 0,
+    longitudeRules: [
+      v => !!v || "Longitude is required",
+      v => (v && v.length <= 30) || "Longitude be less than 30 characters"
+    ],
     period: "",
-    tel: ""
+    timeRules: [
+      v => !!v || "Time available is required",
+      v => (v && v.length <= 30) || "Time available be less than 30 characters"
+    ],
+    tel: "",
+    telRules: [
+      v => !!v || "Tel is required",
+      v => (v && v.length == 10) || "Tel must be 10 characters"
+    ]
   }),
   computed: {
     ...mapGetters(["getStoreAddress"])

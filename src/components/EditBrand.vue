@@ -11,25 +11,38 @@
           <span class="headline">Edit Brand</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="brand.name" label="Name*" required></v-text-field>
+                <v-text-field
+                  v-model="brand.name"
+                  label="Name*"
+                  :rules="nameRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
+                <input
+                  ref="files"
+                  type="file"
+                  @change="onFileSelected"
+                  accept="image/*"
+                  :rules="[v => !!v || 'Item is required']"
+                  required
+                />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onEditClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn :disabled="!valid" color="blue darken-1" @click="onEditClick">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -41,9 +54,20 @@
 import Swal from "sweetalert2";
 import axios from "../utils/axios.js";
 import { mapActions, mapGetters } from "vuex";
+import { validationMixin } from "vuelidate";
+import { required, maxLength, email } from "vuelidate/lib/validators";
 
 export default {
+  mixins: [validationMixin],
+  validations: {
+    name: { required, maxLength: maxLength(30) }
+  },
   methods: {
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
+    },
     onFileSelected: function(event) {
       var input = event.target;
       var reader = new FileReader();
@@ -79,7 +103,7 @@ export default {
     async onEditClick() {
       let image = null;
       try {
-        let image = await this.encodeToBase64(this.$refs.files.files);
+        image = await this.encodeToBase64(this.$refs.files.files);
       } catch (e) {
         console.error(e);
         image = null;
@@ -88,6 +112,8 @@ export default {
         name: this.brand.name,
         image: image
       });
+      this.dialog = false;
+      this.$forceUpdate();
       Swal.fire({
         position: "center",
         type: "success",
@@ -101,13 +127,21 @@ export default {
   },
   props: ["brand"],
   data: () => ({
+    valid: true,
     dialog: false,
     name: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => (v && v.length <= 30) || "Name must be less than 30 characters"
+    ],
     image: "",
     selectedFile: null
   }),
   beforeMount() {
     this.selectedFile = this.brand.image;
+  },
+  mounted() {
+    this.validate();
   },
   computed: {
     ...mapGetters(["getBrand"])

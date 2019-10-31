@@ -11,10 +11,16 @@
           <span class="headline">Edit Store</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="store.name" label="Name*" required></v-text-field>
+                <v-text-field
+                  v-model="store.name"
+                  label="Name*"
+                  :rules="nameRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -23,13 +29,13 @@
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onEditClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn color="blue darken-1" @click="onEditClick" :disabled="!valid">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -89,6 +95,7 @@ export default {
         name: this.store.name,
         image: image
       });
+      this.dialog = false;
       Swal.fire({
         position: "center",
         type: "success",
@@ -98,12 +105,25 @@ export default {
       });
       const { data } = await axios.get(`api/store?part=address`);
       this.setStore(data.data);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
+  },
+  async mounted() {
+    this.validate();
   },
   props: ["store"],
   data: () => ({
     dialog: false,
+    valid: false,
     name: "",
+    nameRules: [
+      v => !!v || "Name is required",
+      v => (v && v.length <= 30) || "Name be less than 30 characters"
+    ],
     image: "",
     selectedFile: null
   }),

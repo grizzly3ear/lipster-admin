@@ -11,35 +11,59 @@
           <span class="headline">Edit Trend</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
-                <v-text-field v-model="props.item.title" label="Title*" required></v-text-field>
+                <v-text-field
+                  v-model="props.item.title"
+                  label="Title*"
+                  :rules="titleRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="props.item.skin_color" label="Skin color*" required></v-text-field>
+                <v-text-field
+                  v-model="props.item.skin_color"
+                  label="Skin color*"
+                  :rules="skinColorRules"
+                  :counter="7"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="props.item.description" label="Description*" required></v-text-field>
+                <v-text-field
+                  v-model="props.item.lipstick_color"
+                  label="Lipstick color*"
+                  :rules="lipstickColorRules"
+                  :counter="7"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="props.item.lipstick_color" label="Lipstick color*" required></v-text-field>
+                <v-text-field
+                  v-model="props.item.description"
+                  label="Description*"
+                  :rules="descriptionRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
-                <div class="image-preview">
+                <div @click="validate" class="image-preview">
                   <img class="preview" :src="selectedFile" />
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*indicates required field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
           <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onEditClick">Edit</v-btn>
+            <v-btn color="blue darken-1" @click="onEditClick" :disabled="!valid">Edit</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -114,16 +138,41 @@ export default {
         `api/trend/collection/${this.$route.params.id}` + `?part=trend`
       );
       this.setTrend(data.data.trends);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
+  },
+  async mounted() {
+    this.validate();
   },
   props: ["props"],
   data: () => ({
     dialog: false,
+    valid: false,
     title: "",
+    titleRules: [
+      v => !!v || "Title is required",
+      v => (v && v.length <= 190) || "Title be less than 190 characters"
+    ],
     image: null,
     skin_color: "",
+    skinColorRules: [
+      v => !!v || "Skin color is required",
+      v => (v && v.length == 7) || "Skin color must be 7 characters"
+    ],
     description: "",
+    descriptionRules: [
+      v => !!v || "Description is required",
+      v => (v && v.length <= 190) || "Description be less than 190 characters"
+    ],
     lipstick_color: null,
+    lipstickColorRules: [
+      v => !!v || "Lipstick color is required",
+      v => (v && v.length == 7) || "Lipstick color must be 7 characters"
+    ],
     selectedFile: null
   }),
   beforeMount() {

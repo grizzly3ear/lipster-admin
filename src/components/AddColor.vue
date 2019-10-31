@@ -11,19 +11,44 @@
           <span class="headline">Add Lipstick Color</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="color_name" label="Color Name*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="rgb" label="RGB*" required></v-text-field>
-              </v-flex>
-              <v-flex xs12 sm6 md4>
-                <v-text-field v-model="color_code" label="Color Code*" required></v-text-field>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="color_name"
+                  label="Color Name*"
+                  :rules="colorNameRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="composition" label="Composition*" required></v-text-field>
+                <v-text-field
+                  v-model="rgb"
+                  prefix="#"
+                  label="RGB*"
+                  :rules="rgbRules"
+                  :counter="6"
+                  required
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="color_code"
+                  label="Color Code*"
+                  :rules="colorCodeRules"
+                  :counter="30"
+                  required
+                ></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <v-text-field
+                  v-model="composition"
+                  label="Composition*"
+                  :rules="compositionRules"
+                  :counter="190"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -32,13 +57,13 @@
                 </div>
               </v-flex>
             </v-layout>
-          </v-container>
-          <small>*indicates required field</small>
+          </v-form>
+          <small>*Image is required</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div @click="dialog = false" style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onAddClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn color="blue darken-1" @click="onAddClick" :disabled="!valid">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -88,7 +113,7 @@ export default {
     async onAddClick() {
       let formData = new FormData();
       formData.append("color_name", this.color_name);
-      formData.append("rgb", this.rgb);
+      formData.append("rgb", "#" + this.rgb);
       formData.append("color_code", this.color_code);
       formData.append("composition", this.composition);
       formData.append("lipstick_detail_id", this.$route.params.id);
@@ -106,6 +131,8 @@ export default {
           "Content-Type": "multipart/form-data"
         }
       });
+      this.dialog = false;
+      this.$forceUpdate();
       Swal.fire({
         position: "center",
         type: "success",
@@ -117,14 +144,39 @@ export default {
         `api/lipstick/detail/${this.$route.params.id}?part=color`
       );
       this.setColor(data);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
+  },
+  async mounted() {
+    this.validate();
   },
   data: () => ({
     dialog: false,
+    valid: false,
     color_name: "",
+    colorNameRules: [
+      v => !!v || "Color name is required",
+      v => (v && v.length <= 30) || "Color name be less than 30 characters"
+    ],
     rgb: "",
+    rgbRules: [
+      v => !!v || "RGB is required",
+      v => (v && v.length == 6) || "Rgb must be 6 characters"
+    ],
     color_code: "",
+    colorCodeRules: [
+      v => !!v || "Color code is required",
+      v => (v && v.length <= 30) || "Color code be less than 30 characters"
+    ],
     composition: "",
+    compositionRules: [
+      v => !!v || "Composition is required",
+      v => (v && v.length <= 190) || "Composition be less than 190 characters"
+    ],
     image: "",
     selectedFile: null
   }),
