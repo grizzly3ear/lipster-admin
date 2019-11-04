@@ -30,7 +30,10 @@
         <img class="image-container" :src="props.item.image" />
       </td>
       <td>{{ props.item.description }}</td>
-      <td>{{ props.item.release_date }}</td>
+      <td>
+        {{ props.item.release_date }}
+        <ReleaseNotification :props="props" />
+      </td>
       <td>
         <EditTrendCollection :props="props" />
       </td>
@@ -44,6 +47,7 @@
 
 <script>
 import EditTrendCollection from "../components/EditTrendCollection";
+import ReleaseNotification from "../components/ReleaseNotification";
 import DeleteTrendCollection from "../components/DeleteTrendCollection";
 import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
@@ -51,7 +55,8 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   components: {
     EditTrendCollection,
-    DeleteTrendCollection
+    DeleteTrendCollection,
+    ReleaseNotification
   },
   methods: {
     ...mapActions(["setTrendCollection"]),

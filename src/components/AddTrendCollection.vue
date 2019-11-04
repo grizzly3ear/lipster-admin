@@ -31,20 +31,44 @@
                   required
                 ></v-text-field>
               </v-flex>
-              <v-flex xs12>
+              <!-- <v-flex xs12>
                 <v-text-field
                   v-model="release_date"
                   label="Release Date*"
                   :rules="releaseDateRules"
                   required
                 ></v-text-field>
-              </v-flex>
+              </v-flex>-->
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
                 <div class="image-preview">
                   <img class="preview" :src="selectedFile" />
                 </div>
               </v-flex>
+              <!-- <v-flex xs12>
+                <h3>Example of Notification:</h3>
+                <div
+                  style="width: 400px; height: 92px; border: 1.5px solid #D5DBDB;  border-radius: 2px;"
+                >
+                  <div style="float: left; width: 70px; height: 70px; margin: 8px;">
+                    <div class="image-preview">
+                      <img style="width: 70px; height: 70px;" class="preview" :src="selectedFile" />
+                    </div>
+                  </div>
+                  <div style="float: right; width: 295px; height: 70px; margin: 8px 8px 8px 0;">
+                    <label style="font-weight: bold; font-size: 14px" v-text="name"></label>
+                    <br />
+                    <label style="font-size: 12px" v-text="description"></label>
+                  </div>
+                </div>
+              </v-flex>-->
+              <!-- <v-flex xs12>
+                <v-checkbox
+                  v-model="checkbox"
+                  label="Do you want release this trend collection now?"
+                  required
+                ></v-checkbox>
+              </v-flex>-->
             </v-layout>
           </v-form>
           <small>*indicates required field</small>
@@ -107,6 +131,13 @@ export default {
       formData.append("description", this.description);
       formData.append("release_date", this.release_date);
       formData.append("image", imageToBase64);
+      // if (this.checkbox == true) {
+      //   formData.append("release", true);
+      //   console.log("true");
+      // } else {
+      //   formData.append("release", false);
+      //   console.log("false");
+      // }
       await axios.post(`api/trend/collection`, formData, {
         headers: {
           "Content-Type": "multipart/form-data"
@@ -147,9 +178,11 @@ export default {
       v => (v && v.length <= 190) || "Description be less than 190 characters"
     ],
     release_date: null,
-    releaseDateRules: [v => !!v || "Release Date is required"],
+    // releaseDateRules: [v => !!v || "Release Date is required"],
     image: "",
-    selectedFile: null
+    selectedFile: null,
+    checkbox: false,
+    release: false
   }),
   computed: {
     ...mapGetters(["getTrendCollection"])

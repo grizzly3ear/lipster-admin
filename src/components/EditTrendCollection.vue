@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.name"
+                  v-model="name"
                   label="Name*"
                   :rules="nameRules"
                   :counter="190"
@@ -24,7 +24,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.description"
+                  v-model="description"
                   label="Description*"
                   :rules="descriptionRules"
                   :counter="190"
@@ -32,12 +32,7 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                  v-model="props.item.release_date"
-                  label="Release Date*"
-                  :rules="releaseDateRules"
-                  required
-                ></v-text-field>
+                <v-text-field v-model="release_date" label="Release Date*" disabled></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <input ref="files" type="file" @change="onFileSelected" accept="image/*" />
@@ -109,9 +104,9 @@ export default {
         image = null;
       }
       await axios.put(`api/trend/collection/` + this.props.item.id, {
-        name: this.props.item.name,
-        description: this.props.item.description,
-        release_date: this.props.item.release_date,
+        name: this.name,
+        description: this.description,
+        release_date: this.release_date,
         image: image
       });
       this.dialog = false;
@@ -132,6 +127,12 @@ export default {
       }
     }
   },
+  beforeMount() {
+    this.selectedFile = this.props.item.image;
+    this.name = this.props.item.name;
+    this.description = this.props.item.description;
+    this.release_date = this.props.item.release_date;
+  },
   async mounted() {
     this.validate();
   },
@@ -151,13 +152,10 @@ export default {
       v => (v && v.length <= 190) || "Description be less than 190 characters"
     ],
     release_date: "",
-    releaseDateRules: [v => !!v || "Release Date is required"],
+    // releaseDateRules: [v => !!v || "Release Date is required"],
     datetime: null,
     selectedFile: null
   }),
-  beforeMount() {
-    this.selectedFile = this.props.item.image;
-  },
   computed: {
     ...mapGetters(["getTrendCollection"])
   }
