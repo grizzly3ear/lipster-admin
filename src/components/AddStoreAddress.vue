@@ -36,7 +36,10 @@
                   v-model="latitude"
                   label="Latitude*"
                   :rules="latitudeRules"
-                  :counter="30"
+                  :counter="20"
+                  type="number"
+                  min="-90"
+                  max="90"
                   required
                 ></v-text-field>
               </v-flex>
@@ -45,7 +48,10 @@
                   v-model="longitude"
                   label="Longitude*"
                   :rules="longitudeRules"
-                  :counter="30"
+                  :counter="20"
+                  type="number"
+                  min="-180"
+                  max="180"
                   required
                 ></v-text-field>
               </v-flex>
@@ -150,12 +156,16 @@ export default {
     latitude: 0,
     latitudeRules: [
       v => !!v || "Latitude is required",
-      v => (v && v.length <= 30) || "Latitude be less than 30 characters"
+      v => (v && v.length <= 20) || "Latitude be less than 20 characters",
+      v => (v && v >= -90) || "Latitude must be more than or equal -90",
+      v => (v && v <= 90) || "Latitude must be less than or equal 90"
     ],
     longitude: 0,
     longitudeRules: [
       v => !!v || "Longitude is required",
-      v => (v && v.length <= 30) || "Longitude be less than 30 characters"
+      v => (v && v.length <= 20) || "Longitude be less than 20 characters",
+      v => (v && v >= -180) || "Longitude must be more than or equal -90",
+      v => (v && v <= 180) || "Longitude must be less than or equal 90"
     ],
     period: "",
     timeRules: [

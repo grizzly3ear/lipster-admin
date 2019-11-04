@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.title"
+                  v-model="title"
                   label="Title*"
                   :rules="titleRules"
                   :counter="190"
@@ -24,7 +24,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.skin_color"
+                  v-model="skin_color"
                   label="Skin color*"
                   :rules="skinColorRules"
                   :counter="7"
@@ -33,7 +33,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.lipstick_color"
+                  v-model="lipstick_color"
                   label="Lipstick color*"
                   :rules="lipstickColorRules"
                   :counter="7"
@@ -42,7 +42,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.description"
+                  v-model="description"
                   label="Description*"
                   :rules="descriptionRules"
                   :counter="190"
@@ -119,11 +119,11 @@ export default {
         image = null;
       }
       await axios.put(`api/trend/` + this.props.item.id, {
-        title: this.props.item.title,
+        title: this.title,
         image: image,
-        skin_color: this.props.item.skin_color,
-        description: this.props.item.description,
-        lipstick_color: this.props.item.lipstick_color,
+        skin_color: this.skin_color,
+        description: this.description,
+        lipstick_color: this.lipstick_color,
         trend_group_id: this.$route.params.id
       });
       this.$forceUpdate();
@@ -144,6 +144,13 @@ export default {
         this.snackbar = true;
       }
     }
+  },
+  beforeMount() {
+    this.selectedFile = this.props.item.image;
+    this.title = this.props.item.title;
+    this.skin_color = this.props.item.skin_color;
+    this.description = this.props.item.description;
+    this.lipstick_color = this.props.item.lipstick_color;
   },
   async mounted() {
     this.validate();
@@ -175,9 +182,6 @@ export default {
     ],
     selectedFile: null
   }),
-  beforeMount() {
-    this.selectedFile = this.props.item.image;
-  },
   computed: {
     ...mapGetters(["getTrend"])
   }

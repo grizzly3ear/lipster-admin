@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="brand.name"
+                  v-model="name"
                   label="Name*"
                   :rules="nameRules"
                   :counter="30"
@@ -109,7 +109,7 @@ export default {
         image = null;
       }
       await axios.put(`api/brand/${this.brand.id}`, {
-        name: this.brand.name,
+        name: this.name,
         image: image
       });
       this.dialog = false;
@@ -139,6 +139,7 @@ export default {
   }),
   beforeMount() {
     this.selectedFile = this.brand.image;
+    this.name = this.brand.name;
   },
   mounted() {
     this.validate();

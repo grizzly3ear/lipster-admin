@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="store.name"
+                  v-model="name"
                   label="Name*"
                   :rules="nameRules"
                   :counter="30"
@@ -92,7 +92,7 @@ export default {
       }
 
       await axios.put(`api/store/` + this.store.id, {
-        name: this.store.name,
+        name: this.name,
         image: image
       });
       this.dialog = false;
@@ -129,6 +129,7 @@ export default {
   }),
   beforeMount() {
     this.selectedFile = this.store.image;
+    this.name = this.store.name;
   },
   computed: {
     ...mapGetters(["getStore"])

@@ -27,7 +27,7 @@
         </td>
       </router-link>
       <td>{{ props.item.type }}</td>
-      <td>{{ props.item.opacity }}</td>
+      <td>{{ (props.item.opacity)*100 }}</td>
       <td>{{ props.item.description }}</td>
       <td>{{ props.item.apply }}</td>
       <td>
@@ -84,7 +84,7 @@ export default {
       headers: [
         { text: "Collection Name", value: "name" },
         { text: "Type", value: "type" },
-        { text: "Opacity", value: "opacity" },
+        { text: "Opacity(%)", value: "opacity" },
         { text: "Description", value: "description" },
         { text: "Apply", value: "apply" },
         { text: "Edit" },

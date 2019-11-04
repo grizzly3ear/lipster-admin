@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12 sm6 md4>
                 <v-text-field
-                  v-model="props.item.color_name"
+                  v-model="color_name"
                   label="Color Name*"
                   :rules="colorNameRules"
                   :counter="30"
@@ -23,17 +23,11 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
-                <v-text-field
-                  v-model="props.item.rgb"
-                  label="RGB*"
-                  :rules="rgbRules"
-                  :counter="7"
-                  required
-                ></v-text-field>
+                <v-text-field v-model="rgb" label="RGB*" :rules="rgbRules" :counter="7" required></v-text-field>
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field
-                  v-model="props.item.color_code"
+                  v-model="color_code"
                   label="Color Code*"
                   :rules="colorCodeRules"
                   :counter="30"
@@ -42,7 +36,7 @@
               </v-flex>
               <v-flex xs12 sm6 md4>
                 <v-text-field
-                  v-model="props.item.composition"
+                  v-model="composition"
                   label="Composition"
                   :rules="compositionRules"
                   :counter="190"
@@ -111,10 +105,10 @@ export default {
     ...mapActions(["setColor"]),
     async onEditClick() {
       await axios.put(`api/lipstick/color/` + this.props.item.id, {
-        color_name: this.props.item.color_name,
-        rgb: this.props.item.rgb,
-        color_code: this.props.item.color_code,
-        composition: this.props.item.composition,
+        color_name: this.color_name,
+        rgb: this.rgb,
+        color_code: this.color_code,
+        composition: this.composition,
         lipstick_detail_id: this.$route.params.id
       });
       let image = null;
@@ -160,6 +154,13 @@ export default {
       }
     }
   },
+  beforeMount() {
+    this.selectedFile = this.props.item.images[0].image;
+    this.color_name = this.props.item.color_name;
+    this.rgb = this.props.item.rgb;
+    this.color_code = this.props.item.color_code;
+    this.composition = this.props.item.composition;
+  },
   async mounted() {
     this.validate();
   },
@@ -190,10 +191,6 @@ export default {
     ],
     selectedFile: null
   }),
-  beforeMount() {
-    //TODO: show only first image
-    this.selectedFile = this.props.item.images[0].image;
-  },
   computed: {
     ...mapGetters(["getColor"])
   }

@@ -18,12 +18,12 @@
                   v-model="name"
                   label="Name*"
                   :rules="nameRules"
-                  :counter="30"
+                  :counter="50"
                   required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-select
+                <v-combobox
                   v-model="type"
                   :items="types"
                   label="Type*"
@@ -31,13 +31,17 @@
                   :rules="[v => !!v || 'Type is required']"
                   return-object
                   required
-                ></v-select>
+                ></v-combobox>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
                   v-model="opacity"
                   label="Opacity*"
-                  type="double"
+                  type="number"
+                  min="10"
+                  max="100"
+                  suffix="%"
+                  :step="10"
                   :rules="opacityRules"
                   required
                 ></v-text-field>
@@ -85,10 +89,16 @@ export default {
   methods: {
     ...mapActions(["setDetail"]),
     async onAddClick() {
+      let lipstickType;
+      if (this.type.type) {
+        lipstickType = this.type.type;
+      } else {
+        lipstickType = this.type;
+      }
       let formData = new FormData();
       formData.append("name", this.name);
-      formData.append("type", this.type.type);
-      formData.append("opacity", this.opacity);
+      formData.append("type", lipstickType);
+      formData.append("opacity", this.opacity / 100);
       formData.append("description", this.description);
       formData.append("apply", this.apply);
       formData.append("lipstick_brand_id", this.$route.params.id);
@@ -121,7 +131,7 @@ export default {
       this.dialog = false;
       this.name = "";
       this.type = "";
-      this.opacity = 0.5;
+      this.opacity = 35;
       this.description = "";
       this.apply = "";
     },
@@ -141,11 +151,15 @@ export default {
     name: "",
     nameRules: [
       v => !!v || "Name is required",
-      v => (v && v.length <= 30) || "Name must be less than 30 characters"
+      v => (v && v.length <= 50) || "Name must be less than 50 characters"
     ],
     type: "",
-    opacity: 0.5,
-    opacityRules: [v => !!v || "Opacity is required"],
+    opacity: 35,
+    opacityRules: [
+      v => !!v || "Opacity is required",
+      v => (v && v >= 10) || "Opacity must be more than or equal 10 percents",
+      v => (v && v <= 100) || "Opacity must be less than or equal 100 percents"
+    ],
     description: "",
     descriptionRules: [
       v => !!v || "Description is required",

@@ -15,28 +15,32 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.name"
+                  v-model="name"
                   label="Name*"
                   :rules="nameRules"
-                  :counter="30"
+                  :counter="50"
                   required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-select
-                  v-model="props.item.type"
+                <v-combobox
                   :items="types"
                   label="Type*"
                   item-text="type"
+                  v-model="type"
                   :rules="[v => !!v || 'Type is required']"
                   return-object
-                ></v-select>
+                ></v-combobox>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.opacity"
+                  v-model="opacity"
                   label="Opacity*"
-                  type="double"
+                  type="number"
+                  min="10"
+                  max="100"
+                  suffix="%"
+                  :step="10"
                   :rules="opacityRules"
                   required
                 ></v-text-field>
@@ -54,7 +58,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.description"
+                  v-model="description"
                   label="Description*"
                   :rules="descriptionRules"
                   :counter="190"
@@ -63,7 +67,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.apply"
+                  v-model="apply"
                   label="Apply*"
                   :rules="applyRules"
                   :counter="190"
@@ -94,18 +98,18 @@ export default {
   methods: {
     ...mapActions(["setDetail"]),
     async onEditClick() {
-      console.log("name", this.props.item.name);
-      console.log("type", this.props.item.type.type);
-      console.log("name", this.props.item.opacity);
-      console.log("name", this.props.item.description);
-      console.log("name", this.props.item.apply);
-      console.log("name", this.$route.params.id);
+      let lipstickType;
+      if (this.type.type) {
+        lipstickType = this.type.type;
+      } else {
+        lipstickType = this.type;
+      }
       await axios.put(`api/lipstick/detail/` + this.props.item.id, {
-        name: this.props.item.name,
-        type: this.props.item.type.type,
-        opacity: this.props.item.opacity,
-        description: this.props.item.description,
-        apply: this.props.item.apply,
+        name: this.name,
+        type: lipstickType,
+        opacity: this.opacity / 100,
+        description: this.description,
+        apply: this.apply,
         lipstick_brand_id: this.$route.params.id
       });
       this.dialog = false;
@@ -132,6 +136,13 @@ export default {
       }
     }
   },
+  beforeMount() {
+    this.name = this.props.item.name;
+    this.type = this.props.item.type;
+    this.opacity = this.props.item.opacity * 100;
+    this.description = this.props.item.description;
+    this.apply = this.props.item.apply;
+  },
   async mounted() {
     this.getType();
     this.validate();
@@ -143,11 +154,15 @@ export default {
     name: "",
     nameRules: [
       v => !!v || "Name is required",
-      v => (v && v.length <= 30) || "Name must be less than 30 characters"
+      v => (v && v.length <= 50) || "Name must be less than 50 characters"
     ],
     type: "",
     opacity: null,
-    opacityRules: [v => !!v || "Opacity is required"],
+    opacityRules: [
+      v => !!v || "Opacity is required",
+      v => (v && v >= 10) || "Opacity must be more than or equal 10 percents",
+      v => (v && v <= 100) || "Opacity must be less than or equal 100 percents"
+    ],
     description: "",
     descriptionRules: [
       v => !!v || "Description is required",

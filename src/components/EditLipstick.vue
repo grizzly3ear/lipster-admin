@@ -11,7 +11,7 @@
           <span class="headline">Edit Lipstick</span>
         </v-card-title>
         <v-card-text>
-          <v-container grid-list-md>
+          <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field v-model="props.item.brand.name" label="Brand*" disabled></v-text-field>
@@ -20,7 +20,14 @@
                 <v-text-field v-model="props.item.detail.name" label="Collection*" disabled></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="props.item.price" label="Price*" required></v-text-field>
+                <v-text-field
+                  v-model="price"
+                  label="Price*"
+                  :rules="priceRules"
+                  type="number"
+                  min="0"
+                  required
+                ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-checkbox
@@ -30,13 +37,13 @@
                 ></v-checkbox>
               </v-flex>
             </v-layout>
-          </v-container>
+          </v-form>
           <small>*user can edit only price field</small>
         </v-card-text>
         <v-card-actions style="margin: 0 187px 0 187px">
           <v-btn color="blue darken-1" @click="dialog = false">Close</v-btn>
-          <div style="margin: 30px">
-            <v-btn color="blue darken-1" @click="onEditClick">Save</v-btn>
+          <div @click="validate" style="margin: 30px">
+            <v-btn color="blue darken-1" @click="onEditClick" :disabled="!valid">Save</v-btn>
           </div>
         </v-card-actions>
       </v-card>
@@ -57,7 +64,7 @@ export default {
         this.getLipstickOfStoreAddress.forEach(lipstick => {
           if (this.props.item.detail.id == lipstick.detail.id) {
             axios.put(`api/store/address/lipsticks/` + lipstick.id_pivot, {
-              price: this.props.item.price,
+              price: this.price,
               lipstick_color_id: lipstick.lipstick_color_id,
               store_address_id: this.$route.params.id
             });
@@ -67,7 +74,7 @@ export default {
         await axios.put(
           `api/store/address/lipsticks/` + this.props.item.id_pivot,
           {
-            price: this.props.item.price,
+            price: this.price,
             lipstick_color_id: this.props.item.lipstick_color_id,
             store_address_id: this.$route.params.id
           }
@@ -86,20 +93,36 @@ export default {
       const { data } = await axios.get(
         `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
       );
-      console.log(data.data);
+      console.log("edit:", data.data);
       this.setLipstickOfStoreAddress(data.data);
+    },
+    validate() {
+      if (this.$refs.form.validate()) {
+        this.snackbar = true;
+      }
     }
+  },
+  beforeMount() {
+    this.price = this.props.item.price;
+  },
+  async mounted() {
+    this.validate();
+  },
+  computed: {
+    ...mapGetters(["getLipstickOfStoreAddress"])
   },
   props: ["props"],
   data: () => ({
     dialog: false,
+    valid: false,
     price: null,
+    priceRules: [
+      v => !!v || "Price is required",
+      v => (v && v >= 0) || "Price can not be less than 0 baht"
+    ],
     lipstick_color_id: null,
     store_address_id: null,
     checkbox: false
-  }),
-  computed: {
-    ...mapGetters(["getLipstickOfStoreAddress"])
-  }
+  })
 };
 </script>

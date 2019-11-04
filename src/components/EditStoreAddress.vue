@@ -15,7 +15,7 @@
             <v-layout wrap>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.name"
+                  v-model="name"
                   label="Name*"
                   :rules="nameRules"
                   :counter="30"
@@ -24,7 +24,7 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.address_detail"
+                  v-model="address_detail"
                   label="Detail*"
                   :rules="addressDetailRules"
                   :counter="190"
@@ -33,25 +33,29 @@
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.latitude"
+                  v-model="latitude"
                   label="Latitude*"
                   :rules="latitudeRules"
-                  :counter="30"
+                  type="number"
+                  min="-90"
+                  max="90"
                   required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.longitude"
+                  v-model="longitude"
                   label="Longitude*"
                   :rules="longitudeRules"
-                  :counter="30"
+                  type="number"
+                  min="-180"
+                  max="180"
                   required
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
                 <v-text-field
-                  v-model="props.item.period"
+                  v-model="period"
                   label="Time Available"
                   :rules="timeRules"
                   :counter="30"
@@ -59,13 +63,7 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                  v-model="props.item.tel"
-                  label="Tel"
-                  :rules="telRules"
-                  :counter="10"
-                  required
-                ></v-text-field>
+                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
               </v-flex>
             </v-layout>
           </v-form>
@@ -92,12 +90,12 @@ export default {
     ...mapActions(["setStoreAddress"]),
     async onEditClick() {
       await axios.put(`api/store/address/${this.props.item.id}`, {
-        name: this.props.item.name,
-        address_detail: this.props.item.address_detail,
-        latitude: this.props.item.latitude,
-        longitude: this.props.item.longitude,
-        period: this.props.item.period,
-        tel: this.props.item.tel,
+        name: this.name,
+        address_detail: this.address_detail,
+        latitude: this.latitude,
+        longitude: this.longitude,
+        period: this.period,
+        tel: this.tel,
         store_id: this.$route.params.id
       });
       this.dialog = false;
@@ -120,6 +118,14 @@ export default {
       }
     }
   },
+  beforeMount() {
+    this.name = this.props.item.name;
+    this.address_detail = this.props.item.address_detail;
+    this.latitude = this.props.item.latitude;
+    this.longitude = this.props.item.longitude;
+    this.period = this.props.item.period;
+    this.tel = this.props.item.tel;
+  },
   async mounted() {
     this.validate();
   },
@@ -132,7 +138,7 @@ export default {
       v => !!v || "Name is required",
       v => (v && v.length <= 30) || "Name be less than 30 characters"
     ],
-    detail: "",
+    address_detail: "",
     address_detail: "",
     addressDetailRules: [
       v => !!v || "Address detail is required",
@@ -141,12 +147,14 @@ export default {
     latitude: null,
     latitudeRules: [
       v => !!v || "Latitude is required",
-      v => (v && v.length <= 30) || "Latitude be less than 30 characters"
+      v => (v && v >= -90) || "Latitude must be more than or equal -90",
+      v => (v && v <= 90) || "Latitude must be less than or equal 90"
     ],
     longitude: null,
     longitudeRules: [
       v => !!v || "Longitude is required",
-      v => (v && v.length <= 30) || "Longitude be less than 30 characters"
+      v => (v && v >= -180) || "Longitude must be more than or equal -180",
+      v => (v && v <= 180) || "Longitude must be less than or equal 180"
     ],
     period: null,
     timeRules: [

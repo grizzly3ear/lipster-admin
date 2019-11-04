@@ -91,7 +91,14 @@
                     ></v-select>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field v-model="price" label="Price*" required></v-text-field>
+                    <v-text-field
+                      v-model="price"
+                      label="Price*"
+                      :rules="priceRules"
+                      type="number"
+                      min="0"
+                      required
+                    ></v-text-field>
                   </v-flex>
                 </v-layout>
               </v-form>
@@ -187,6 +194,10 @@ export default {
     valid: false,
     name: "",
     price: 0,
+    priceRules: [
+      v => !!v || "Price is required",
+      v => (v && v >= 0) || "Price can not be less than 0 baht"
+    ],
     brands: [],
     details: [],
     colors: [],
