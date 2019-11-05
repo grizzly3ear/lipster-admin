@@ -8,10 +8,10 @@
         <OperationTrend />
       </div>
     </v-toolbar>
-    <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
     <div class="title">
-      <p>Trend</p>
+      <p>TRENDS</p>
     </div>
+    <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
     <TrendList />
   </div>
 </template>

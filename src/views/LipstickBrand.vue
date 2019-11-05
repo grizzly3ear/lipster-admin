@@ -11,7 +11,7 @@
       </v-toolbar>
       <hr />
       <div class="title">
-        <p>List Brand</p>
+        <p>BRANDS</p>
       </div>
       <BrandList />
     </div>

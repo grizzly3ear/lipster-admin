@@ -10,10 +10,10 @@
         </div>
       </v-toolbar>
       <hr />
-      <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
       <div class="title">
-        <p>List Lipsticks</p>
+        <p>LIPSTICKS</p>
       </div>
+      <v-breadcrumbs :items="getBreadcrumbs" divider=">"></v-breadcrumbs>
       <LipstickOfStoreAddressList />
     </div>
   </div>

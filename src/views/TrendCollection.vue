@@ -11,7 +11,7 @@
       </v-toolbar>
       <hr />
       <div class="title">
-        <p>Trend Collection</p>
+        <p>TREND COLLECTIONS</p>
       </div>
       <TrendCollectionList />
     </div>
