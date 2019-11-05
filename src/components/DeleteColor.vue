@@ -13,7 +13,7 @@ import { mapActions, mapGetters } from "vuex";
 
 export default {
   methods: {
-    ...mapActions(["setColor"]),
+    ...mapActions(["setColor", "setStoreOfLipstickColor"]),
     onDeleteClick() {
       Swal.fire({
         title: "Are you sure?",
@@ -25,32 +25,95 @@ export default {
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
         if (result.value) {
-          axios.delete(`api/lipstick/color/` + this.props.item.id);
-          Swal.fire("Deleted!", "This item has been deleted.", "success")
-            .catch(error => {
-              Swal.fire(
-                "Deleted!",
-                "This item has been failed to deleted.",
-                "warning"
-              );
+          axios
+            .delete(`api/lipstick/color/${this.props.item.id}`, {
+              data: {
+                force: false
+              }
             })
-            .finally(() => {
-              axios
-                .get(`api/lipstick/detail/${this.$route.params.id}?part=color`)
-                .then(({ data }) => {
-                  this.setColor(data);
+            .then(after => {
+              if (after.data == 1) {
+                //can delete
+                Swal.fire("Deleted!", "This item has been deleted.", "success")
+                  .catch(error => {
+                    Swal.fire(
+                      "Deleted!",
+                      "This item has been failed to deleted.",
+                      "warning"
+                    );
+                  })
+                  .finally(() => {
+                    axios
+                      .get(
+                        `api/lipstick/detail/${this.$route.params.id}?part=color`
+                      )
+                      .then(({ data }) => {
+                        this.setColor(data);
+                      });
+                  });
+              } else {
+                Swal.fire({
+                  title: "This item has been used!",
+                  text: "Are you sure?",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#d33",
+                  cancelButtonColor: "#3085d6",
+                  confirmButtonText: "Yes, force delete it!"
+                }).then(result => {
+                  if (result.value) {
+                    axios
+                      .delete(`api/lipstick/color/${this.props.item.id}`, {
+                        data: {
+                          force: true
+                        }
+                      })
+                      .then(after => {
+                        if (after.data == 1) {
+                          //can delete
+                          Swal.fire(
+                            "Deleted!",
+                            "This item has been deleted.",
+                            "success"
+                          )
+                            .catch(error => {
+                              Swal.fire(
+                                "Deleted!",
+                                "This item has been failed to deleted.",
+                                "warning"
+                              );
+                            })
+                            .finally(() => {
+                              axios
+                                .get(
+                                  `api/lipstick/detail/${this.$route.params.id}?part=color`
+                                )
+                                .then(({ data }) => {
+                                  this.setColor(data);
+                                });
+                            });
+                        }
+                      });
+                  }
                 });
+              }
             });
         }
+        //
       });
     }
   },
+  // async mounted() {
+  //   this.getStores();
+  // },
   props: ["props"],
   data() {
-    return {};
+    return {
+      text: ""
+    };
   },
   computed: {
-    ...mapGetters(["getColor"])
+    ...mapGetters(["getColor", "getStoreOfLipstickColor"])
   }
 };
 </script>
