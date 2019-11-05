@@ -4,20 +4,20 @@
 
     <!-- <EditLipstick/> -->
     <AddStore />
-    <ConfirmDelete />
+    <!-- <ConfirmDelete /> -->
   </v-toolbar>
 </template>
 
 <script>
 import AddStore from "../components/AddStore";
 // import EditLipstick from '../components/EditLipstick'
-import ConfirmDelete from "../components/ConfirmDelete";
+// import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddStore,
+    AddStore
     // EditLipstick,
-    ConfirmDelete
+    // ConfirmDelete
   }
 };
 </script>

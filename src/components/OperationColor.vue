@@ -1,28 +1,25 @@
 <template>
-  <v-toolbar id='tool-bar'>
-
+  <v-toolbar id="tool-bar">
     <v-spacer></v-spacer>
-    
-    
-    <!-- <EditColor/> -->
-    <AddColor/>
-    <ConfirmDelete/>
 
+    <!-- <EditColor/> -->
+    <AddColor />
+    <!-- <ConfirmDelete/> -->
   </v-toolbar>
 </template>
 
 <script>
-import AddColor from '../components/AddColor'
+import AddColor from "../components/AddColor";
 // import EditColor from '../components/EditColor'
-import ConfirmDelete from '../components/ConfirmDelete'
+// import ConfirmDelete from '../components/ConfirmDelete'
 
 export default {
   components: {
-    AddColor,
+    AddColor
     // EditColor,
-    ConfirmDelete
+    // ConfirmDelete
   }
-}
+};
 </script>
 
 

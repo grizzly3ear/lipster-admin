@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchDetail />
+          <!-- <SearchDetail /> -->
         </div>
         <div id="operation-container">
           <OperationStoreAddress />
@@ -20,19 +20,25 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import SearchDetail from "../components/SearchDetail";
+import { mapGetters, mapActions } from "vuex";
+// import SearchDetail from "../components/SearchDetail";
 import OperationStoreAddress from "../components/OperationStoreAddress";
 import StoreAddressList from "../components/StoreAddressList";
 
 export default {
   components: {
-    SearchDetail,
+    // SearchDetail,
     OperationStoreAddress,
     StoreAddressList
   },
   computed: {
     ...mapGetters(["getBreadcrumbs"])
+  },
+  methods: {
+    ...mapActions(["setBreadcrumbs"])
+  },
+  mounted() {
+    this.setBreadcrumbs([]);
   }
 };
 </script>

@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchStore />
+          <!-- <SearchStore /> -->
         </div>
         <div id="operation-container">
           <OperationStore />
@@ -20,13 +20,13 @@
 
 <script>
 import { mapActions } from "vuex";
-import SearchStore from "../components/SearchStore";
+// import SearchStore from "../components/SearchStore";
 import OperationStore from "../components/OperationStore";
 import StoreList from "../components/StoreList";
 
 export default {
   components: {
-    SearchStore,
+    // SearchStore,
     OperationStore,
     StoreList
   },

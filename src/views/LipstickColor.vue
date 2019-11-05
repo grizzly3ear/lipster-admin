@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchColor />
+          <!-- <SearchColor /> -->
         </div>
         <div id="operation-container">
           <OperationColor />
@@ -21,13 +21,13 @@
 
 <script>
 import { mapGetters } from "vuex";
-import SearchColor from "../components/SearchColor";
+// import SearchColor from "../components/SearchColor";
 import OperationColor from "../components/OperationColor";
 import ColorList from "../components/ColorList";
 
 export default {
   components: {
-    SearchColor,
+    // SearchColor,
     OperationColor,
     ColorList
   },

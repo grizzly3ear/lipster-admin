@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchBrand />
+          <!-- <SearchBrand /> -->
         </div>
         <div id="operation-container">
           <OperationBrand />
@@ -20,13 +20,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import SearchBrand from "@/components/SearchBrand";
+// import SearchBrand from "@/components/SearchBrand";
 import OperationBrand from "@/components/OperationBrand";
 import BrandList from "@/components/BrandList";
 
 export default {
   components: {
-    SearchBrand,
+    // SearchBrand,
     OperationBrand,
     BrandList
   },

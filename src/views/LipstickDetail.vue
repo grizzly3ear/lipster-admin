@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchDetail />
+          <!-- <SearchDetail /> -->
         </div>
         <div id="operation-container">
           <OperationDetail />
@@ -21,13 +21,13 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import SearchDetail from "../components/SearchDetail";
+// import SearchDetail from "../components/SearchDetail";
 import OperationDetail from "../components/OperationDetail";
 import DetailList from "../components/DetailList";
 
 export default {
   components: {
-    SearchDetail,
+    // SearchDetail,
     OperationDetail,
     DetailList
   },

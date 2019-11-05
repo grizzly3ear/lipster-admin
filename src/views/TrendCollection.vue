@@ -3,7 +3,7 @@
     <div class="body-content">
       <v-toolbar card prominent id="tool-container">
         <div id="search-container">
-          <SearchTrend />
+          <!-- <SearchTrend /> -->
         </div>
         <div id="operation-container">
           <OperationTrendCollection />
@@ -19,13 +19,13 @@
 </template>
 
 <script>
-import SearchTrend from "@/components/SearchTrend";
+// import SearchTrend from "@/components/SearchTrend";
 import OperationTrendCollection from "@/components/OperationTrendCollection";
 import TrendCollectionList from "@/components/TrendCollectionList";
 
 export default {
   components: {
-    SearchTrend,
+    // SearchTrend,
     OperationTrendCollection,
     TrendCollectionList
   }

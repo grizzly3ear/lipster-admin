@@ -2,18 +2,18 @@
   <v-toolbar id="tool-bar">
     <v-spacer></v-spacer>
     <AddLipstick />
-    <ConfirmDelete />
+    <!-- <ConfirmDelete /> -->
   </v-toolbar>
 </template>
 
 <script>
 import AddLipstick from "../components/AddLipstick";
-import ConfirmDelete from "../components/ConfirmDelete";
+// import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddLipstick,
-    ConfirmDelete
+    AddLipstick
+    // ConfirmDelete
   }
 };
 </script>

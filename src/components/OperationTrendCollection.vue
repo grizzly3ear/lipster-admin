@@ -3,18 +3,18 @@
     <v-spacer></v-spacer>
 
     <AddTrendCollection />
-    <ConfirmDelete />
+    <!-- <ConfirmDelete /> -->
   </v-toolbar>
 </template>
 
 <script>
 import AddTrendCollection from "../components/AddTrendCollection";
-import ConfirmDelete from "../components/ConfirmDelete";
+// import ConfirmDelete from "../components/ConfirmDelete";
 
 export default {
   components: {
-    AddTrendCollection,
-    ConfirmDelete
+    AddTrendCollection
+    // ConfirmDelete
   }
 };
 </script>
