@@ -60,18 +60,23 @@ export default {
   methods: {
     ...mapActions(["setLipstickOfStoreAddress"]),
     async onEditClick() {
-      if (this.checkbox == true) {
-        this.getLipstickOfStoreAddress.forEach(lipstick => {
+      if (this.checkbox) {
+        this.getLipstickOfStoreAddress.forEach(async lipstick => {
+          console.log("edit multi");
           if (this.props.item.detail.id == lipstick.detail.id) {
-            axios.put(`api/store/address/lipsticks/` + lipstick.id_pivot, {
-              price: this.price,
-              lipstick_color_id: lipstick.lipstick_color_id,
-              store_address_id: this.$route.params.id
-            });
+            await axios.post(
+              `api/store/address/lipsticks/` + lipstick.id_pivot,
+              {
+                price: this.price,
+                lipstick_color_id: lipstick.lipstick_color_id,
+                store_address_id: this.$route.params.id
+              }
+            );
           }
         });
       } else {
-        await axios.put(
+        console.log("edit once");
+        await axios.post(
           `api/store/address/lipsticks/` + this.props.item.id_pivot,
           {
             price: this.price,
@@ -81,7 +86,6 @@ export default {
         );
       }
       this.dialog = false;
-      this.$forceUpdate();
       Swal.fire({
         position: "center",
         type: "success",
@@ -89,30 +93,41 @@ export default {
         showConfirmButton: false,
         timer: 1000
       });
-
-      const { data } = await axios.get(
-        `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
-      );
-      console.log("edit:", data.data);
-      this.setLipstickOfStoreAddress(data.data);
+      console.log("get lip");
+      // const { data } = await axios.get(
+      //   `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
+      // );
+      // console.log("edit:", data.data);
+      // this.setLipstickOfStoreAddress(data.data);
     },
     validate() {
       if (this.$refs.form.validate()) {
         this.snackbar = true;
       }
+    },
+    async fetchData() {
+      const { data } = await axios.get(
+        `api/store/address/${this.$route.params.id}/lipstickColors?part=brand,detail`
+      );
+      this.setLipstickOfStoreAddress(data.data);
     }
   },
   beforeMount() {
     this.price = this.props.item.price;
   },
-  async mounted() {
+  mounted() {
+    this.timer = setInterval(this.fetchData, 5000);
     this.validate();
+  },
+  beforeDestroy() {
+    clearInterval(this.timer);
   },
   computed: {
     ...mapGetters(["getLipstickOfStoreAddress"])
   },
   props: ["props"],
   data: () => ({
+    timer: () => {},
     dialog: false,
     valid: false,
     price: null,
@@ -122,7 +137,7 @@ export default {
     ],
     lipstick_color_id: null,
     store_address_id: null,
-    checkbox: false
+    checkbox: true
   })
 };
 </script>
