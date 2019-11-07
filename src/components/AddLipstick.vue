@@ -137,11 +137,17 @@ export default {
       const { data } = await axios.get(`api/brand/${this.brand_id}/detail`);
       this.details = data;
     },
+    sortedColor(data) {
+      console.log("data:", data);
+      return [].slice.call(data).sort(function(a, b) {
+        return ("" + a.color_name).localeCompare(b.color_name);
+      });
+    },
     async getColors() {
       const { data } = await axios.get(
         `api/lipstick/detail/${this.detail_id}?part=color`
       );
-      this.colors = data.data.colors;
+      this.colors = this.sortedColor(data.data.colors);
     },
     closeDialog() {
       this.dialog = false;
