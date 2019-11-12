@@ -7,7 +7,10 @@
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <router-link :to="{ name: 'Trend', params: {id: props.item.id}}">
+      <router-link
+        :to="{ name: 'Trend', params: {id: props.item.id}}"
+        @click.native="onClickCollectionCard(props)"
+      >
         <td
           style="text-alin: center; padding-top: 26px; text-decoration: none; display: inline-block;"
         >
@@ -59,7 +62,14 @@ export default {
     ReleaseNotification
   },
   methods: {
-    ...mapActions(["setTrendCollection"]),
+    ...mapActions(["setTrendCollection", "pushBreadcrumb"]),
+    onClickCollectionCard(props) {
+      this.pushBreadcrumb({
+        text: props.item.name,
+        disabled: true,
+        href: ``
+      });
+    },
     async getTrendCollections() {
       const { data } = await axios.get(`api/trend/collection?part=trend`);
       this.setTrendCollection(data.data);

@@ -33,12 +33,6 @@ export default {
   },
   computed: {
     ...mapGetters(["getBreadcrumbs"])
-  },
-  methods: {
-    ...mapActions(["setBreadcrumbs"])
-  },
-  mounted() {
-    this.setBreadcrumbs([]);
   }
 };
 </script>

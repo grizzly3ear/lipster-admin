@@ -11,12 +11,14 @@
         <router-link
           :to="{ name: 'LipstickOfStoreAddress', params: {id: props.item.id}}"
           style="text-decoration: none !important; display: inline-block;"
+          @click.native="onClickAddressList(props.item)"
         >
           {{ props.item.name }}
           <br />
           <!-- {{ getLipsticks(props.item.id) ? "" : "" }} -->
           <v-icon color="gray">invert_colors</v-icon>
-          <label v-text="(props.item.lipstick || []).length" style="font-size: 14px; color: gray;"></label>
+
+          <label v-text="(props.item.lipsticks || []).length" style="font-size: 14px; color: gray;"></label>
           <!-- <label v-text="0" style="font-size: 14px; color: gray;" v-else></label> -->
           <label style="font-size: 14px; color: gray;">{{" "}}items</label>
           <br />
@@ -51,17 +53,24 @@ export default {
     DeleteStoreAddress
   },
   methods: {
-    ...mapActions(["setStoreAddress"]),
+    ...mapActions(["setStoreAddress", "pushBreadcrumb"]),
     async getStoreAddresses() {
       const { data } = await axios.get(
         `api/store/${this.$route.params.id}?part=address`
       );
-      let store = data.data;
-      store.addresses.forEach(async addresses => {
-        const { data: lipstick } = await this.getLipsticks(addresses.id);
-        addresses.lipstick = [...lipstick];
+      // let store = data.data;
+      // store.addresses.forEach(async addresses => {
+      //   const { data: lipstick } = await this.getLipsticks(addresses.id);
+      //   addresses.lipstick = [...lipstick];
+      // });
+      this.setStoreAddress(data.data.addresses);
+    },
+    onClickAddressList(props) {
+      this.pushBreadcrumb({
+        text: props.name,
+        disabled: true,
+        href: `storeAddress`
       });
-      this.setStoreAddress(store.addresses);
     },
     async getLipsticks(storeAddressId) {
       const { data } = await axios.get(
