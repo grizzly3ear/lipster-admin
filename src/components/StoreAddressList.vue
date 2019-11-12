@@ -29,7 +29,7 @@
       <td>{{ props.item.address_detail }}</td>
       <td>{{ props.item.latitude }}</td>
       <td>{{ props.item.longitude }}</td>
-      <td>{{ props.item.period }}</td>
+      <td>{{ (props.item.period).substring(0,5) }} - {{(props.item.period).substring(6)}}</td>
       <td>{{ props.item.tel }}</td>
       <td>
         <EditStoreAddress :props="props" />

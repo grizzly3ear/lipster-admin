@@ -56,17 +56,27 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
-                  v-model="period"
-                  label="Time Available"
-                  :rules="timeRules"
-                  :counter="30"
-                  required
-                ></v-text-field>
-                <!-- <vue-timepicker></vue-timepicker> -->
+                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
+                <p style="margin-top: 20px;">
+                  <label style="margin: 0 20px 0 0;">Time Available</label>
+                  <vue-timepicker
+                    v-model="start_time"
+                    placeholder="Start Time"
+                    :minute-interval="5"
+                    hide-disabled-items
+                    style="margin: 0 10px 0 10px;"
+                  ></vue-timepicker>
+                  <span>to</span>
+                  <vue-timepicker
+                    v-model="end_time"
+                    placeholder="End Time"
+                    :minute-interval="5"
+                    hide-disabled-items
+                    style="margin: 0 10px 0 10px;"
+                  ></vue-timepicker>
+                </p>
               </v-flex>
             </v-layout>
           </v-form>
@@ -85,11 +95,13 @@
 
 <script>
 import Swal from "sweetalert2";
-// import VueTimepicker from "vue2-timepicker";
+import VueTimepicker from "vue2-timepicker";
+import "vue2-timepicker/dist/VueTimepicker.css";
 import axios from "../utils/axios";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  components: { VueTimepicker },
   methods: {
     ...mapActions(["setStoreAddress"]),
     async onAddClick() {
@@ -98,7 +110,16 @@ export default {
       formData.append("address_detail", this.address_detail);
       formData.append("latitude", this.latitude);
       formData.append("longitude", this.longitude);
-      formData.append("period", this.period);
+      formData.append(
+        "period",
+        this.start_time.HH +
+          "." +
+          this.start_time.mm +
+          ";" +
+          this.end_time.HH +
+          "." +
+          this.end_time.mm
+      );
       formData.append("tel", this.tel);
       formData.append("store_id", this.$route.params.id);
       await axios.post(`api/store/address`, formData, {
@@ -143,6 +164,8 @@ export default {
   data: () => ({
     dialog: false,
     valid: false,
+    start_time: { HH: "08", mm: "00" },
+    end_time: { HH: "22", mm: "00" },
     name: "",
     nameRules: [
       v => !!v || "Name is required",

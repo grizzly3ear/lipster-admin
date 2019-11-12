@@ -54,16 +54,34 @@
                 ></v-text-field>
               </v-flex>
               <v-flex xs12>
-                <v-text-field
+                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
+              </v-flex>
+              <v-flex xs12>
+                <!-- <v-text-field
                   v-model="period"
                   label="Time Available"
                   :rules="timeRules"
                   :counter="30"
                   required
-                ></v-text-field>
-              </v-flex>
-              <v-flex xs12>
-                <v-text-field v-model="tel" label="Tel" :rules="telRules" :counter="10" required></v-text-field>
+                ></v-text-field>-->
+                <p style="margin-top: 20px;">
+                  <label style="margin: 0 20px 0 0;">Time Available</label>
+                  <vue-timepicker
+                    v-model="start_time"
+                    placeholder="Start Time"
+                    :minute-interval="5"
+                    hide-disabled-items
+                    style="margin: 0 10px 0 10px;"
+                  ></vue-timepicker>
+                  <span>to</span>
+                  <vue-timepicker
+                    v-model="end_time"
+                    placeholder="End Time"
+                    :minute-interval="5"
+                    hide-disabled-items
+                    style="margin: 0 10px 0 10px;"
+                  ></vue-timepicker>
+                </p>
               </v-flex>
             </v-layout>
           </v-form>
@@ -84,8 +102,11 @@
 import Swal from "sweetalert2";
 import axios from "../utils/axios.js";
 import { mapGetters, mapActions } from "vuex";
+import VueTimepicker from "vue2-timepicker";
+import "vue2-timepicker/dist/VueTimepicker.css";
 
 export default {
+  components: { VueTimepicker },
   methods: {
     ...mapActions(["setStoreAddress"]),
     async onEditClick() {
@@ -94,7 +115,14 @@ export default {
         address_detail: this.address_detail,
         latitude: this.latitude,
         longitude: this.longitude,
-        period: this.period,
+        period:
+          this.start_time.HH +
+          "." +
+          this.start_time.mm +
+          ";" +
+          this.end_time.HH +
+          "." +
+          this.end_time.mm,
         tel: this.tel,
         store_id: this.$route.params.id
       });
@@ -123,7 +151,10 @@ export default {
     this.address_detail = this.props.item.address_detail;
     this.latitude = this.props.item.latitude;
     this.longitude = this.props.item.longitude;
-    this.period = this.props.item.period;
+    this.start_time.HH = this.props.item.period.substring(0, 2);
+    this.start_time.mm = this.props.item.period.substring(3, 5);
+    this.end_time.HH = this.props.item.period.substring(6, 8);
+    this.end_time.mm = this.props.item.period.substring(9, 11);
     this.tel = this.props.item.tel;
   },
   async mounted() {
@@ -133,6 +164,8 @@ export default {
   data: () => ({
     dialog: false,
     valid: false,
+    start_time: { HH: "", mm: "" },
+    end_time: { HH: "", mm: "" },
     name: "",
     nameRules: [
       v => !!v || "Name is required",
