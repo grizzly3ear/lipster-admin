@@ -34,8 +34,16 @@
       </td>
       <td>{{ props.item.description }}</td>
       <td>
-        {{ props.item.release_date }}
+        <!-- <div v-if="props.item.release_date">released at:</div>
+        <div v-else>
+          <div
+            v-if="(props.item.trends || []).length ==0"
+          >This collection must have trends before release!</div>
+        <div v-else>-->
         <ReleaseNotification :props="props" />
+        <!-- </div>
+        </div>-->
+        {{ props.item.release_date }}
       </td>
       <td>
         <EditTrendCollection :props="props" />
