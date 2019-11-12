@@ -13,7 +13,7 @@
         <v-card-text>
           <v-form grid-list-md ref="form" v-model="valid" lazy-validation>
             <v-layout wrap>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-text-field
                   v-model="color_name"
                   label="Color Name*"
@@ -22,10 +22,10 @@
                   required
                 ></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-text-field v-model="rgb" label="RGB*" :rules="rgbRules" :counter="7" required></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-text-field
                   v-model="color_code"
                   label="Color Code*"
@@ -34,7 +34,7 @@
                   required
                 ></v-text-field>
               </v-flex>
-              <v-flex xs12 sm6 md4>
+              <v-flex xs12>
                 <v-text-field
                   v-model="composition"
                   label="Composition"
