@@ -19,3 +19,24 @@ new Vue({
     return h(App);
   }
 }).$mount("#app");
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    var token = window.localStorage.getItem("token");
+    if (!token) {
+      next({
+        path: "/login"
+      });
+    } else {
+      next();
+    }
+  } else if (to.matched.some(record => record.meta.requiresVisitor)) {
+    if (token) {
+      next({
+        path: "/lipstickBrand"
+      });
+    } else {
+      next();
+    }
+  }
+});

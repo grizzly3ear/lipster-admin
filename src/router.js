@@ -17,49 +17,94 @@ export default new Router({
   base: process.env.BASE_URL,
   routes: [
     {
-      path: "/",
+      path: "/login",
       name: "home",
-      component: Home
+      component: Home,
+      props: true,
+      meta: {
+        requiresVisitor: true,
+        layout: "landing"
+      }
     },
     {
       path: "/lipstickBrand",
       name: "LipstickBrand",
-      component: LipstickBrand
+      component: LipstickBrand,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/trend/:id",
       name: "Trend",
-      component: Trend
+      component: Trend,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/trendCollection",
       name: "TrendCollection",
-      component: TrendCollection
+      component: TrendCollection,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/lipstickDetail/:id",
       name: "LipstickDetail",
-      component: LipstickDetail
+      component: LipstickDetail,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/store",
       name: "Store",
-      component: Store
+      component: Store,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/StoreAddress/:id",
       name: "StoreAddress",
-      component: StoreAddress
+      component: StoreAddress,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/lipstickColor/:id",
       name: "LipstickColor",
-      component: LipstickColor
+      component: LipstickColor,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     },
     {
       path: "/lipstickOfStoreAddress/:id",
       name: "LipstickOfStoreAddress",
-      component: LipstickOfStoreAddress
+      component: LipstickOfStoreAddress,
+      props: true,
+      meta: {
+        requiresAuth: true,
+        layout: "default"
+      }
     }
   ]
 });
